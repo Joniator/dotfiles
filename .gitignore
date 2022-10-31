@@ -1,0 +1,9 @@
+# Ignore everything by default
+/*
+/.*
+
+# Don't ignore config relevant files and directories
+!/.gitignore
+!/.gitmodules
+!/.config
+!/.zshenv

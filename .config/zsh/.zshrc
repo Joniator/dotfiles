@@ -1,0 +1,22 @@
+source $XDG_CONFIG_HOME/antigen/antigen.zsh
+
+antigen use oh-my-zsh
+
+antigen bundle <<EOBUNDLES
+  docker
+  docker-compose
+  fzf
+  git
+  rsync
+  sudo
+  systemadmin
+  tmux
+  MichaelAquilina/zsh-you-should-use
+  zsh-users/zsh-completions
+  zsh-users/zsh-autosuggestions
+  zsh-users/zsh-syntax-highlighting
+EOBUNDLES
+
+antigen theme robbyrussell
+
+antigen apply

@@ -1,0 +1,21 @@
+[submodule ".config/antigen"]
+	path = .config/antigen
+	url = https://github.com/zsh-users/antigen.git
+[submodule ".config/vim/bundle/vim-airline"]
+	path = .config/vim/bundle/vim-airline
+	url = https://github.com/vim-airline/vim-airline
+[submodule ".config/vim/bundle/vim-nerdtree"]
+	path = .config/vim/bundle/vim-nerdtree
+	url = https://github.com/preservim/nerdtree
+[submodule ".config/vim/bundle/vim-gitgutter"]
+	path = .config/vim/bundle/vim-gitgutter
+	url = https://github.com/airblade/vim-gitgutter
+[submodule ".config/vim/bundle/vim-fugitive"]
+	path = .config/vim/bundle/vim-fugitive
+	url = https://github.com/tpope/vim-fugitive
+[submodule ".config/vim/bundle/vim-syntastic"]
+	path = .config/vim/bundle/vim-syntastic
+	url = https://github.com/vim-syntastic/syntastic.git
+[submodule ".config/vim/bundle/vim-floaterm"]
+	path = .config/vim/bundle/vim-floaterm
+	url = https://github.com/voldikss/vim-floaterm
