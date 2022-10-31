@@ -14,3 +14,24 @@ set number
 set modeline
 
 colo darkblue
+
+" Configuration vim Airline
+set laststatus=2
+
+let g:airline#extensions#tabline#enabled=1
+let g:airline_powerline_fonts=1
+
+" Configuration NERDTree
+map <F5> :NERDTreeFocus<CR>
+let NERDTreeShowHidden=1
+
+" Configuration floaterm
+let g:floaterm_keymap_toggle = '<F12>'
+let g:floaterm_width = 0.9
+let g:floaterm_height = 0.9
+
+" Configuration Syntastic
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
