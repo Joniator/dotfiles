@@ -5,5 +5,7 @@
 # Don't ignore config relevant files and directories
 !/.gitignore
 !/.gitmodules
-!/.config
 !/.zshenv
+
+!/.config
+/.config/vim/viminfo
