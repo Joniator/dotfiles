@@ -2,7 +2,7 @@
 
 # Install yadm
 if [ ! -f /usr/local/bin/yadm ]; then
-  sudo curl -fLo /usr/local/bin/yadm https://github.com/TheLocehiliosan/yadm/raw/master/yadm && sudo chmod a+x /usr/local/bin/yadm
+  sudo curl -fLo /usr/local/bin/yadm https://raw.githubusercontent.com/TheLocehiliosan/yadm/master/yadm && sudo chmod a+x /usr/local/bin/yadm
 fi
 
 if [ ! -d ~/.local/share/yadm/repo.git ]; then
