@@ -10,8 +10,6 @@ ohmyzsh/ohmyzsh path:plugins/sudo
 ohmyzsh/ohmyzsh path:plugins/systemadmin
 ohmyzsh/ohmyzsh path:plugins/tmux
 
-ptavares/zsh-sdkman
-matthieusb/zsh-sdkman
 MichaelAquilina/zsh-you-should-use
 zsh-users/zsh-autosuggestions
 zsh-users/zsh-completions
