@@ -7,6 +7,8 @@ fi
 
 if [ ! -d ~/.local/share/yadm/repo.git ]; then
   yadm clone git@github.com:Joniator/dotfiles.git
+  yadm submodule init
+  yadm submodule update
 fi
 
 source ~/.zshenv
