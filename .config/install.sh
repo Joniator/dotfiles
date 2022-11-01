@@ -10,7 +10,12 @@ if [ ! -d ~/.local/share/yadm/repo.git ]; then
 fi
 
 # Install zsh and oh-my-zsh
-sudo apt-get install -y zsh
+if command -v apt-get &> /dev/null; then
+  sudo apt-get update
+  sudo apt-get install -y zsh fzf
+else
+  echo "No package manager found";
+fi
 
 source .zshenv
 

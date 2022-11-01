@@ -2,6 +2,10 @@
 /*
 /.*
 
+# Ignore compiled zsh files and completion
+.zcompdump*
+*.zwc
+
 # Don't ignore config relevant files and directories
 !/.gitignore
 !/.gitmodules

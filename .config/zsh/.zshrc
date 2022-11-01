@@ -2,7 +2,7 @@ source $XDG_CONFIG_HOME/antigen/antigen.zsh
 
 antigen use oh-my-zsh
 
-antigen bundle <<EOBUNDLES
+antigen bundles <<EOBUNDLES
   docker
   docker-compose
   fzf
