@@ -12,7 +12,7 @@ fi
 # Install zsh and oh-my-zsh
 if command -v apt-get &> /dev/null; then
   sudo apt-get update
-  sudo apt-get install -y zsh fzf
+  sudo apt-get install -y zsh fzf zip unzip curl sed
 else
   echo "No package manager found";
 fi
