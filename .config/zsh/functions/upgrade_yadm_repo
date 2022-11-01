@@ -1,0 +1,5 @@
+#!/usr/bin/env zsh
+
+# Use my private github repo access instead of the public repo. This will break pulling changes if the machines ssh key is not trusted.
+yadm remote set-url origin git@github.com:Joniator/dotfiles.git
+
