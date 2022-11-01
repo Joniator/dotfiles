@@ -1,28 +1,26 @@
 #!/usr/bin/env zsh
 
-source $XDG_CONFIG_HOME/antigen/antigen.zsh
+source ${ZDOTDIR:-~}/antidote/antidote.zsh
+antidote_dir=${ZDOTDIR:-~}/antidote
+plugins_txt=${ZDOTDIR:-~}/plugins
+static_file=${ZDOTDIR:-~}/plugins.zsh
 
-antigen use oh-my-zsh
+# Generate a static plugin file.
+if [[ ! $static_file -nt $plugins_txt ]]; then
+  (
+    source $antidote_dir/antidote.zsh
+    [[ -e $plugins_txt ]] || touch $plugins_txt
+    antidote bundle <$plugins_txt >$static_file
+  )
+fi
 
-antigen bundles <<EOBUNDLES
-  docker
-  docker-compose
-  fzf
-  git
-  matthieusb/zsh-sdkman@main
-  MichaelAquilina/zsh-you-should-use
-  rsync
-  sudo
-  systemadmin
-  tmux
-  zsh-users/zsh-autosuggestions
-  zsh-users/zsh-completions
-  zsh-users/zsh-syntax-highlighting
-EOBUNDLES
+autoload -Uz $antidote_dir/functions/antidote
 
-antigen theme robbyrussell
+# source the static plugins file
+source $static_file
 
-antigen apply
+# cleanup
+unset antidote_dir plugins_txt static_file
 
 #THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
 export SDKMAN_DIR="/home/boeckj/.sdkman"

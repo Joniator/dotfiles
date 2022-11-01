@@ -1,0 +1,18 @@
+ohmyzsh/ohmyzsh path:lib
+ohmyzsh/ohmyzsh path:themes/robbyrussell.zsh-theme
+
+ohmyzsh/ohmyzsh path:plugins/docker
+ohmyzsh/ohmyzsh path:plugins/docker-compose
+ohmyzsh/ohmyzsh path:plugins/fzf
+ohmyzsh/ohmyzsh path:plugins/git
+ohmyzsh/ohmyzsh path:plugins/rsync
+ohmyzsh/ohmyzsh path:plugins/sudo
+ohmyzsh/ohmyzsh path:plugins/systemadmin
+ohmyzsh/ohmyzsh path:plugins/tmux
+
+matthieusb/zsh-sdkman
+MichaelAquilina/zsh-you-should-use
+zsh-users/zsh-autosuggestions
+zsh-users/zsh-completions
+zsh-users/zsh-syntax-highlighting
+

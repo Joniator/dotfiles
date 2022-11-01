@@ -5,6 +5,7 @@
 # Ignore compiled zsh files and completion
 .zcompdump*
 *.zwc
+.config/zsh/plugins.zsh
 
 # Don't ignore config relevant files and directories
 !/.gitignore
