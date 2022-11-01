@@ -6,7 +6,7 @@ if [ ! -f /usr/local/bin/yadm ]; then
 fi
 
 if [ ! -d ~/.local/share/yadm/repo.git ]; then
-  yadm clone https://github.com/Joniator/dotfiles.gitt
+  yadm clone git://github.com/Joniator/dotfiles.git
 fi
 
 source ~/.zshenv
