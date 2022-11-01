@@ -9,8 +9,10 @@
 
 # Don't ignore config relevant files and directories
 !/.gitignore
+!/.gitconfig
 !/.gitmodules
 !/.zshenv
 
 !/.config
+/.config/sdkman
 /.config/vim/viminfo

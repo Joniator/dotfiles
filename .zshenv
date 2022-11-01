@@ -11,6 +11,7 @@ export ZSH_CUSTOM="$XDG_CONFIG_HOME/oh-my-zsh_custom"
 export ZSH_CACHE_DIR="$ZSH/cache"
 
 export DOCKER_CONFIG="$XDG_CONFIG_HOME/docker"
+export SDKMAN_DIR="$XDG_CONFIG_HOME/sdkman"
 
 export LESSHISTFILE="$XDG_STATE_HOME/lesshst"
 export HISTFILE="$XDG_STATE_HOME/zsh_history"
