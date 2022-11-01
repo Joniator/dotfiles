@@ -13,9 +13,9 @@
 [submodule ".config/vim/bundle/vim-fugitive"]
 	path = .config/vim/bundle/vim-fugitive
 	url = https://github.com/tpope/vim-fugitive
-[submodule ".config/vim/bundle/vim-ale"]
-	path = .config/vim/bundle/vim-ale
-	url = https://github.com/dense-analysis/ale.git
 [submodule ".config/vim/bundle/vim-floaterm"]
 	path = .config/vim/bundle/vim-floaterm
 	url = https://github.com/voldikss/vim-floaterm
+[submodule ".config/vim/bundle/vim-ale"]
+	path = .config/vim/bundle/vim-ale
+	url = https://github.com/dense-analysis/ale
