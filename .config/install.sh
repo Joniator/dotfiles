@@ -1,6 +1,6 @@
 #!/usr/bin/env zsh
 
-APT_PACKAGES=(yadm zsh fzf zip unzip curl sed jq)
+APT_PACKAGES=(yadm zsh fzf zip unzip curl sed jq ctop)
 
 # Install packages
 if command -v apt-get &> /dev/null; then
