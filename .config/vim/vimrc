@@ -15,6 +15,9 @@ set modeline
 
 colo darkblue
 
+" Configuration templates
+let g:tmpl_search_paths=[ ".config/vim/templates" ]
+
 " Configuration vim Airline
 set laststatus=2
 

@@ -19,3 +19,6 @@
 [submodule ".config/vim/bundle/vim-ale"]
 	path = .config/vim/bundle/vim-ale
 	url = https://github.com/dense-analysis/ale
+[submodule ".config/vim/bundle/vim-templates"]
+	path = .config/vim/bundle/vim-templates
+	url = https://github.com/tibabit/vim-templates
