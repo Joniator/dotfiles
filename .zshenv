@@ -17,4 +17,4 @@ export LESSHISTFILE="$XDG_STATE_HOME/lesshst"
 export HISTFILE="$XDG_STATE_HOME/zsh_history"
 export VIMINIT='source $XDG_CONFIG_HOME/vim/vimrc'
 
-export PATH="$PATH:$HOME/.local/bin:$ZDOTDIR/functions"
+export PATH="$PATH:$HOME/.local/bin"

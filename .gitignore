@@ -16,4 +16,5 @@
 !/.config
 /.config/sdkman
 /.config/gnupg
+/.config/secrets
 /.config/vim/viminfo
