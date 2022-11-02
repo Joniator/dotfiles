@@ -15,4 +15,5 @@
 
 !/.config
 /.config/sdkman
+/.config/gnupg
 /.config/vim/viminfo

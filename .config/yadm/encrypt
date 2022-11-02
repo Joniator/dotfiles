@@ -1,2 +1,3 @@
 .ssh/config
 .ssh/config.d/*
+.config/gnupg/*.asc
