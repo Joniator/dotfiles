@@ -1,0 +1,6 @@
+#!/usr/bin/env zsh
+
+OUTPUT=$(curl -s \
+  -H "Accept: application/json" \
+  ipinfo.io/$1)
+echo $OUTPUT  | jq
