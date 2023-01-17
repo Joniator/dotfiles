@@ -6,24 +6,31 @@ vim.cmd [[packadd packer.nvim]]
 return require('packer').startup(function(use)
 	-- Packer can manage itself
 	use 'wbthomason/packer.nvim'
+  -- Highlight #AABBCC
+  use 'NvChad/nvim-colorizer.lua'
+  -- Dracula-theme
+	use 'dracula/vim'
+  -- Bookmarking
+	use 'theprimeagen/harpoon'
+	use 'mbbill/undotree'
+	use 'tpope/vim-fugitive'
+	use 'WhoIsSethDaniel/mason-tool-installer.nvim'
+  use 'akinsho/toggleterm.nvim'
 
 	use {
+		'nvim-lualine/lualine.nvim',
+		requires = { 'kyazdani42/nvim-web-devicons', opt = true }
+	}
+
+  use {
 		'nvim-telescope/telescope.nvim', tag = '0.1.0',
 		requires = { {'nvim-lua/plenary.nvim'} }
 	}
-
-	use 'dracula/vim'
 
 	use {
 		'nvim-treesitter/nvim-treesitter',
 		run = ':TSUpdate'
 	}
-
-	use 'theprimeagen/harpoon'
-
-	use 'mbbill/undotree'
-
-	use 'tpope/vim-fugitive'
 
 	use {
 		'VonHeikemen/lsp-zero.nvim',
@@ -46,14 +53,5 @@ return require('packer').startup(function(use)
 			-- Snippet Collection (Optional)
 			{'rafamadriz/friendly-snippets'},
 		}
-	}
-
-	use 'WhoIsSethDaniel/mason-tool-installer.nvim'
-
-  use 'akinsho/toggleterm.nvim'
-
-	use {
-		'nvim-lualine/lualine.nvim',
-		requires = { 'kyazdani42/nvim-web-devicons', opt = true }
 	}
 end)
