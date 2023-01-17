@@ -14,7 +14,8 @@
 !/.zshenv
 
 !/.config
-/.config/sdkman
 /.config/gnupg
+/.config/nvim/plugin/packer_compiled.lua
+/.config/oh-my-zsh/cache
+/.config/sdkman
 /.config/secrets
-/.config/vim/viminfo
