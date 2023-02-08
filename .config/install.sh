@@ -24,7 +24,7 @@ if [ ! -d ~/.local/share/yadm/repo.git ]; then
   yadm clone https://github.com/Joniator/dotfiles
   yadm submodule init
   yadm submodule update
-  EOF
+EOF
 fi
 
 . "$HOME/.zshenv"
