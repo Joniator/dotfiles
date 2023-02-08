@@ -6,7 +6,7 @@ plugins_txt=${ZDOTDIR:-~}/plugins
 static_file=${ZDOTDIR:-~}/plugins.zsh
 
 # Generate a static plugin file.
-if [[ ! $static_file -nt $plugins_txt || -s $static_file ]]; then
+if [[ ! $static_file -nt $plugins_txt || ! -s $static_file ]]; then
   (
     . $antidote_dir/antidote.zsh
     [[ -e $plugins_txt ]] || touch $plugins_txt
