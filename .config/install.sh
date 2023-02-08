@@ -19,9 +19,12 @@ else
 fi
 
 if [ ! -d ~/.local/share/yadm/repo.git ]; then
+  bash <<EOF
+  cd $HOME
   yadm clone https://github.com/Joniator/dotfiles
   yadm submodule init
   yadm submodule update
+  EOF
 fi
 
 . "$HOME/.zshenv"
@@ -30,14 +33,8 @@ mkdir -p "$XDG_CONFIG_HOME"
 mkdir -p "$XDG_DATA_HOME"
 mkdir -p "$XDG_STATE_HOME"
 
-echo Changing default shell
-<<<<<<< HEAD
 if [[ $- == *i* ]]; then
+  echo Changing default shell
   chsh -s $(which zsh)
   zsh
 fi
-=======
-chsh -s "$(which zsh)"
-
-zsh
->>>>>>> 5c4de5e (Fix shellcheck)
