@@ -9,7 +9,7 @@ if command -v apt-get &> /dev/null; then
   sudo apt-get install -y $APT_PACKAGES
 
   if ! command -v nvim &> /dev/null; then
-    TEMP_DEB = "$(mktemp)"
+    TEMP_DEB="$(mktemp)"
     wget -O "$TEMP_DEB" "https://github.com/neovim/neovim/releases/download/v0.8.2/nvim-linux64.deb"
     sudo apt-get install -y "$TEMP_DEB"
     rm -f "$TEMP_DEB"
