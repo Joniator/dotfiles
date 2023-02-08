@@ -9,10 +9,10 @@ if command -v apt-get &> /dev/null; then
   sudo apt-get install -y $APT_PACKAGES
 
   if ! command -v nvim &> /dev/null; then
-    TEMP_DEB="$(mktemp nvim-XXXXXX.deb)"
-    wget -O "$TEMP_DEB" "https://github.com/neovim/neovim/releases/download/v0.8.2/nvim-linux64.deb"
-    sudo apt-get install -y "$TEMP_DEB"
-    rm -f "$TEMP_DEB"
+    TEMP_DEB="$(mktemp nvim-XXXXXX.deb)" && \
+    wget -O "$TEMP_DEB" "https://github.com/neovim/neovim/releases/download/v0.8.2/nvim-linux64.deb" && \
+    sudo apt-get install -y "$TEMP_DEB" && \
+    rm -f "$TEMP_DEB" || echo "Failed to install nvim"
   fi
 else
   echo "No package manager found";
@@ -31,6 +31,7 @@ mkdir -p $XDG_DATA_HOME
 mkdir -p $XDG_STATE_HOME
 
 echo Changing default shell
-chsh -s $(which zsh)
-
-zsh
+if [[ $- == *i* ]]; then
+  chsh -s $(which zsh)
+  zsh
+fi
