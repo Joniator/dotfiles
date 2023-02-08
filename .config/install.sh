@@ -7,13 +7,6 @@ APT_PACKAGES="yadm zsh fzf zip unzip curl sed jq ctop nodejs npm ripgrep"
 if command -v apt-get > /dev/null 2>&1; then
   sudo apt-get update
   sudo apt-get install -y $APT_PACKAGES
-
-  if ! command -v nvim > /dev/null 2>&1; then
-    TEMP_DEB="$(mktemp nvim-XXXXXX.deb)" && \
-    wget -O "$TEMP_DEB" "https://github.com/neovim/neovim/releases/download/v0.8.2/nvim-linux64.deb" && \
-    sudo apt-get install -y "$TEMP_DEB" && \
-    rm -f "$TEMP_DEB" || echo "Failed to install nvim"
-  fi
 else
   echo "No package manager found";
 fi
