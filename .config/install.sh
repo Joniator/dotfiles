@@ -14,7 +14,7 @@ if command -v apt-get > /dev/null 2>&1; then
       sudo apt-get install -y "$TEMP_DEB" && \
       rm -f "$TEMP_DEB" || echo "Failed to install nvim"
   fi
-else
+else[
   echo "No package manager found";
 fi
 
@@ -33,8 +33,8 @@ mkdir -p "$XDG_CONFIG_HOME"
 mkdir -p "$XDG_DATA_HOME"
 mkdir -p "$XDG_STATE_HOME"
 
-if [[ $- == *i* ]]; then
-  echo Changing default shell
-  chsh -s $(which zsh)
-  zsh
-fi
+echo Changing default shell
+sudo chsh -s $(which zsh) $USER
+
+echo Installing nvim packages
+nvim +PackerSync || nvim +PackerSync # Retry, bc treesitter likes to fail on first attempt
