@@ -1,9 +1,10 @@
 [user]
-	email = me@jonnyb.name
+  email = me@jonnyb.name
   name = Jonathan Boeckel
   signingkey = BAB33D6B07CF1A8D0D6823A393A6844F814C1648
-
 [init]
   defaultBranch=main
 [color]
-	ui = true
+  ui = true
+[commit]
+  gpgsign = true
