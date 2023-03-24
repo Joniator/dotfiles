@@ -14,7 +14,10 @@
 !/.zshenv
 
 !/.config
+/.config/.lesshst
 /.config/gnupg
+/.config/docker
+/.config/htop
 /.config/nvim/plugin/packer_compiled.lua
 /.config/oh-my-zsh/cache
 /.config/sdkman
