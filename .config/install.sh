@@ -14,7 +14,7 @@ if command -v apt-get > /dev/null 2>&1; then
       sudo apt-get install -y "$TEMP_DEB" && \
       rm -f "$TEMP_DEB" || echo "Failed to install nvim"
   fi
-else[
+else
   echo "No package manager found";
 fi
 
