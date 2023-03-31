@@ -7,6 +7,8 @@
 *.zwc
 .config/zsh/plugins.zsh
 
+!/README.md
+
 # Don't ignore config relevant files and directories
 !/.gitignore
 !/.gitconfig
