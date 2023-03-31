@@ -1,11 +1,9 @@
 -- Learn the keybindings, see :help lsp-zero-keybindings
--- Learn to configure LSP servers, see :help lsp-zero-api-showcase
-local lsp = require('lsp-zero')
-lsp.preset('recommended')
+-- Learn to configure LSP sevrers, see :help lsp-zero-api-showcase
+local lsp = require('lsp-zero').preset('recommended')
 
-lsp.ensure_installed({
-})
-
-lsp.nvim_workspace()
+lsp.on_attach(function(client, bufnr)
+  lsp.default_keymaps({buffer = bufnr})
+end)
 
 lsp.setup()
