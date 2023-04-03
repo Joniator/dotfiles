@@ -40,6 +40,13 @@ return require('packer').startup(function(use)
     'nvim-lualine/lualine.nvim',
     requires = { 'kyazdani42/nvim-web-devicons', opt = true }
   }
+  -- Git signs
+  use 'lewis6991/gitsigns.nvim'
+  -- Explorer
+  use {
+    'nvim-tree/nvim-tree.lua',
+    requires = { 'nvim-tree/nvim-web-devicons' }
+  }
   -- Filebrowser
   use {
     'nvim-telescope/telescope.nvim', tag = '0.1.0',
