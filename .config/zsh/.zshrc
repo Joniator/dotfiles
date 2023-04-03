@@ -8,7 +8,7 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
 fi
 
 setopt EXTENDED_GLOB
-for _zconf in $ZDOTDIR/zshrc.d/*.zsh(N); do
+for _zconf in $ZDOTDIR/{zshrc.d,alias,functions}/*.zsh(N); do
   #ignore files that begin with a tilde
   case ${f:t} in '~'*) continue;; esac
   source "$_zconf"
