@@ -6,6 +6,7 @@
 .zcompdump*
 *.zwc
 .config/zsh/plugins.zsh
+.config/zsh/.zsh_history
 
 !/README.md
 

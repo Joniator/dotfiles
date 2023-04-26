@@ -3,7 +3,11 @@ require('mason-tool-installer').setup {
 	-- a list of all tools you want to ensure are installed upon
 	-- start; they should be the names Mason uses for each tool
 	ensure_installed = {
-		'shellcheck'
+		'shellcheck',
+    'json-lsp',
+    'lua-language-server',
+    'bash-language-server',
+    'docker-compose-language-service'
 	},
 
 	-- if set to true this will check each tool for updates. If updates

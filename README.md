@@ -15,6 +15,7 @@ Plus means at same time, no plus is pressed in sequence.
 | Terminal | Open terminal | `<space>term` | `<Esc>` to leave terminal mode
 | LSP-Zero | Show warning/info/diagnostic | `gl`
 | | Show symbol information | `K`
+| | Confirm completion | `<ctrl>+y`
 | Filebrowser | Filebrowser | `<space>fb`
 | Telescope | Find file | `<space>ff`
 | | Find git file | `<space>fg`
