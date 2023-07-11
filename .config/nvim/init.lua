@@ -6,3 +6,5 @@ require("lazy").setup("plugins", {
     colorscheme = { "catppuccin-macchiato" }
   }
 })
+
+require('lsp-config')
