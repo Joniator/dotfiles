@@ -18,9 +18,11 @@
 
 !/.config
 /.config/.lesshst
-/.config/gnupg
 /.config/docker
+/.config/gnupg
+/.config/helm
 /.config/htop
+/.config/menus
 /.config/nvim/plugin/packer_compiled.lua
 /.config/oh-my-zsh/cache
 /.config/sdkman

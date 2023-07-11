@@ -1,12 +1,14 @@
 #!/usr/bin/env sh
 set -e -o xtrace
 
-APT_PACKAGES="yadm zsh fzf zip unzip curl sed jq ctop nodejs npm ripgrep"
+APT_PACKAGES="yadm zsh fzf zip unzip curl sed jq ctop nodejs npm ripgrep bat"
 
 # Install packages
 if command -v apt-get > /dev/null 2>&1; then
   sudo apt-get update
   sudo apt-get install -y $APT_PACKAGES
+
+  ln -s /usr/bin/batcat ~/.local/bin/bat
 
   if ! command -v nvim > /dev/null 2>&1; then
     TEMP_DEB="$(mktemp ./nvim-XXXXXX.deb)" && \
@@ -36,5 +38,3 @@ mkdir -p "$XDG_STATE_HOME"
 echo Changing default shell
 sudo chsh -s $(which zsh) $USER
 
-echo Installing nvim packages
-nvim +PackerSync || nvim +PackerSync # Retry, bc treesitter likes to fail on first attempt
