@@ -8,11 +8,11 @@ GITUI_VERSION="v0.23.0"
 # Install packages
 if command -v apt-get >/dev/null 2>&1; then
 	sudo apt-get update
-	sudo apt-get install -y "$APT_PACKAGES"
+	sudo apt-get install -y $APT_PACKAGES
 
-	ln -s /usr/bin/batcat ~/.local/bin/bat
+	ln -fs /usr/bin/batcat ~/.local/bin/bat
 
-  # Install nvim
+# Install nvim
 	if ! command -v nvim >/dev/null 2>&1; then
 		case $(uname -m) in
 		x86_64)
@@ -29,13 +29,7 @@ if command -v apt-get >/dev/null 2>&1; then
 
   # Install gitui
 	if ! command -v gitui >/dev/null 2>&1; then
-    case $/uname -m) in
-      x86_64)
-        wget -qO- https://github.com/extrawurst/gitui/releases/download/v0.23.0/gitui-linux-musl.tar.gz | sudo tar -xz -C /usr/local/bin
-        ;;
-      default)
-        echo "Failed to install gitui, architecture not supported" >&2
-    esac
+    cargo install --git https://github.com/hendrikmaus/gitui --branch gpg-commit-signing
 	fi
 else
 	echo "No package manager found"
