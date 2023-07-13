@@ -1,10 +1,11 @@
-require("vim-config")
+require("config/vim")
 
 require("install-lazy")
 require("lazy").setup("plugins", {
-  install = {
-    colorscheme = { "catppuccin-macchiato" }
-  }
+	install = {
+		colorscheme = { "catppuccin-macchiato" },
+	},
 })
 
-require('lsp-config')
+require("config/lsp")
+require("config/which-key")
