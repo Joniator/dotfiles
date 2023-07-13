@@ -20,5 +20,9 @@
 
 [difftool]
 	prompt = false
+
 [core]
 	autocrlf = true
+  
+[http]
+	sslCAInfo = /etc/ssl/certs/gitlab-prod-eu-techem-corp.pem

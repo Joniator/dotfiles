@@ -1,7 +1,7 @@
 local git_mappings = {
 	name = "git",
 	b = {
-		":Gitsigns toggle_current_line_blame",
+		":Gitsigns toggle_current_line_blame<CR>",
 		"blame",
 	},
 	h = {
@@ -58,6 +58,21 @@ local pretty_mappings = {
 	},
 }
 
+local control_mappings = {
+	["<c-p>"] = {
+		":lua require('fzf-lua').files()<CR>",
+		"Fuzzy find files",
+	},
+	["<c-a>"] = {
+		":lua require('fzf-lua').commands()<CR>",
+		"Fuzzy find commands",
+	},
+	["<c-f>"] = {
+		":lua require('fzf-lua').live_grep()<CR>",
+		"Fuzzy find text in files",
+	},
+}
+
 local wk = require("which-key")
 
 wk.register({
@@ -66,3 +81,7 @@ wk.register({
 }, {
 	prefix = "<leader>",
 })
+
+wk.register(
+	control_mappings
+)

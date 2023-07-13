@@ -1,25 +1,28 @@
 local lsp = require("lsp-zero").preset({})
 
 lsp.on_attach(function(client, bufnr)
-	lsp.default_keymaps({ buffer = bufnr })
+  lsp.default_keymaps({ buffer = bufnr })
 end)
 
 require("mason-lspconfig").setup()
 
 require("mason-tool-installer").setup({
-	ensure_installed = {
-		"lua-language-server",
-		"selene", -- Lua stylecheck
-		"stylua",
-	},
+  ensure_installed = {
+    "lua-language-server",
+    "selene", -- Lua stylecheck
+    "stylua",
+    "bash-language-server",
+    "shellcheck",
+    "shfmt",
+  },
 })
 
 require("lspconfig").lua_ls.setup({
-	root_dir = function()
-		--- project root will be the first directory that has
-		--- either .luarc.json or .stylua.toml
-		return lsp.dir.find_first({ ".luarc.json", ".stylua.toml" })
-	end,
+  root_dir = function()
+    --- project root will be the first directory that has
+    --- either .luarc.json or .stylua.toml
+    return lsp.dir.find_first({ ".luarc.json", ".stylua.toml" })
+  end,
 })
 
 lsp.setup()
@@ -34,11 +37,12 @@ local diagnostics = builtins.diagnostics
 local formatting = builtins.formatting
 
 null_ls.setup({
-	sources = {
-		code_actions.gitsigns,
-		completion.spell,
-		diagnostics.eslint,
-		formatting.stylua,
-	},
+  sources = {
+    code_actions.gitsigns,
+    code_actions.shellcheck,
+    completion.spell,
+    diagnostics.eslint,
+    formatting.stylua,
+    formatting.shfmt,
+  },
 })
-

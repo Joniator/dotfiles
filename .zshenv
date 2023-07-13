@@ -18,3 +18,4 @@ export LESSHISTFILE="$XDG_STATE_HOME/lesshst"
 export HISTFILE="$XDG_STATE_HOME/zsh_history"
 
 export PATH="$PATH:$HOME/.local/bin:$HOME/.cargo/bin"
+export YADM_DIR="$XDG_DATA_HOME/yadm/repo.git"
