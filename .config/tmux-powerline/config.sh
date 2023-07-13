@@ -1,20 +1,20 @@
 # Default configuration file for tmux-powerline.
-# Modeline {
+# Modeline 
 #	 vi: foldmarker={,} foldmethod=marker foldlevel=0 tabstop=4 filetype=sh
-# }
 
-# General {
+
+# General 
 	# Show which segment fails and its exit code.
 	export TMUX_POWERLINE_DEBUG_MODE_ENABLED="false"
 	# Use patched font symbols.
 	export TMUX_POWERLINE_PATCHED_FONT_IN_USE="true"
 	# The theme to use.
-	export TMUX_POWERLINE_THEME="jonnyb"
+	export TMUX_POWERLINE_THEME="default"
 	# Overlay directory to look for themes. There you can put your own themes outside the repo. Fallback will still be the "themes" directory in the repo.
 	export TMUX_POWERLINE_DIR_USER_THEMES=""
 	# Overlay directory to look for segments. There you can put your own segments outside the repo. Fallback will still be the "segments" directory in the repo.
 	export TMUX_POWERLINE_DIR_USER_SEGMENTS=""
-# }
+
 
 # battery.sh {
 	# How to display battery remaining. Can be {percentage, cute}.
@@ -33,7 +33,7 @@
 	export TMUX_POWERLINE_SEG_DISK_USAGE_FILESYSTEM="/"
 # }
 
-# earthquake.sh {
+# earthquake.sh 
 	# The data provider to use. Currently only "goo" is supported.
 	export TMUX_POWERLINE_SEG_EARTHQUAKE_DATA_PROVIDER="goo"
 	# How often to update the earthquake data in seconds.
@@ -48,12 +48,12 @@
 	export TMUX_POWERLINE_SEG_EARTHQUAKE_TIME_FORMAT='(%H:%M)'
 	# Display only if magnitude is greater or equal to this number
 	export TMUX_POWERLINE_SEG_EARTHQUAKE_MIN_MAGNITUDE="3"
-# }
 
-# hostname.sh {
+
+# hostname.sh 
 	# Use short or long format for the hostname. Can be {"short, long"}.
-	export TMUX_POWERLINE_SEG_HOSTNAME_FORMAT="short"
-# }
+#	export TMUX_POWERLINE_SEG_HOSTNAME_FORMAT="short"
+
 
 # macos_notification_count.sh {
 	# App ids to query in notification center, separated by space
@@ -151,7 +151,7 @@
 	export TMUX_POWERLINE_SEG_UTC_TIME_FORMAT="%H:%M %Z"
 # }
 
-# weather.sh {
+# weather.sh 
 	# The data provider to use. Currently only "yahoo" is supported.
 	export TMUX_POWERLINE_SEG_WEATHER_DATA_PROVIDER="yrno"
 	# What unit to use. Can be any of {c,f,k}.
@@ -164,6 +164,6 @@
 	export TMUX_POWERLINE_SEG_WEATHER_JSON="jq"
 	# Your location
 	# Latitude and Longtitude for use with yr.no
-	TMUX_POWERLINE_SEG_WEATHER_LAT="50.36677637995384"
-	TMUX_POWERLINE_SEG_WEATHER_LON="8.63792564436326"
-# }
+	TMUX_POWERLINE_SEG_WEATHER_LAT="50.360600"
+	TMUX_POWERLINE_SEG_WEATHER_LON="8.735760"
+
