@@ -22,7 +22,7 @@
 	prompt = false
 
 [core]
-	autocrlf = true
+	autocrlf = false
   
 [http]
 	sslCAInfo = /etc/ssl/certs/gitlab-prod-eu-techem-corp.pem

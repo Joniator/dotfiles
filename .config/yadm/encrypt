@@ -2,3 +2,4 @@
 .ssh/config.d/*
 .config/gnupg/*.asc
 .config/secrets
+.config/neonmodem.toml

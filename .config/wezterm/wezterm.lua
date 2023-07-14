@@ -1,0 +1,1 @@
+/mnt/c/Users/boeckj/.wezterm.lua
