@@ -1,11 +1,6 @@
-require("config/vim")
+local jonnyb = require("jonnyb")
 
-require("install-lazy")
-require("lazy").setup("plugins", {
-	install = {
-		colorscheme = { "catppuccin-macchiato" },
-	},
-})
-
-require("config/lsp")
-require("config/which-key")
+jonnyb.setup_vim()
+jonnyb.setup_remap()
+jonnyb.install_lazy()
+jonnyb.setup_lazy()

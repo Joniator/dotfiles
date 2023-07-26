@@ -17,5 +17,5 @@ export ZSH_TMUX_CONFIG="$XDG_CONFIG_HOME/tmux/tmux.conf"
 export LESSHISTFILE="$XDG_STATE_HOME/lesshst"
 export HISTFILE="$XDG_STATE_HOME/zsh_history"
 
-export PATH="$PATH:$HOME/.local/bin:$HOME/.cargo/bin"
+export PATH="$PATH:$HOME/.local/bin:$HOME/.cargo/bin:$HOME/.config/zsh/bin"
 export YADM_DIR="$XDG_DATA_HOME/yadm/repo.git"
