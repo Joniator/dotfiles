@@ -1,5 +1,5 @@
 [user]
-  email = me@jonnyb.name
+  email = jonathan.boeckel@msg.group
   name = Jonathan Boeckel
   signingkey = BAB33D6B07CF1A8D0D6823A393A6844F814C1648
 
@@ -23,6 +23,6 @@
 
 [core]
 	autocrlf = false
-  
+
 [http]
-	sslCAInfo = /etc/ssl/certs/gitlab-prod-eu-techem-corp.pem
+  sslCAInfo = /etc/ssl/certs/gitlab-prod-eu-techem-corp.pem
