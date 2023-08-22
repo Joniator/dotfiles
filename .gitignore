@@ -23,6 +23,7 @@
 /.config/gnupg
 /.config/helm
 /.config/htop
+/.config/lazygit/state.json
 /.config/menus
 /.config/nvim/plugin/packer_compiled.lua
 /.config/oh-my-zsh/cache

@@ -22,6 +22,8 @@ syntax keyword kustoConstant false true visible hidden default linear log none a
 
 syntax keyword kustoBuiltinFunction count ingestion_time max max min iff isempty isnotempty log sum extract now makeset make_set makelist make_list arg_max arg_min any take_any dcount sumif countif avg materialize pack database strcat translate substring tostring toscalar strlen split typeof gettype datatable has_all has_any
 
+syntax match kustoCommands "\.[\w\-]*" display
+
 syntax keyword kustoChartType anomalychart areachart barchart card columnchart ladderchart linechart piechart pivotchart scatterchart stackedareachart table timechart timepivot
 syntax keyword kustoChartProperty kind accumulate legend series ymin ymax title xaxis xcolumn xtitle yaxis ycolumns ysplit ytitle anomalycolumns
 
@@ -51,6 +53,7 @@ highlight default link kustoTabularOperator Operator
 highlight default link kustoTabularStatement Statement
 
 highlight default link kustoQueryStatement Statement
+highlight default link kustoCommands Statement
 
 highlight default link kustoConstant Constant
 
