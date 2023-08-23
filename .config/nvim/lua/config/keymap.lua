@@ -15,6 +15,11 @@ local function map(mode, lhs, rhs, opts) -- Taken from LazyVim/LazyVim
   end
 end
 
+
+-- Delete buffer
+map('n', '<leader>bd', vim.cmd.bdelete, { desc = 'Delete buffer' })
+
+
 -- Move to window using the <ctrl> hjkl keys
 map("n", "<C-h>", "<C-w>h", { desc = "Go to left window", remap = true })
 map("n", "<C-j>", "<C-w>j", { desc = "Go to lower window", remap = true })
@@ -52,11 +57,6 @@ map({ "n", "x", "o" }, 's', function() require("flash").jump() end, { desc = "Fl
 map({ "n", "x", "o" }, 'S', function() require("flash").treesitter() end, { desc = "Flash Treesitter" })
 
 
--- LSP
-map('n', '<leader>d', vim.diagnostic.open_float)
-map('n', '<leader>q', vim.diagnostic.setloclist)
-
-
 -- Telescope
 do
   local builtin = require('telescope.builtin')
@@ -74,46 +74,46 @@ do
   local neotree = require('neo-tree.command')
   map('n', "<leader>fe",
     function()
-      neotree.execute({ toggle = true, dir = require("lazyvim.util").get_root() })
-    end, {
-      desc = "Explorer NeoTree (root dir) " })
-  map('n', "<leader>fE",
-    function()
       neotree.execute({ toggle = true, dir = vim.loop.cwd() })
     end,
     { desc = "Explorer NeoTree (cwd)" })
-
-  -- Use LspAttach autocommand to only map the following keys
-  -- after the language server attaches to the current buffer
-  vim.api.nvim_create_autocmd('LspAttach', {
-    group = vim.api.nvim_create_augroup('UserLspConfig', {}),
-    -- Enable completion triggered by <c-x><c-o>
-    callback = function(ev)
-      vim.bo[ev.buf].omnifunc = 'v:lua.vim.lsp.omnifunc'
-
-      -- Buffer local mappings.
-      -- See `:help vim.lsp.*` for documentation on any of the below functions
-      local buf = ev.buf
-      map('n', 'gD', vim.lsp.buf.declaration, { buffer = buf, desc = 'Go to declaration' })
-      map('n', 'gd', vim.lsp.buf.definition, { buffer = buf, desc = 'Go to definition' })
-      map('n', 'K', vim.lsp.buf.hover, { buffer = buf, desc = 'Hover info' })
-      map('n', 'gi', vim.lsp.buf.implementation, { buffer = buf, desc = 'Implementation' })
-      map('n', '<C-k>', vim.lsp.buf.signature_help, { buffer = buf, desc = 'Show signature' })
-      map('n', '<leader>wa', vim.lsp.buf.add_workspace_folder, { buffer = buf, desc = 'Add workspace folder' })
-      map('n', '<leader>wr', vim.lsp.buf.remove_workspace_folder, { buffer = buf, desc = 'Remove workspace folder' })
-      map('n', '<leader>wl', function()
-        print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
-      end, { buffer = buf, desc = 'List workspace folders' })
-      map('n', '<leader>D', vim.lsp.buf.type_definition, { buffer = buf, desc = 'Type definition' })
-      map('n', '<leader>rn', vim.lsp.buf.rename, { buffer = buf, desc = 'Renamce' })
-      map({ 'n', 'v' }, '<leader>ca', vim.lsp.buf.code_action, { buffer = buf, desc = 'Code Action' })
-      map('n', 'gr', vim.lsp.buf.references, { buffer = buf, desc = 'Go to references' })
-      map('n', '<leader>cf', function()
-        vim.lsp.buf.format { async = true }
-      end, { buffer = buf, desc = 'Format file' })
-    end,
-  })
 end
+
+
+-- LSP
+map('n', '<leader>d', vim.diagnostic.open_float)
+map('n', '<leader>q', vim.diagnostic.setloclist)
+
+-- Use LspAttach autocommand to only map the following keys
+-- after the language server attaches to the current buffer
+vim.api.nvim_create_autocmd('LspAttach', {
+  group = vim.api.nvim_create_augroup('UserLspConfig', {}),
+  -- Enable completion triggered by <c-x><c-o>
+  callback = function(ev)
+    vim.bo[ev.buf].omnifunc = 'v:lua.vim.lsp.omnifunc'
+
+    -- Buffer local mappings.
+    -- See `:help vim.lsp.*` for documentation on any of the below functions
+    local buf = ev.buf
+    map('n', 'gD', vim.lsp.buf.declaration, { buffer = buf, desc = 'Go to declaration' })
+    map('n', 'gd', vim.lsp.buf.definition, { buffer = buf, desc = 'Go to definition' })
+    map('n', 'K', vim.lsp.buf.hover, { buffer = buf, desc = 'Hover info' })
+    map('n', 'gi', vim.lsp.buf.implementation, { buffer = buf, desc = 'Implementation' })
+    map('n', '<C-k>', vim.lsp.buf.signature_help, { buffer = buf, desc = 'Show signature' })
+    map('n', '<leader>wa', vim.lsp.buf.add_workspace_folder, { buffer = buf, desc = 'Add workspace folder' })
+    map('n', '<leader>wr', vim.lsp.buf.remove_workspace_folder, { buffer = buf, desc = 'Remove workspace folder' })
+    map('n', '<leader>wl', function()
+      print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
+    end, { buffer = buf, desc = 'List workspace folders' })
+    map('n', '<leader>D', vim.lsp.buf.type_definition, { buffer = buf, desc = 'Type definition' })
+    map('n', '<leader>rn', vim.lsp.buf.rename, { buffer = buf, desc = 'Renamce' })
+    map({ 'n', 'v' }, '<leader>ca', vim.lsp.buf.code_action, { buffer = buf, desc = 'Code Action' })
+    map('n', 'gr', vim.lsp.buf.references, { buffer = buf, desc = 'Go to references' })
+    map('n', '<leader>cf', function()
+      vim.lsp.buf.format { async = true }
+    end, { buffer = buf, desc = 'Format file' })
+  end,
+})
 
 -- Gitsigns
 function M.gitsigns(bufnr)

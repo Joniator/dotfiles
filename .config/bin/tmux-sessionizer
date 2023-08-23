@@ -3,7 +3,10 @@
 if [[ $# -eq 1 ]]; then
 	selected=$1
 else
-	selected=$(find ~/Code/Techem -mindepth 1 -maxdepth 1 -type d | fzf)
+  if [[ $(hostname -s) = MSG* ]] do
+    maxdepth=2
+  done
+	selected=$(find ~/Projects -mindepth 1 -maxdepth ${maxdepth:-1} -type d | fzf)
 fi
 
 if [[ -z "$selected" ]]; then
