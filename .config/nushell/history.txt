@@ -1,0 +1,5 @@
+clear
+ls
+ls | sort-by size
+hostname
+exit

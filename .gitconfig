@@ -13,16 +13,16 @@
   gpgsign = true
 
 [diff]
-	tool = nvimdiff
+  tool = nvimdiff
 
 [merge]
-	tool = nvimdiff
+  tool = nvimdiff
 
 [difftool]
-	prompt = false
+  prompt = false
 
 [core]
-	autocrlf = false
+  autocrlf = false
 
-[http]
-  sslCAInfo = /etc/ssl/certs/gitlab-prod-eu-techem-corp.pem
+[include]
+  path = .gitconfig.local

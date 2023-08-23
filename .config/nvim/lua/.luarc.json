@@ -1,0 +1,26 @@
+{
+    "workspace.library": [
+        "/home/jonnyb/.local/share/nvim/lazy/neodev.nvim/types/stable",
+        "/usr/share/nvim/runtime/lua",
+        "/home/jonnyb/.local/share/nvim/lazy/nvim-colorizer.lua/lua",
+        "/home/jonnyb/.local/share/nvim/lazy/nvim-cmp/lua",
+        "/home/jonnyb/.local/share/nvim/lazy/lualine.nvim/lua",
+        "/home/jonnyb/.local/share/nvim/lazy/LuaSnip/lua",
+        "/home/jonnyb/.local/share/nvim/lazy/nvim-web-devicons/lua",
+        "/home/jonnyb/.local/share/nvim/lazy/nvim-lspconfig/lua",
+        "/home/jonnyb/.local/share/nvim/lazy/cmp_luasnip/lua",
+        "/home/jonnyb/.local/share/nvim/lazy/bufferline.nvim/lua",
+        "/home/jonnyb/.local/share/nvim/lazy/mason.nvim/lua",
+        "/home/jonnyb/.local/share/nvim/lazy/cmp-nvim-lsp/lua",
+        "/home/jonnyb/.local/share/nvim/lazy/lazy.nvim/lua",
+        "/home/jonnyb/.local/share/nvim/lazy/mason-lspconfig.nvim/lua",
+        "/home/jonnyb/.local/share/nvim/lazy/neodev.nvim/lua",
+        "/home/jonnyb/.local/share/nvim/lazy/nvim-treesitter/lua",
+        "/home/jonnyb/.local/share/nvim/lazy/nvim-treesitter-textobjects/lua",
+        "/home/jonnyb/.local/share/nvim/lazy/gitsigns.nvim/lua",
+        "/home/jonnyb/.local/share/nvim/lazy/fidget.nvim/lua",
+        "/home/jonnyb/.local/share/nvim/lazy/catppuccin/lua",
+        "/home/jonnyb/.config/nvim/lua"
+    ],
+    "workspace.checkThirdParty": false
+}
