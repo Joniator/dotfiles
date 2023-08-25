@@ -11,11 +11,11 @@
 
 sourceDir: "{{ .chezmoi.sourceDir }}"
 
-{{- if not stdinIsATTY -}}
+{{ if not stdinIsATTY -}}
 encryption: "gpg"
 gpg:
   symmetric: true
-{{- end -}}
+{{ end -}}
 
 data:
   name: "{{ $name }}"
