@@ -1,0 +1,32 @@
+[user]
+  email = {{ .email }}
+  name = {{ .name }}
+  {{ if not .isCodespace -}}
+  signingkey = BAB33D6B07CF1A8D0D6823A393A6844F814C1648
+
+[commit]
+  gpgsign = true
+{{- end}}
+
+[init]
+  defaultBranch=main
+
+[color]
+  ui = true
+
+[diff]
+  tool = nvimdiff
+
+[merge]
+  tool = nvimdiff
+
+[difftool]
+  prompt = false
+
+[core]
+  autocrlf = false
+
+{{ if .isWork -}}
+[http]
+  sslCAInfo = /etc/ssl/certs/gitlab-prod-eu-techem-corp.pem
+{{- end }}

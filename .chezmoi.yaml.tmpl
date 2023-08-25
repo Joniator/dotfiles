@@ -1,0 +1,23 @@
+{{- $isWork := contains "MSG" .chezmoi.hostname}}
+{{- $isCodespace := contains "codespaces-" .chezmoi.hostname}}
+
+{{- $name := "Jonathan Boeckel" -}}
+{{- $email := "jboeckel@mailbox.org" -}}
+{{- $githubUsername := "Joniator" -}}
+
+{{- if $isWork }}
+{{- $email = "jonathan.boeckel@msg.group" -}}
+{{- end -}}
+
+sourceDir: "{{ .chezmoi.sourceDir }}"
+
+encryption: "gpg"
+gpg:
+  symmetric: true
+
+data:
+  name: "{{ $name }}"
+  email: "{{ $email }}"
+  isWork: {{ $isWork }}
+  isCodespace: {{ $isCodespace }}
+  githubUsername: "{{ $githubUsername }}"
