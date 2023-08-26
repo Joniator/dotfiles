@@ -10,7 +10,7 @@ static_file=${ZDOTDIR:-~}/plugins.zsh
 alias_folder=${ZDOTDIR:-~}/alias
 
 # Generate a static plugin file.
-if [[ ! $static_file -nt $plugins_txt || ! $alias_folder -nt $plugins_txt || ! -s $static_file ]]; then
+if [[ $plugins_txt -nt $static_file || $alias_folder -nt $static_file || ! -s $static_file ]]; then
   (
     . $antidote_dir/antidote.zsh
     [[ -e $plugins_txt ]] || touch $plugins_txt

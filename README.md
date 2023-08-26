@@ -5,7 +5,11 @@ Managed with [chezmoi](https://chezmoi.io/).
 # Installation
 
 ```sh
-sh -c "$(curl -fsLS get.chezmoi.io)" && chezmoi init --apply Joniator --branch chezmoi
+# Don't decrypt secrets, works on non-interactive terminals and does not need a password to work
+sh -c "$(curl -fsLS https://raw.githubusercontent.com/Joniator/dotfiles/chezmoi/install.sh) --mode=checkout"
+
+# Trying to decrypt secrets, needs interactive terminal and password
+sh -c "$(curl -fsLS https://raw.githubusercontent.com/Joniator/dotfiles/chezmoi/install.sh) --mode=decrypt"
 ```
 
 ## Usage

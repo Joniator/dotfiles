@@ -4,6 +4,21 @@
 # -u: exit on unset variables
 set -eu
 
+print_help () {
+  echo """
+  install.sh --mode=MODE
+  Installs chezmoi and applies the dotfiles using MODE
+
+  Defaults:
+    MODE = local
+  
+  Modes:
+    local     Uses the local, checked out version of the repo, useful for CI/development
+    checkout  Checks out the repository and applies non-interactively without decrypting the secrest
+    decrypt   Checks out the repository and interactively asks for decryption password. Does not work non-interactive and fails without correct password.
+"""
+}
+
 if ! chezmoi="$(command -v chezmoi)"; then
   bin_dir="${HOME}/.local/bin"
   chezmoi="${bin_dir}/chezmoi"
@@ -20,11 +35,22 @@ if ! chezmoi="$(command -v chezmoi)"; then
   unset chezmoi_install_script bin_dir
 fi
 
-# POSIX way to get script's dir: https://stackoverflow.com/a/29834779/12156188
-script_dir="$(cd -P -- "$(dirname -- "$(command -v -- "$0")")" && pwd -P)"
+if [ $# = "0" ] || [ $1 = "--mode=local" ]; then
+  # POSIX way to get script's dir: https://stackoverflow.com/a/29834779/12156188
+  script_dir="$(cd -P -- "$(dirname -- "$(command -v -- "$0")")" && pwd -P)"
 
-set -- init --apply --source="${script_dir}"
+  set -- init --apply --source="${script_dir}"
+elif [ $1 = "--mode=checkout" ]; then
+  set -- init --apply Joniator --branch chezmoi --exclude=encrypted
+elif [ $1 = "--mode=decrypt" ]; then
+  set -- init --apply Joniator --branch chezmoi
+else
+  echo $1
+  print_help
+  exit
+fi
+
 
 echo "Running 'chezmoi $*'" >&2
 # exec: replace current process with chezmoi
-exec "$chezmoi" "--exclude=encrypted" "$@"
+# exec "$chezmoi" "--exclude=encrypted" "$@"
