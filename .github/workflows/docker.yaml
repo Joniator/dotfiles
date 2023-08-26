@@ -34,9 +34,9 @@ jobs:
 
       - name: Test chezmoi
         run: >
-          docker run --rm chezmoi:test zsh -c "chezmoi data && 
-          install-sdkman && 
-          install-nvim
+          docker run --rm chezmoi:test zsh -c "chezmoi data;
+          install-sdkman;
+          install-nvim;"
 
       - name: Push image
         uses: docker/build-push-action@v4

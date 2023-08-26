@@ -16,6 +16,6 @@ jobs:
       - run: ./install.sh
       - name: chezmoi data
         run: > 
-          "$HOME/.local/bin/chezmoi" data && 
-          install-sdkman && 
-          install-nvim
+          "$HOME/.local/bin/chezmoi" data;
+          install-sdkman;
+          install-nvim;
