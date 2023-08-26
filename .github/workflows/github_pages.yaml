@@ -8,9 +8,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - run: 
-          - mkdir _pages
-          - cp install.sh _page
+      - run: |
+          mkdir _pages
+          cp install.sh _page
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v2
         with:
