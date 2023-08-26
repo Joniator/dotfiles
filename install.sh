@@ -13,7 +13,7 @@ print_help () {
     MODE = local
   
   Modes:
-    local     Uses the local, checked out version of the repo, useful for CI/development
+    local     Uses the local, checked out version of the repo, useful for CI/development without decrypting
     checkout  Checks out the repository and applies non-interactively without decrypting the secrest
     decrypt   Checks out the repository and interactively asks for decryption password. Does not work non-interactive and fails without correct password.
 """
@@ -39,7 +39,7 @@ if [ $# = "0" ] || [ $1 = "--mode=local" ]; then
   # POSIX way to get script's dir: https://stackoverflow.com/a/29834779/12156188
   script_dir="$(cd -P -- "$(dirname -- "$(command -v -- "$0")")" && pwd -P)"
 
-  set -- init --apply --source="${script_dir}"
+  set -- init --apply --source="${script_dir}" --exclude=encrypted
 elif [ $1 = "--mode=checkout" ]; then
   set -- init --apply Joniator --branch chezmoi --exclude=encrypted
 elif [ $1 = "--mode=decrypt" ]; then
