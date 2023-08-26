@@ -30,7 +30,6 @@ jobs:
         with:
           context: .
           platforms: linux/amd64,linux/arm64
-          push: true
           tags: chezmoi:test
 
       - name: Test chezmoi

@@ -1,4 +1,4 @@
-name: CI
+name: Local tests
 
 on:
   push:
@@ -18,4 +18,4 @@ jobs:
         run: > 
           "$HOME/.local/bin/chezmoi" data && 
           install-sdkman && 
-          install-nvim'
+          install-nvim
