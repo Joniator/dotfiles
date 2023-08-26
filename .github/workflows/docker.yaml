@@ -32,7 +32,7 @@ jobs:
           platforms: linux/amd64,linux/arm64
           push: true
           tags: |
-            joniator/dotfiles:${{ GITHUB_SHA }}
+            joniator/dotfiles:${{ github.sha }}
             joniator/dotfiles:latest
-            ghcr.io/joniator/dotfiles:${{ GITHUB_SHA }}
+            ghcr.io/joniator/dotfiles:${{ github.sha }}
             ghcr.io/joniator/dotfiles:latest
