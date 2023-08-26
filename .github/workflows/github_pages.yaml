@@ -11,6 +11,7 @@ jobs:
       - run: |
           mkdir _pages
           cp ./install.sh _pages
+          cp ./README.md _pages/index.html
           ls -la _pages
           cat _pages/install.sh
       - name: Upload Pages artifact
