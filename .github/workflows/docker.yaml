@@ -25,7 +25,21 @@ jobs:
           username: ${{ github.repository_owner }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Build and push
+      - name: Build image
+        uses: docker/build-push-action@v4
+        with:
+          context: .
+          platforms: linux/amd64,linux/arm64
+          push: true
+          tags: chezmoi:test
+
+      - name: Test chezmoi
+        run: >
+          docker run --rm chezmoi:test zsh -c "chezmoi data && 
+          install-sdkman && 
+          install-nvim
+
+      - name: Push image
         uses: docker/build-push-action@v4
         with:
           context: .
