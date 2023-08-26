@@ -16,8 +16,8 @@ jobs:
       - uses: actions/checkout@v2
       - run: ./install.sh
       - run: $HOME/.local/bin/chezmoi data
-      - run: install-sdkman
-      - run: install-nvim;
+      - run: zsh -c install-sdkman
+      - run: zsh -c install-nvim;
 
   deploy:
     name: Build, test and deploy docker image
