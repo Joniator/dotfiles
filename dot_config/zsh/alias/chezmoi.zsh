@@ -3,12 +3,12 @@
 alias ch='chezmoi'
 
 # Add
-alias cha='ch add'
-alias chat='cha --template'
+alias chadd='ch add'
+alias chaddt='cha --template'
 
 # Edit
 alias che='ch edit'
 
 # Apply
-alias chap='ch apply'
-alias chape='chap --exclude=encrypted'
+alias cha='ch apply'
+alias chae='chap --exclude=encrypted'

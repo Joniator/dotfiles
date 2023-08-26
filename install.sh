@@ -19,6 +19,16 @@ print_help () {
 """
 }
 
+if apt="$(command -v apt)"; then 
+  echo "Installing dependencies"
+  packages="curl zsh git gettext unzip zip"
+  if $(command -v sudo); then
+    sudo apt install -y $packages
+  elif [ $(id -u) = 0 ]; then
+    apt install -y $packages
+  fi
+fi
+
 if ! chezmoi="$(command -v chezmoi)"; then
   bin_dir="${HOME}/.local/bin"
   chezmoi="${bin_dir}/chezmoi"

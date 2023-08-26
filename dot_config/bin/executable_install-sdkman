@@ -1,5 +1,7 @@
-#!/usr/bin/env zsh
+#!/usr/bin/env bash
 
-if [[ ! -s "$SDKMAN_DIR/bin/sdkman-init.sh" ]]; then 
+if [[ ! -s "$SDKMAN_DIR/bin/sdkman-init.sh" ]]; then
   source <(curl -s "https://get.sdkman.io?rcupdate=false")
+else 
+  echo SDKman already installed
 fi
