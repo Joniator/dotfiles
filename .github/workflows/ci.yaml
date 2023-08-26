@@ -15,8 +15,8 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - run: ./install.sh
-      - run: "$HOME/.local/bin/chezmoi" data;
-      - run: install-sdkman;
+      - run: $HOME/.local/bin/chezmoi data
+      - run: install-sdkman
       - run: install-nvim;
 
   deploy:
