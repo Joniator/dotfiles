@@ -1,11 +1,11 @@
-name: ci
+name: CI
 
 on:
   push:
   pull_request:
 
 jobs:
-  clone-and-install:
+  Test Install:
     runs-on: ubuntu-latest
     container:
       image: mcr.microsoft.com/vscode/devcontainers/base:ubuntu
