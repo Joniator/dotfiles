@@ -8,12 +8,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - run: |
+      - name: Install pandoc
+        run: sudo apt install -y pandoc
+      - name: Prepare page
+        run: |
           mkdir _pages
           cp ./install.sh _pages
-          cp ./README.md _pages/index.html
-          ls -la _pages
-          cat _pages/install.sh
+          pandoc -f markdown ./README.md -t html > _pages/index.html
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v2
         with:
