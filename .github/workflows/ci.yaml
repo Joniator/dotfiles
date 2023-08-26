@@ -5,7 +5,7 @@ on:
   pull_request:
 
 jobs:
-  Test Install:
+  Test_Install:
     runs-on: ubuntu-latest
     container:
       image: mcr.microsoft.com/vscode/devcontainers/base:ubuntu
