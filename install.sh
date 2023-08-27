@@ -21,7 +21,7 @@ print_help () {
 
 if apt="$(command -v apt)"; then 
   echo "Installing dependencies"
-  packages="curl zsh git gettext unzip zip"
+  packages="curl zsh git gettext unzip zip jq software-properties-common"
   if $(command -v sudo); then
     sudo apt install -y $packages
   elif [ $(id -u) = 0 ]; then
