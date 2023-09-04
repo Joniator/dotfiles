@@ -1,9 +1,7 @@
 {{- $isWork := contains "MSG" .chezmoi.hostname}}
 {{- $isCodespace := contains "codespaces-" .chezmoi.hostname}}
 
-{{- $name := "Jonathan Boeckel" -}}
 {{- $email := "jboeckel@mailbox.org" -}}
-{{- $githubUsername := "Joniator" -}}
 
 {{- if $isWork }}
 {{- $email = "jonathan.boeckel@msg.group" -}}
@@ -16,8 +14,8 @@ gpg:
   symmetric: true
 
 data:
-  name: "{{ $name }}"
+  name: "Jonathan Boeckel"
+  githubUsername: "Joniator"
   email: "{{ $email }}"
   isWork: {{ $isWork }}
   isCodespace: {{ $isCodespace }}
-  githubUsername: "{{ $githubUsername }}"
