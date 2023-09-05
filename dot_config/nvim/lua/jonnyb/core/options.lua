@@ -1,6 +1,8 @@
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 
+vim.g.undotree_WindowLayout = 4
+
 vim.opt.termguicolors = true
 
 vim.opt.number = true

@@ -15,6 +15,9 @@ require("lazy").setup({
   {
     import = "jonnyb.plugins"
   }, 
+  {
+    import = "jonnyb.plugins.lsp"
+  },
 }, {
   install = {
     colorscheme = { "catppucin-macchiato" },
