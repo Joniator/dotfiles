@@ -1,7 +1,2 @@
-require('config/vim')
-require('config/lazy')
+require('jonnyb')
 
-require('lazy').setup('plugins')
-
-require('config/keymap')
-require('config/lsp')
