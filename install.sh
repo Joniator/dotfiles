@@ -51,9 +51,9 @@ if [ $# = "0" ] || [ $1 = "--mode=local" ]; then
 
   set -- init --apply --source="${script_dir}" --exclude=encrypted
 elif [ $1 = "--mode=checkout" ]; then
-  set -- init --apply Joniator --branch chezmoi --exclude=encrypted
+  set -- init --apply Joniator --exclude=encrypted
 elif [ $1 = "--mode=decrypt" ]; then
-  set -- init --apply Joniator --branch chezmoi
+  set -- init --apply Joniator
 else
   echo $1
   print_help
