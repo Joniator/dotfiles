@@ -47,12 +47,15 @@ fi
 
 if [ $# = "0" ] || [ $1 = "--mode=local" ]; then
   # POSIX way to get script's dir: https://stackoverflow.com/a/29834779/12156188
+  shift;
   script_dir="$(cd -P -- "$(dirname -- "$(command -v -- "$0")")" && pwd -P)"
 
   set -- init --apply --source="${script_dir}" --exclude=encrypted
 elif [ $1 = "--mode=checkout" ]; then
+  shift;
   set -- init --apply Joniator --exclude=encrypted
 elif [ $1 = "--mode=decrypt" ]; then
+  shift;
   set -- init --apply Joniator
 else
   echo $1
