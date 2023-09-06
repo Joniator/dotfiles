@@ -30,6 +30,6 @@ return {
     vim.keymap.set('n', '<leader>fb', builtin.buffers, { desc = 'Find buffers' })
     vim.keymap.set('n', '<leader>fh', builtin.help_tags, { desc = 'Find help' })
     vim.keymap.set('n', '<leader>fk', builtin.keymaps, { desc = 'Find help' })
-    vim.keymap.set('n', '<leader>fc', builtin.oldfiles, { desc = 'Find commands' })
+    vim.keymap.set('n', '<leader>fF', builtin.oldfiles, { desc = 'Find commands' })
   end,
 }
