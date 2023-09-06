@@ -5,7 +5,7 @@ return {
     { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
     "nvim-tree/nvim-web-devicons",
   },
-  config = function() 
+  config = function()
     local telescope = require('telescope')
     local builtin = require('telescope.builtin')
     local actions = require("telescope.actions")
@@ -25,8 +25,12 @@ return {
     })
 
     telescope.load_extension("fzf")
+
     telescope.load_extension("http")
+    vim.api.nvim_create_user_command("HttpCodes", extensions.http.list, {})
+
     telescope.load_extension('emoji')
+    vim.api.nvim_create_user_command("Emojis", extensions.emoji.emoji, {})
 
     vim.keymap.set('n', '<leader>ff', builtin.find_files, { desc = 'Find files' })
     vim.keymap.set('n', '<leader>fg', builtin.live_grep, { desc = 'Find grep' })
