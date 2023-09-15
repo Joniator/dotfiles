@@ -1,0 +1,4 @@
+#!/usr/bin/env zsh
+
+tar -C /usr/local/lib -xzf <(curl -L https://go.dev/dl/go1.21.1.linux-amd64.tar.gz)
+ln -s /usr/local/lib/go/bin/go /usr/local/bin/

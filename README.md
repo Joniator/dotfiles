@@ -17,12 +17,17 @@ Some programs need to be installed first:
 
 ### SDKMan
 ```sh
-setup-sdkman
+sudo $(which setup-sdkman)
 ```
 
 ### Neovim
 ```sh
-setup-nvim
+sudo $(which setup-nvim)
+```
+
+### go
+```sh
+sudo $(which setup-go)
 ```
 
 ## License
