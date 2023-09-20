@@ -3,4 +3,5 @@ return {
   'stevearc/dressing.nvim',
   'barrett-ruth/telescope-http.nvim',
   'xiyaowong/telescope-emoji.nvim',
+  'tpope/vim-fugitive',
 }
