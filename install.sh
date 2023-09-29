@@ -23,8 +23,10 @@ if apt="$(command -v apt)"; then
   echo "Installing dependencies"
   packages="curl zsh git gettext unzip zip jq software-properties-common"
   if sudo=$(command -v sudo); then
+    sudo apt-get update
     sudo apt-get install -y $packages
   elif [ $(id -u) = 0 ]; then
+    apt-get update
     apt-get install -y $packages
   fi
 fi
