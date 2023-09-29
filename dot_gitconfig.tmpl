@@ -8,6 +8,11 @@
   gpgsign = true
 {{- end}}
 
+{{ if eq .chezmoi.os "windows" -}}
+[gpg]
+  program = C:\\Users\\boeckj\\AppData\\Local\\GnuPG\\bin\\gpg.exe
+{{- end }}
+
 [init]
   defaultBranch=main
 
@@ -26,7 +31,7 @@
 [core]
   autocrlf = false
 
-{{ if .isWork -}}
-[http]
-  sslCAInfo = /etc/ssl/certs/gitlab-prod-eu-techem-corp.pem
-{{- end }}
+[log]
+  decorate = true
+  showSignature = true
+  abbrevCommit = true
