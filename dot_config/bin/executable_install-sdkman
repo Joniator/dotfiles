@@ -1,15 +1,5 @@
 #!/usr/bin/env bash
 
-if [ "$(id -u)" -eq 0 ]; then
-    SUDO=""
-else
-    if ! command -v sudo &> /dev/null; then
-        echo "Error: sudo is not installed. Please install sudo or run as root."
-        exit 1
-    fi
-    SUDO="sudo"
-fi
-
 if [[ ! -s "$SDKMAN_DIR/bin/sdkman-init.sh" ]]; then
   source <(curl -s "https://get.sdkman.io?rcupdate=false")
   source "$SDKMAN_DIR/bin/sdkman-init.sh"

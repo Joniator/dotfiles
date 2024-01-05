@@ -1,5 +1,10 @@
 #!/usr/bin/env zsh
 
+if command -v go &> /dev/null; then
+    echo "Go is already installed"
+    return
+fi
+
 if [ "$(id -u)" -eq 0 ]; then
     SUDO=""
 else
