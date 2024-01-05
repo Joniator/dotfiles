@@ -47,7 +47,11 @@ if ! chezmoi="$(command -v chezmoi)"; then
   unset chezmoi_install_script bin_dir
 fi
 
-if [ $# = "0" ] || [ $1 = "--mode=local" ]; then
+if [ $# = "0" ]; then
+  set -- "--mode=local"
+fi
+
+if [ $1 = "--mode=local" ]; then
   # POSIX way to get script's dir: https://stackoverflow.com/a/29834779/12156188
   shift;
   script_dir="$(cd -P -- "$(dirname -- "$(command -v -- "$0")")" && pwd -P)"

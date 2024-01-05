@@ -1,0 +1,9 @@
+{
+    "image":"mcr.microsoft.com/devcontainers/universal:2",
+    "postStartCommand": [
+        "./install.sh --mode=local",
+        "install-sdkman",
+        "install-go",
+        "install-nvim"
+    ]
+}
