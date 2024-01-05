@@ -5,6 +5,6 @@ RUN apt update; \
 
 WORKDIR /dotfiles
 COPY . /dotfiles
-RUN sh -c "$(curl -fsLS https://joniator.github.io/dotfiles/install.sh)" --mode=local;
+RUN sh -c "./install.sh --mode=local";
 
 CMD zsh
