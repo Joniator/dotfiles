@@ -1,17 +1,6 @@
 [user]
   email = {{ .email }}
   name = {{ .name }}
-  {{ if not .isCodespace -}}
-  signingkey = BAB33D6B07CF1A8D0D6823A393A6844F814C1648
-
-[commit]
-  gpgsign = true
-{{- end}}
-
-{{ if eq .chezmoi.os "windows" -}}
-[gpg]
-  program = C:\\Users\\boeckj\\AppData\\Local\\GnuPG\\bin\\gpg.exe
-{{- end }}
 
 [init]
   defaultBranch=main
