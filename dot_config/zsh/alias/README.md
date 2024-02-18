@@ -1,3 +1,3 @@
 # ZSH Alias
 
-This folder gets sourced by antidote
+Thi folder gets sourced by antidote

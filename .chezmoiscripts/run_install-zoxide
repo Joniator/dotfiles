@@ -1,0 +1,9 @@
+#!/usr/bin/env zsh
+
+if command -v zoxide &> /dev/null; then
+    echo "Zoxide is already installed"
+    return
+fi
+
+curl -sS https://raw.githubusercontent.com/ajeetdsouza/zoxide/main/install.sh | bash
+

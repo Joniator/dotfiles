@@ -1,10 +1,5 @@
 #!/usr/bin/env zsh
 
-if command -v go &> /dev/null; then
-    echo "Go is already installed"
-    return
-fi
-
 if [ "$(id -u)" -eq 0 ]; then
     SUDO=""
 else
@@ -15,5 +10,5 @@ else
     SUDO="sudo"
 fi
 
-$SUDO tar -C /usr/local/lib -xzf <(curl -L https://go.dev/dl/go1.21.1.linux-amd64.tar.gz)
-$SUDO ln -s /usr/local/lib/go/bin/go /usr/local/bin/
+$SUDO apt-get install -y unzip zip jq software-properties-common build-essential tar fzf ripgrep bat
+
