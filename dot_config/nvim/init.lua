@@ -230,6 +230,7 @@ require('lazy').setup({
       'nvim-treesitter/nvim-treesitter',
       dependencies = {
         'nvim-treesitter/nvim-treesitter-textobjects',
+        'hiphish/rainbow-delimiters.nvim',
       },
       build = ':TSUpdate',
     },
@@ -496,7 +497,9 @@ require('which-key').register({
 
 -- mason-lspconfig requires that these setup functions are called in this order
 -- before setting up the servers.
-require('mason').setup()
+require('mason').setup(
+{ log_level = vim.log.levels.DEBUG }
+)
 require('mason-lspconfig').setup()
 
 -- Enable the following language servers
@@ -513,11 +516,11 @@ local servers = {
   -- pyright = {},
   -- rust_analyzer = {},
   -- tsserver = {},
-  -- html = { filetypes = { 'html', 'twig', 'hbs'} },
-
-  kotlin_language_server = {
-    filetypes = { 'kotlin' },
+  html = {
+    cmd = { "/usr/local/bin/vscode-html-language-server", "--stdio" }
   },
+  tailwindcss = {},
+
   lua_ls = {
     Lua = {
       workspace = { checkThirdParty = false },
