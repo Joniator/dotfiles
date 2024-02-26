@@ -251,9 +251,9 @@ vim.opt.termguicolors = true
 
 vim.opt.number = true
 vim.opt.relativenumber = true
-vim.opt.tabstop = 2
-vim.opt.softtabstop = 2
-vim.opt.shiftwidth = 2
+vim.opt.tabstop = 4
+vim.opt.softtabstop = 4
+vim.opt.shiftwidth = 4
 vim.opt.expandtab = true
 vim.opt.modeline = true
 
@@ -278,9 +278,6 @@ vim.keymap.set({ 'n', 'v' }, '<Space>', '<Nop>', { silent = true })
 -- Remap for dealing with word wrap
 vim.keymap.set('n', 'k', "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
 vim.keymap.set('n', 'j', "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
-
-vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv")
-vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv")
 
 -- Diagnostic keymaps
 vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = 'Go to previous diagnostic message' })
@@ -515,14 +512,9 @@ require('mason-lspconfig').setup()
 --  define the property 'filetypes' to the map in question.
 local servers = {
   -- clangd = {},
-  gopls = {},
   -- pyright = {},
   -- rust_analyzer = {},
   -- tsserver = {},
-  html = {
-    cmd = { "/usr/local/bin/vscode-html-language-server", "--stdio" }
-  },
-  tailwindcss = {},
 
   lua_ls = {
     Lua = {
@@ -533,6 +525,17 @@ local servers = {
     },
   },
 }
+
+if (vim.fn.executable("go")) then
+  servers["gopls"] = {}
+end
+
+if (vim.fn.executable("node")) then
+  servers["html"] = {
+    cmd = { "/usr/local/bin/vscode-html-language-server", "--stdio" }
+  }
+  servers["tailwindcss"]  = {}
+end
 
 -- Setup neovim lua configuration
 require('neodev').setup()
