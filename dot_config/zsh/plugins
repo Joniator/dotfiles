@@ -4,7 +4,6 @@ romkatv/powerlevel10k path:powerlevel10k.zsh-theme
 ohmyzsh/ohmyzsh path:plugins/colorize
 ohmyzsh/ohmyzsh path:plugins/docker-compose
 ohmyzsh/ohmyzsh path:plugins/git
-ohmyzsh/ohmyzsh path:plugins/sudo
 ohmyzsh/ohmyzsh path:plugins/systemadmin
 ohmyzsh/ohmyzsh path:plugins/fzf
 
@@ -12,6 +11,5 @@ MichaelAquilina/zsh-you-should-use
 zsh-users/zsh-autosuggestions
 zsh-users/zsh-completions
 zsh-users/zsh-syntax-highlighting
-jeffreytse/zsh-vi-mode
 
 $ZDOTDIR/alias
