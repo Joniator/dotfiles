@@ -1,0 +1,13 @@
+#!/usr/bin/env zsh
+
+if [ "$(id -u)" -eq 0 ]; then
+    SUDO=""
+else
+    if ! command -v sudo &> /dev/null; then
+        echo "Error: sudo is not installed. Please install sudo or run as root." 1>&2
+        exit 1
+    fi
+    SUDO="sudo"
+fi
+
+echo $SUDO

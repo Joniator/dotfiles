@@ -1,0 +1,6 @@
+#!/usr/bin/env zsh
+
+SUDO=$(get-sudo)
+
+$SUDO apt-get update
+$SUDO apt-get install -y tmux git neofetch python3-pip ripgrep python3-venv ctop
