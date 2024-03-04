@@ -12,4 +12,5 @@ alias che='ch edit --apply'
 
 # Apply
 alias cha='ch apply'
+alias chaa='cha --refresh-externals'
 alias chae='chap --exclude=encrypted'

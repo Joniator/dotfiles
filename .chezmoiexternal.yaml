@@ -1,7 +1,9 @@
 ".config/zsh/antidote":
   type: "git-repo"
   url: "https://github.com/mattmc3/antidote.git"
+  refreshPeriod: "168h"
 
 ".config/tmux/plugins/tpm":
   type: "git-repo"
   url: "https://github.com/tmux-plugins/tpm"
+  refreshPeriod: "168h"
