@@ -12,5 +12,4 @@ zsh-users/zsh-autosuggestions
 zsh-users/zsh-completions
 zsh-users/zsh-syntax-highlighting
 
-$ZDOTDIR/lib
 $ZDOTDIR/alias
