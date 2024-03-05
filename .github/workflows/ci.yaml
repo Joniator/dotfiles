@@ -1,7 +1,7 @@
 name: CI
 
 on:
-  manual:
+  workflow_dispatch:
   push: 
     branches:
       - main
