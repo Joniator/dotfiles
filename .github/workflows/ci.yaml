@@ -1,5 +1,11 @@
 name: CI
 
+on:
+  manual:
+  push: 
+    branches:
+      - main
+
 jobs:
   test:
     name: Run local tests

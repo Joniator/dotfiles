@@ -1,5 +1,11 @@
 name: Github Pages
 
+on:
+  manual:
+  push: 
+    branches:
+      - main
+
 jobs:
   Build:
     runs-on: ubuntu-latest
