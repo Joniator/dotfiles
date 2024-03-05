@@ -1,5 +1,7 @@
 #!/usr/bin/env zsh
 
+ZSH_LIB="$ZDOTDIR/lib"
+
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.config/zsh/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
 # confirmations, etc.) must go above this block; everything else may go below.
@@ -19,10 +21,10 @@ if [[ ! -d "$XDG_CACHE_HOME" ]]; then mkdir -p "$XDG_CACHE_HOME"; fi
 GO_INSTALL_DIR="/usr/local/go"
 if [[ -d "$GO_INSTALL_DIR" ]]; then export PATH="$GO_INSTALL_DIR/bin:$PATH"; fi
 
-source setup-antidote
+source "$ZSH_LIB/setup-antidote"
 
 if [[ -d "$SDKMAN_DIR" ]]; then
-  source setup-sdkman
+  source "$ZSH_LIB/setup-sdkman"
 fi
 
 # To customize prompt, run `p10k configure` or edit ~/.config/zsh/.p10k.zsh.
