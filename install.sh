@@ -6,11 +6,12 @@ set -eu
 
 print_help () {
   echo """
-  install.sh --mode=MODE
+  install.sh [--mode=MODE] [--ssh]
   Installs chezmoi and applies the dotfiles using MODE
 
   Defaults:
     MODE = local
+    SSH = false
   
   Modes:
     local     Uses the local, checked out version of the repo, useful for CI/development without decrypting
@@ -51,29 +52,35 @@ install_chezmoi () {
   fi
 }
 
+arg_mode=local
+flag_ssh=false
+while [ $# -gt 0 ]; do
+  case $1 in
+    -h|--help)          print_help && return                    ;;
+    -m|--mode)          shift; arg_mode=$1                      ;;
+    -m=*|--mode=*)      arg_mode="${1#*=}"                      ;;
+    -s|--ssh)           flag_ssh=true                           ;;
+    *)                  print_help && return 2                  ;;
+  esac
+  shift
+done
+
 install_dependencies
 install_chezmoi
 
-if [ $# = "0" ]; then
-  set -- "--mode=local"
+set -- init --apply
+if [ $arg_mode = "local" ]; then
+  # POSIX way to get script's dir: https://stackoverflow.com/a/29834779/12156188
+  script_dir="$(cd -P -- "$(dirname -- "$(command -v -- "$0")")" && pwd -P)"
+  set -- "$@" --source="${script_dir}" --exclude=encrypted
+elif [ $arg_mode = "checkout" ]; then
+  set -- "$@" Joniator --exclude=encrypted
+elif [ $arg_mode = "decrypt" ]; then
+  set -- "$@" Joniator
 fi
 
-if [ $1 = "--mode=local" ]; then
-  # POSIX way to get script's dir: https://stackoverflow.com/a/29834779/12156188
-  shift;
-  script_dir="$(cd -P -- "$(dirname -- "$(command -v -- "$0")")" && pwd -P)"
-
-  set -- init --apply --source="${script_dir}" --exclude=encrypted
-elif [ $1 = "--mode=checkout" ]; then
-  shift;
-  set -- init --ssh --apply Joniator --exclude=encrypted
-elif [ $1 = "--mode=decrypt" ]; then
-  shift;
-  set -- init --ssh --apply Joniator
-else
-  echo $1
-  print_help
-  exit
+if [ $flag_ssh = true ]; then
+  set -- "$@" --ssh
 fi
 
 chezmoi="$(command -v chezmoi)"
