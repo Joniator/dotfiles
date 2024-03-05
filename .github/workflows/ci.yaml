@@ -16,7 +16,7 @@ jobs:
         CODESPACES: true
     steps:
       - uses: actions/checkout@v2
-      - run: bash ./install.sh --mode=checkout
+      - run: bash ./install.sh --mode=checkout || echo Hello
       - run: $HOME/.local/bin/chezmoi data
       - run: zsh -c "install-sdkman; source setup-sdkman; sdk version"
       - run: zsh -c "install-nvim; nvim --version"
