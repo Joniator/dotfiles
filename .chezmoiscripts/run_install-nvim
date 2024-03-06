@@ -1,20 +1,25 @@
 #!/usr/bin/env zsh
 
-if command -v nvim &> /dev/null; then
-    echo "nvim is already installed"
-    return
-fi
-
-if [ "$(id -u)" -eq 0 ]; then
-    SUDO=""
-else
-    if ! command -v sudo &> /dev/null; then
-        echo "Error: sudo is not installed. Please install sudo or run as root."
-        exit 1
+function install {
+    if command -v nvim &> /dev/null; then
+        echo "nvim is already installed"
+        return
     fi
-    SUDO="sudo"
-fi
 
-$SUDO add-apt-repository -y ppa:neovim-ppa/unstable
-$SUDO apt-get update
-$SUDO apt-get install -y neovim ripgrep fd-find
+    if [ "$(id -u)" -eq 0 ]; then
+        SUDO=""
+    else
+        if ! command -v sudo &> /dev/null; then
+            echo "Error: sudo is not installed. Please install sudo or run as root."
+            exit 1
+        fi
+        SUDO="sudo"
+    fi
+
+    $SUDO add-apt-repository -y ppa:neovim-ppa/unstable
+    $SUDO apt-get update
+    $SUDO apt-get install -y neovim ripgrep fd-find
+}
+
+install || echo Failed to install nvim
+

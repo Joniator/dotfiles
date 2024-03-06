@@ -1,8 +1,13 @@
 #!/usr/bin/env bash
 
-if [[ ! -s "$SDKMAN_DIR/bin/sdkman-init.sh" ]]; then
-  source <(curl -s "https://get.sdkman.io?rcupdate=false")
-  source "$SDKMAN_DIR/bin/sdkman-init.sh"
-else 
-  echo SDKman already installed
-fi
+function install {
+  if [[ ! -s "$SDKMAN_DIR/bin/sdkman-init.sh" ]]; then
+    source <(curl -s "https://get.sdkman.io?rcupdate=false")
+    source "$SDKMAN_DIR/bin/sdkman-init.sh"
+  else 
+    echo SDKman already installed
+  fi
+}
+
+install || echo Failed to install SDKman
+

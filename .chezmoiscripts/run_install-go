@@ -1,25 +1,29 @@
 #!/usr/bin/env zsh
 
-if command -v go &> /dev/null; then
-    echo "Go is already installed"
-    return
-fi
-
-ARCH=$(uname -m)
-if [ $ARCH != "x86_64" ]; then
-    echo "$ARCH is not supported"
-    return
-fi
-
-if [ "$(id -u)" -eq 0 ]; then
-    SUDO=""
-else
-    if ! command -v sudo &> /dev/null; then
-        echo "Error: sudo is not installed. Please install sudo or run as root."
-        exit 1
+function install {
+    if command -v go &> /dev/null; then
+        echo "Go is already installed"
+        return
     fi
-    SUDO="sudo"
-fi
 
-$SUDO zsh -c "tar -C /usr/local/lib -xzf <(curl -sL https://go.dev/dl/go1.21.1.linux-amd64.tar.gz)"
-$SUDO ln -s /usr/local/lib/go/bin/go /usr/local/bin/
+    ARCH=$(uname -m)
+    if [ $ARCH != "x86_64" ]; then
+        echo "$ARCH is not supported"
+        return
+    fi
+
+    if [ "$(id -u)" -eq 0 ]; then
+        SUDO=""
+    else
+        if ! command -v sudo &> /dev/null; then
+            echo "Error: sudo is not installed. Please install sudo or run as root."
+            exit 1
+        fi
+        SUDO="sudo"
+    fi
+
+    $SUDO zsh -c "tar -C /usr/local/lib -xzf <(curl -sL https://go.dev/dl/go1.21.1.linux-amd64.tar.gz)"
+    $SUDO ln -s /usr/local/lib/go/bin/go /usr/local/bin/
+}
+
+install || echo Failed to install Go

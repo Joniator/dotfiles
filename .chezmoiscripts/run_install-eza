@@ -1,26 +1,31 @@
 #!/usr/bin/env zsh
 
-if command -v eza &> /dev/null; then
-    echo "Eza is already installed"
-    return
-fi
-
-ARCH=$(uname -m)
-if [ $ARCH != "x86_64" ]; then
-    echo "$ARCH is not supported"
-    return
-fi
-
-if [ "$(id -u)" -eq 0 ]; then
-    SUDO=""
-else
-    if ! command -v sudo &> /dev/null; then
-        echo "Error: sudo is not installed. Please install sudo or run as root."
-        exit 1
+function install {
+    if command -v eza &> /dev/null; then
+        echo "Eza is already installed"
+        return
     fi
-    SUDO="sudo"
-fi
 
-$SUDO zsh -c "tar -C /usr/local/bin -xzf <(curl -sL https://github.com/eza-community/eza/releases/latest/download/eza_x86_64-unknown-linux-gnu.tar.gz)"
-$SUDO chmod +x /usr/local/bin/eza
-$SUDO chown root:root /usr/local/bin/eza
+    ARCH=$(uname -m)
+    if [ $ARCH != "x86_64" ]; then
+        echo "$ARCH is not supported"
+        return
+    fi
+
+    if [ "$(id -u)" -eq 0 ]; then
+        SUDO=""
+    else
+        if ! command -v sudo &> /dev/null; then
+            echo "Error: sudo is not installed. Please install sudo or run as root."
+            exit 1
+        fi
+        SUDO="sudo"
+    fi
+
+    $SUDO zsh -c "tar -C /usr/local/bin -xzf <(curl -sL https://github.com/eza-community/eza/releases/latest/download/eza_x86_64-unknown-linux-gnu.tar.gz)"
+    $SUDO chmod +x /usr/local/bin/eza
+    $SUDO chown root:root /usr/local/bin/eza
+}
+
+install || echo Failed to install Eza
+

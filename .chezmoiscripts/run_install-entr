@@ -1,16 +1,21 @@
 #!/usr/bin/env zsh
 
-if command -v entr &> /dev/null; then
-    echo "Entr is already installed"
-    return
-fi
+function install {
+    if command -v entr &> /dev/null; then
+        echo "Entr is already installed"
+        return
+    fi
 
-SUDO=$(get-sudo)
-TMP="$(mktemp -d)"
+    SUDO=$(get-sudo)
+    TMP="$(mktemp -d)"
 
-cd $TMP
-git clone https://github.com/eradman/entr.git
-cd entr
-./configure
-make test
-$SUDO make install
+    cd $TMP
+    git clone https://github.com/eradman/entr.git
+    cd entr
+    ./configure
+    make test
+    $SUDO make install
+}
+
+install || echo Failed to install Entr
+
