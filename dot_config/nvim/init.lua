@@ -668,12 +668,15 @@ require('lazy').setup {
       --    for various frameworks/libraries/etc. but you will have to
       --    set up the ones that are useful for you.
       -- 'rafamadriz/friendly-snippets',
+      'molleweide/LuaSnip-snippets.nvim',
     },
     config = function()
       -- See `:help cmp`
       local cmp = require 'cmp'
       local luasnip = require 'luasnip'
       luasnip.config.setup {}
+      -- be sure to load this first since it overwrites the snippets table.
+      luasnip.snippets = require('luasnip_snippets').load_snippets()
 
       cmp.setup {
         snippet = {
@@ -696,10 +699,7 @@ require('lazy').setup {
           -- Accept ([y]es) the completion.
           --  This will auto-import if your LSP supports it.
           --  This will expand snippets if the LSP sent a snippet.
-          ['<C-y>'] = function()
-            cmp.mapping.confirm { select = true }
-          end,
-
+          ['<C-y>'] = cmp.mapping.confirm { select = true },
           -- Think of <c-l> as moving to the right of your snippet expansion.
           --  So if you have a snippet that's like:
           --  function $name($args)
