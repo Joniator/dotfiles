@@ -5,6 +5,6 @@ RUN apt update; \
 
 WORKDIR /dotfiles
 COPY . /dotfiles
-RUN sh -c "./install.sh --mode=local";
+RUN ls -la; ./install.sh --mode=local
 
 CMD zsh
