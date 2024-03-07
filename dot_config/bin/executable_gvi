@@ -4,7 +4,7 @@
 # If supplied with --reload flag, try to copy the local ginit to the assumed windows home
 
 
-if [ $1 = "--reload" ]; then
+if [[ $1 == "--reload" ]]; then
 	APPDATA="/mnt/c/Users/$USER/AppData/Local"
 	if [[ ! -d $APPDATA ]]; then
 		echo $$APPDATA not found

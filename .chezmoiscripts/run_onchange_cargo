@@ -1,0 +1,11 @@
+#!/usr/bin/env zsh
+
+function install {
+    cargo install \
+        du-dust \
+        eza \
+        tlrc \
+}
+
+install || echo Failed to update cargo packages
+

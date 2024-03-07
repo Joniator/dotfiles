@@ -13,6 +13,7 @@ function install {
 
     $SUDO apt-get install -y \
         bat \
+        btop \
         build-essential \
         ctop
         fzf \
@@ -29,5 +30,5 @@ function install {
         zip \
 }
 
-install || echo Failed to update packages
+install || echo Failed to update apt packages
 

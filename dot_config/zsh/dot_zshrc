@@ -15,19 +15,14 @@ if [[ ! -d "$XDG_DATA_HOME" ]]; then mkdir -p "$XDG_DATA_HOME"; fi
 if [[ ! -d "$XDG_STATE_HOME" ]]; then mkdir -p "$XDG_STATE_HOME"; fi
 if [[ ! -d "$XDG_CACHE_HOME" ]]; then mkdir -p "$XDG_CACHE_HOME"; fi
 
-# Add go to path
-GO_INSTALL_DIR="/usr/local/go"
-if [[ -d "$GO_INSTALL_DIR" ]]; then export PATH="$GO_INSTALL_DIR/bin:$PATH"; fi
-
 source setup-antidote
 
-if [[ -d "$SDKMAN_DIR" ]]; then
-  source setup-sdkman
-fi
+GO_INSTALL_DIR="/usr/local/go"
+if [[ -d "$GO_INSTALL_DIR" ]]; then export PATH="$GO_INSTALL_DIR/bin:$PATH"; fi
+if [[ -d "$SDKMAN_DIR" ]]; then source setup-sdkman; fi
+if [[ -d "$HOME/.cargo/env" ]]; then source "$HOME/.cargo/env"; fi
 
 # To customize prompt, run `p10k configure` or edit ~/.config/zsh/.p10k.zsh.
 [[ ! -f ~/.config/zsh/.p10k.zsh ]] || source ~/.config/zsh/.p10k.zsh
 
-if command -v zoxide &> /dev/null; then
-  eval "$(zoxide init --cmd cd zsh)"
-fi
+if command -v zoxide &> /dev/null; then eval "$(zoxide init --cmd cd zsh)"; fi
