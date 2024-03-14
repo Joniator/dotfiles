@@ -12,18 +12,9 @@ function install {
         return
     fi
 
-    if [ "$(id -u)" -eq 0 ]; then
-        SUDO=""
-    else
-        if ! command -v sudo &> /dev/null; then
-            echo "Error: sudo is not installed. Please install sudo or run as root."
-            exit 1
-        fi
-        SUDO="sudo"
-    fi
-
-    $SUDO zsh -c "tar -C /usr/local/lib -xzf <(curl -sL https://go.dev/dl/go1.21.1.linux-amd64.tar.gz)"
-    $SUDO ln -s /usr/local/lib/go/bin/go /usr/local/bin/
+    mkdir -p ~/.local/lib
+    zsh -c "tar -C ~/.local/lib -xzf <(curl -sL https://go.dev/dl/go1.21.1.linux-amd64.tar.gz)"
+    ln -s ~/.local/lib/go/bin/go ~/.local/bin/
 }
 
 install || echo Failed to install Go

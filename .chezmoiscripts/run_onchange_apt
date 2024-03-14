@@ -15,7 +15,7 @@ function install {
         bat \
         btop \
         build-essential \
-        ctop
+        ctop \
         fzf \
         git \
         jq \

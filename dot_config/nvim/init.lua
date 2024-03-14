@@ -49,10 +49,6 @@ vim.g.maplocalleader = ' '
 vim.opt.number = true
 vim.opt.relativenumber = true
 
--- Sync clipboard between OS and Neovim.
---  See `:help 'clipboard'`
-vim.opt.clipboard = 'unnamedplus'
-
 -- Enable break indent
 vim.opt.breakindent = true
 
@@ -158,6 +154,33 @@ vim.api.nvim_create_autocmd('TextYankPost', {
   end,
 })
 
+--[[ Custom Commands ]]
+vim.api.nvim_create_user_command('Headline', function(opts)
+  local args = opts.fargs
+  local width = args[1] or 100
+  local char = args[2] or '#'
+  local line_start = opts.line1 - 1
+  local line_stop = opts.line2
+  local lines = vim.api.nvim_buf_get_lines(0, line_start, line_stop, false)
+  local result = {}
+  for _, value in pairs(lines) do
+    local trimmed = value:gsub('^%s+', '')
+    if trimmed:len() == 0 then
+      table.insert(result, char:rep(width))
+    else
+      local filler = width - trimmed:len() - 4
+      local lfill = math.max(filler / 2, 3)
+      local rfill = math.max(filler / 2, 3) + (width % 2 + trimmed:len() % 2) % 2
+      table.insert(result, char:rep(lfill) .. '  ' .. trimmed .. '  ' .. char:rep(rfill))
+    end
+  end
+  vim.api.nvim_buf_set_lines(0, line_start, line_stop, false, result)
+end, {
+  nargs = '*',
+  range = true,
+  desc = 'Replaces the selection with full line block comments, defaults, width=100 char=#',
+})
+
 -- If win32yank is installed, assume we are in WSL and want to use the windows clipboard
 if vim.fn.executable 'win32yank.exe' then
   vim.g.clipboard = {
@@ -186,12 +209,19 @@ vim.opt.rtp:prepend(lazypath)
 -- NOTE: Here is where you install your plugins.
 require('lazy').setup {
   'equalsraf/neovim-gui-shim',
+  'alker0/chezmoi.vim',
   'tpope/vim-sleuth', -- Detect tabstop and shiftwidth automatically
+  'tpope/vim-fugitive',
 
   -- "gc" to comment visual regions/lines
   { 'numToStr/Comment.nvim', opts = {} },
 
-  'alker0/chezmoi.vim',
+  {
+    'mbbill/undotree',
+    init = function()
+      vim.keymap.set('n', '<leader>u', vim.cmd.UndotreeToggle)
+    end,
+  },
 
   { -- Adds git related signs to the gutter, as well as utilities for managing changes
     'lewis6991/gitsigns.nvim',
@@ -234,30 +264,30 @@ require('lazy').setup {
         end, { expr = true })
 
         -- Actions
-        gsmap('n', '<leader>ghs', gs.stage_hunk)
-        gsmap('n', '<leader>ghr', gs.reset_hunk)
+        gsmap('n', '<leader>ghs', gs.stage_hunk, { desc = '[G]it [H]unk [S]tage' })
+        gsmap('n', '<leader>ghr', gs.reset_hunk, { desc = '[G]it [H]unk [R]eset' })
         gsmap('v', '<leader>ghs', function()
           gs.stage_hunk { vim.fn.line '.', vim.fn.line 'v' }
-        end)
+        end, { desc = '[G]it [H]unk [S]tage' })
         gsmap('v', '<leader>ghr', function()
           gs.reset_hunk { vim.fn.line '.', vim.fn.line 'v' }
-        end)
-        gsmap('n', '<leader>ghS', gs.stage_buffer)
-        gsmap('n', '<leader>ghu', gs.undo_stage_hunk)
-        gsmap('n', '<leader>ghR', gs.reset_buffer)
-        gsmap('n', '<leader>ghp', gs.preview_hunk)
+        end, { desc = '[G]it [H]unk [R]eset' })
+        gsmap('n', '<leader>ghS', gs.stage_buffer, { desc = '[G]it [H]unk [S]tage Buffer' })
+        gsmap('n', '<leader>ghu', gs.undo_stage_hunk, { desc = '[G]it [H]unk [U]ndo' })
+        gsmap('n', '<leader>ghR', gs.reset_buffer, { desc = '[G]it [H]unk [R]eset Buffer' })
+        gsmap('n', '<leader>ghp', gs.preview_hunk, { desc = '[G]it [H]unk [P]review' })
         gsmap('n', '<leader>ghb', function()
           gs.blame_line { full = true }
-        end)
-        gsmap('n', '<leader>gtb', gs.toggle_current_line_blame)
-        gsmap('n', '<leader>ghd', gs.diffthis)
+        end, { desc = '[G]it [H]unk [B]lame' })
+        gsmap('n', '<leader>ghtb', gs.toggle_current_line_blame, { desc = '[G]it [H]unk [T]oggle Line [B]lame' })
+        gsmap('n', '<leader>ghd', gs.diffthis, { desc = '[G]it [H]unk [D]iff' })
         gsmap('n', '<leader>ghD', function()
           gs.diffthis '~'
-        end)
-        gsmap('n', '<leader>gtd', gs.toggle_deleted)
+        end, { desc = '[G]it [H]unk [D]iff all' })
+        gsmap('n', '<leader>ghtd', gs.toggle_deleted, { desc = '[G]it [H]unk [T]oggle [D]eleted' })
 
         -- Text object
-        gsmap({ 'o', 'x' }, 'ih', ':<C-U>Gitsigns select_hunk<CR>')
+        gsmap({ 'o', 'x' }, 'ih', ':<C-U>Gitsigns select_hunk<CR>', { desc = 'inner hunk' })
       end,
     },
   },
@@ -271,7 +301,7 @@ require('lazy').setup {
         ['<leader>c'] = { name = '[C]ode', _ = 'which_key_ignore' },
         ['<leader>d'] = { name = '[D]ocument', _ = 'which_key_ignore' },
         ['<leader>g'] = { name = '[G]it', _ = 'which_key_ignore' },
-        ['<leader>gh'] = { name = '[G]it [Hunk]', _ = 'which_key_ignore' },
+        ['<leader>gh'] = { name = '[G]it [H]unk', _ = 'which_key_ignore' },
         ['<leader>h'] = { name = '[H]arpoon', _ = 'which_key_ignore' },
         ['<leader>r'] = { name = '[R]ename', _ = 'which_key_ignore' },
         ['<leader>s'] = { name = '[S]earch', _ = 'which_key_ignore' },
@@ -581,6 +611,10 @@ require('lazy').setup {
         servers['gopls'] = {}
       end
 
+      if vim.fn.executable 'terraform' then
+        servers['terraform-ls'] = {}
+      end
+
       if vim.fn.executable 'node' then
         servers['html'] = {
           cmd = { '/usr/local/bin/vscode-html-language-server', '--stdio' },
@@ -701,6 +735,14 @@ require('lazy').setup {
           --  This will auto-import if your LSP supports it.
           --  This will expand snippets if the LSP sent a snippet.
           ['<C-y>'] = cmp.mapping.confirm { select = true },
+          ['<C-m>'] = cmp.mapping(function()
+            if cmp.visible() then
+              cmp.abort()
+            else
+              cmp.complete()
+            end
+          end),
+
           -- Think of <c-l> as moving to the right of your snippet expansion.
           --  So if you have a snippet that's like:
           --  function $name($args)
@@ -780,6 +822,10 @@ require('lazy').setup {
       -- - sr)'  - [S]urround [R]eplace [)] [']
       require('mini.surround').setup()
 
+      -- Align text
+      -- - ga=  - Align equal signs in selection
+      require('mini.align').setup()
+
       -- ... and there is more!
       --  Check out: https://github.com/echasnovski/mini.nvim
     end,
@@ -826,6 +872,20 @@ require('lazy').setup {
               ['as'] = '@scope',
             },
           },
+          move = {
+            enable = true,
+            set_jumps = true,
+            goto_next_start = {
+              [']f'] = '@function.outer',
+              [']c'] = '@class.outer',
+              [']s'] = '@scope',
+            },
+            goto_previous_start = {
+              ['[f'] = '@function.outer',
+              ['[c'] = '@class.outer',
+              ['[s'] = '@scope',
+            },
+          },
         },
       }
     end,
@@ -868,7 +928,9 @@ require('lazy').setup {
       map('n', '<F1>', dap.step_into, { desc = 'Debug: Step Into' })
       map('n', '<F2>', dap.step_over, { desc = 'Debug: Step Over' })
       map('n', '<F3>', dap.step_out, { desc = 'Debug: Step Out' })
+      map('n', '<F4>', dap.step_back, { desc = 'Debug: Step back' })
       map('n', '<F5>', dap.continue, { desc = 'Debug: Start/Continue' })
+      map('n', '<F6>', dap.terminate, { desc = 'Debug: Disconnect' })
       map('n', '<leader>b', dap.toggle_breakpoint, { desc = 'Debug: Toggle Breakpoint' })
       map('n', '<leader>B', function()
         dap.set_breakpoint(vim.fn.input 'Breakpoint condition: ')
@@ -883,15 +945,15 @@ require('lazy').setup {
         icons = { expanded = '▾', collapsed = '▸', current_frame = '*' },
         controls = {
           icons = {
-            pause = '⏸',
-            play = '▶',
-            step_into = '⏎',
-            step_over = '⏭',
-            step_out = '⏮',
-            step_back = 'b',
-            run_last = '▶▶',
-            terminate = '⏹',
-            disconnect = '⏏',
+            pause = '',
+            play = ' F5',
+            step_into = ' F1',
+            step_over = ' F2',
+            step_out = ' F3',
+            step_back = ' F4',
+            run_last = '',
+            terminate = ' F6',
+            disconnect = '',
           },
         },
       }
