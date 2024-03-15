@@ -735,7 +735,7 @@ require('lazy').setup {
           --  This will auto-import if your LSP supports it.
           --  This will expand snippets if the LSP sent a snippet.
           ['<C-y>'] = cmp.mapping.confirm { select = true },
-          ['<C-m>'] = cmp.mapping(function()
+          ['<C-space>'] = cmp.mapping(function()
             if cmp.visible() then
               cmp.abort()
             else
@@ -850,12 +850,6 @@ require('lazy').setup {
         indent = { enable = true },
         incremental_selection = {
           enable = true,
-          keymaps = {
-            init_selection = '<c-space>',
-            node_incremental = '<c-space>',
-            scope_incremental = '<c-s-S>',
-            node_decremental = '<M-space>',
-          },
         },
         textobjects = {
           select = {
