@@ -207,7 +207,12 @@ end ---@diagnostic disable-next-line: undefined-field
 vim.opt.rtp:prepend(lazypath)
 
 -- NOTE: Here is where you install your plugins.
-require('lazy').setup {
+local lazy_config = {
+  dev = {
+    path = '~/Projects/',
+  },
+}
+require('lazy').setup({
   'equalsraf/neovim-gui-shim',
   'alker0/chezmoi.vim',
   'tpope/vim-sleuth', -- Detect tabstop and shiftwidth automatically
@@ -833,6 +838,7 @@ require('lazy').setup {
 
   { -- Highlight, edit, and navigate code
     'nvim-treesitter/nvim-treesitter',
+    dev = false,
     build = ':TSUpdate',
     dependencies = {
       'nvim-treesitter/nvim-treesitter-context',
@@ -850,6 +856,12 @@ require('lazy').setup {
         indent = { enable = true },
         incremental_selection = {
           enable = true,
+          -- keymaps = {
+          --   init_selection = 'gnn',
+          --   node_incremental = false,
+          --   scope_incremental = false,
+          --   node_decremental = false,
+          -- },
         },
         textobjects = {
           select = {
@@ -882,6 +894,27 @@ require('lazy').setup {
           },
         },
       }
+      -- local selection = require 'nvim-treesitter.incremental_selection'
+      -- map('v', 'grn', function()
+      --   local node_incremental = selection.node_incremental
+      --   for _ = 1, math.max(vim.v.count, 1) do
+      --     node_incremental()
+      --   end
+      -- end)
+      --
+      -- map('v', 'grc', function()
+      --   local scope_incremental = selection.scope_incremental
+      --   for _ = 1, math.max(vim.v.count, 1) do
+      --     scope_incremental()
+      --   end
+      -- end)
+      --
+      -- map('v', 'grm', function()
+      --   local node_decremental = selection.node_decremental
+      --   for _ = 1, math.max(vim.v.count, 1) do
+      --     node_decremental()
+      --   end
+      -- end)
     end,
   },
   {
@@ -963,7 +996,7 @@ require('lazy').setup {
       require('dap-go').setup()
     end,
   },
-}
+}, lazy_config)
 
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
