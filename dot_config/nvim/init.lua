@@ -756,15 +756,17 @@ require('lazy').setup({
           --
           -- <c-l> will move you to the right of each of the expansion locations.
           -- <c-h> is similar, except moving you backwards.
-          ['<C-l>'] = cmp.mapping(function()
+          ['<C-l>'] = cmp.mapping(function(fallback)
             if luasnip.expand_or_locally_jumpable() then
               luasnip.expand_or_jump()
             end
+            fallback()
           end, { 'i', 's' }),
-          ['<C-h>'] = cmp.mapping(function()
+          ['<C-h>'] = cmp.mapping(function(fallback)
             if luasnip.locally_jumpable(-1) then
               luasnip.jump(-1)
             end
+            fallback()
           end, { 'i', 's' }),
         },
         sources = {
@@ -831,8 +833,12 @@ require('lazy').setup({
       -- - ga=  - Align equal signs in selection
       require('mini.align').setup()
 
-      -- ... and there is more!
-      --  Check out: https://github.com/echasnovski/mini.nvim
+      local indent = require 'mini.indentscope'
+      indent.setup {
+        draw = {
+          animation = indent.gen_animation.none(),
+        },
+      }
     end,
   },
 

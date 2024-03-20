@@ -6,6 +6,8 @@ alias bat='batcat'
 alias cat='bat'
 alias zshsrc='source $HOME/.config/zsh/.zshrc'
 
+alias gacp='gaa && gc && gp'
+
 cdc() {
   mkdir -p "$1"
   cd "$1"
