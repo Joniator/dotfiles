@@ -14,8 +14,7 @@ function install {
     cd entr
     ./configure
     make test
-    PREFIX=~/.local
-    make install
+    PREFIX=~/.local make install
 }
 
 install || echo Failed to install Entr
