@@ -3,7 +3,9 @@
 if [[ $# -eq 1 ]]; then
     selected=$1
 else
-    selected=$(find ~/Projects /srv -mindepth 1 -maxdepth 1 -type d | fzf)
+    selected=$(find $HOME/Projects /srv -mindepth 1 -maxdepth 1 -type d \
+        | cat - <(echo -e "$HOME/") \
+        | fzf)
 fi
 
 if [[ -z $selected ]]; then
