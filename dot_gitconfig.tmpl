@@ -1,6 +1,10 @@
 [user]
   email = {{ .email }}
   name = {{ .name }}
+  signingkey = ~/.ssh/id_ed25519
+
+[gpg]
+  format = ssh
 
 [init]
   defaultBranch=main
