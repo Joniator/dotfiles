@@ -218,6 +218,33 @@ require('lazy').setup({
   'tpope/vim-sleuth', -- Detect tabstop and shiftwidth automatically
   'tpope/vim-fugitive',
 
+  'pearofducks/ansible-vim', -- Ansible syntax highlight and filetype detection
+
+  {
+    'folke/trouble.nvim',
+    dependencies = { 'nvim-tree/nvim-web-devicons' },
+    config = function()
+      vim.keymap.set('n', '<leader>tt', function()
+        require('trouble').toggle()
+      end, { desc = '[T]oggle' })
+      vim.keymap.set('n', '<leader>tw', function()
+        require('trouble').toggle 'workspace_diagnostics'
+      end, { desc = '[W]orkspace diagnostics' })
+      vim.keymap.set('n', '<leader>td', function()
+        require('trouble').toggle 'document_diagnostics'
+      end, { desc = '[D]ocument diagnostics' })
+      vim.keymap.set('n', '<leader>tq', function()
+        require('trouble').toggle 'quickfix'
+      end, { desc = '[Q]uickfix' })
+      vim.keymap.set('n', '<leader>tl', function()
+        require('trouble').toggle 'loclist'
+      end, { desc = '[L]oclist' })
+      vim.keymap.set('n', 'gR', function()
+        require('trouble').toggle 'lsp_references'
+      end, { desc = 'Lsp [R]eferences' })
+    end,
+  },
+
   -- "gc" to comment visual regions/lines
   { 'numToStr/Comment.nvim', opts = {} },
 
@@ -310,6 +337,7 @@ require('lazy').setup({
         ['<leader>h'] = { name = '[H]arpoon', _ = 'which_key_ignore' },
         ['<leader>r'] = { name = '[R]ename', _ = 'which_key_ignore' },
         ['<leader>s'] = { name = '[S]earch', _ = 'which_key_ignore' },
+        ['<leader>t'] = { name = '[T]rouble', _ = 'which_key_ignore' },
         ['<leader>w'] = { name = '[W]orkspace', _ = 'which_key_ignore' },
       }
     end,
@@ -587,7 +615,7 @@ require('lazy').setup({
       }
 
       if vim.fn.executable 'ansible' then
-        servers['ansible'] = {}
+        servers['ansiblels'] = {}
       end
 
       if vim.fn.executable 'go' then
