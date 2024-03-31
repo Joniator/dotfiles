@@ -218,6 +218,33 @@ require('lazy').setup({
   'tpope/vim-sleuth', -- Detect tabstop and shiftwidth automatically
   'tpope/vim-fugitive',
 
+  'pearofducks/ansible-vim', -- Ansible syntax highlight and filetype detection
+
+  {
+    'folke/trouble.nvim',
+    dependencies = { 'nvim-tree/nvim-web-devicons' },
+    config = function()
+      vim.keymap.set('n', '<leader>tt', function()
+        require('trouble').toggle()
+      end, { desc = '[T]oggle' })
+      vim.keymap.set('n', '<leader>tw', function()
+        require('trouble').toggle 'workspace_diagnostics'
+      end, { desc = '[W]orkspace diagnostics' })
+      vim.keymap.set('n', '<leader>td', function()
+        require('trouble').toggle 'document_diagnostics'
+      end, { desc = '[D]ocument diagnostics' })
+      vim.keymap.set('n', '<leader>tq', function()
+        require('trouble').toggle 'quickfix'
+      end, { desc = '[Q]uickfix' })
+      vim.keymap.set('n', '<leader>tl', function()
+        require('trouble').toggle 'loclist'
+      end, { desc = '[L]oclist' })
+      vim.keymap.set('n', 'gR', function()
+        require('trouble').toggle 'lsp_references'
+      end, { desc = 'Lsp [R]eferences' })
+    end,
+  },
+
   -- "gc" to comment visual regions/lines
   { 'numToStr/Comment.nvim', opts = {} },
 
@@ -310,6 +337,7 @@ require('lazy').setup({
         ['<leader>h'] = { name = '[H]arpoon', _ = 'which_key_ignore' },
         ['<leader>r'] = { name = '[R]ename', _ = 'which_key_ignore' },
         ['<leader>s'] = { name = '[S]earch', _ = 'which_key_ignore' },
+        ['<leader>t'] = { name = '[T]rouble', _ = 'which_key_ignore' },
         ['<leader>w'] = { name = '[W]orkspace', _ = 'which_key_ignore' },
       }
     end,
@@ -467,31 +495,6 @@ require('lazy').setup({
       { 'j-hui/fidget.nvim', opts = {} },
     },
     config = function()
-      -- Brief Aside: **What is LSP?**
-      --
-      -- LSP is an acronym you've probably heard, but might not understand what it is.
-      --
-      -- LSP stands for Language Server Protocol. It's a protocol that helps editors
-      -- and language tooling communicate in a standardized fashion.
-      --
-      -- In general, you have a "server" which is some tool built to understand a particular
-      -- language (such as `gopls`, `lua_ls`, `rust_analyzer`, etc). These Language Servers
-      -- (sometimes called LSP servers, but that's kind of like ATM Machine) are standalone
-      -- processes that communicate with some "client" - in this case, Neovim!
-      --
-      -- LSP provides Neovim with features like:
-      --  - Go to definition
-      --  - Find references
-      --  - Autocompletion
-      --  - Symbol Search
-      --  - and more!
-      --
-      -- Thus, Language Servers are external tools that must be installed separately from
-      -- Neovim. This is where `mason` and related plugins come into play.
-      --
-      -- If you're wondering about lsp vs treesitter, you can check out the wonderfully
-      -- and elegantly composed help section, `:help lsp-vs-treesitter`
-
       --  This function gets run when an LSP attaches to a particular buffer.
       --    That is to say, every time a new file is opened that is associated with
       --    an lsp (for example, opening `main.rs` is associated with `rust_analyzer`) this
@@ -575,7 +578,6 @@ require('lazy').setup({
       capabilities = vim.tbl_deep_extend('force', capabilities, require('cmp_nvim_lsp').default_capabilities())
 
       -- Enable the following language servers
-      --  Feel free to add/remove any LSPs that you want here. They will automatically be installed.
       --
       --  Add any additional override configuration in the following tables. Available keys are:
       --  - cmd (table): Override the default command used to start the server
@@ -611,6 +613,10 @@ require('lazy').setup({
           },
         },
       }
+
+      if vim.fn.executable 'ansible' then
+        servers['ansiblels'] = {}
+      end
 
       if vim.fn.executable 'go' then
         servers['gopls'] = {}
@@ -703,11 +709,7 @@ require('lazy').setup({
       'hrsh7th/cmp-nvim-lsp',
       'hrsh7th/cmp-path',
 
-      -- If you want to add a bunch of pre-configured snippets,
-      --    you can use this plugin to help you. It even has snippets
-      --    for various frameworks/libraries/etc. but you will have to
-      --    set up the ones that are useful for you.
-      -- 'rafamadriz/friendly-snippets',
+      'rafamadriz/friendly-snippets',
       'molleweide/LuaSnip-snippets.nvim',
     },
     config = function()
@@ -716,6 +718,7 @@ require('lazy').setup({
       local luasnip = require 'luasnip'
       luasnip.config.setup {}
       -- be sure to load this first since it overwrites the snippets table.
+      require('luasnip.loaders.from_vscode').lazy_load()
       luasnip.snippets = require('luasnip_snippets').load_snippets()
 
       cmp.setup {

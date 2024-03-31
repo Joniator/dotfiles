@@ -1,9 +1,12 @@
 #!/usr/bin/env zsh
 
+version='go1.22.1'
 function install {
     if command -v go &> /dev/null; then
-        echo "Go is already installed"
-        return
+        if [[ $(go version) =~ $version ]]; then
+            echo "Go is up to date"
+            return
+        fi
     fi
 
     ARCH=$(uname -m)
@@ -13,7 +16,7 @@ function install {
     fi
 
     mkdir -p ~/.local/lib
-    zsh -c "tar -C ~/.local/lib -xzf <(curl -sL https://go.dev/dl/go1.21.1.linux-amd64.tar.gz)"
+    zsh -c "tar -C ~/.local/lib -xzf <(curl -sL https://go.dev/dl/go1.22.1.linux-amd64.tar.gz)"
     ln -s ~/.local/lib/go/bin/go ~/.local/bin/
 }
 

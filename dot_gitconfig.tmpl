@@ -1,6 +1,10 @@
 [user]
   email = {{ .email }}
   name = {{ .name }}
+  signingkey = ~/.ssh/id_ed25519
+
+[gpg]
+  format = ssh
 
 [init]
   defaultBranch=main
@@ -25,5 +29,5 @@
 
 [log]
   decorate = true
-  showSignature = true
+  showSignature = false
   abbrevCommit = true
