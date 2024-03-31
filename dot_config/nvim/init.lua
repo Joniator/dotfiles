@@ -846,8 +846,9 @@ require('lazy').setup({
   },
 
   { -- Highlight, edit, and navigate code
-    'nvim-treesitter/nvim-treesitter',
+    'Joniator/nvim-treesitter',
     dev = false,
+    branch = 'countable_motions',
     build = ':TSUpdate',
     dependencies = {
       'nvim-treesitter/nvim-treesitter-context',
@@ -865,12 +866,6 @@ require('lazy').setup({
         indent = { enable = true },
         incremental_selection = {
           enable = true,
-          -- keymaps = {
-          --   init_selection = 'gnn',
-          --   node_incremental = false,
-          --   scope_incremental = false,
-          --   node_decremental = false,
-          -- },
         },
         textobjects = {
           select = {
@@ -903,27 +898,6 @@ require('lazy').setup({
           },
         },
       }
-      -- local selection = require 'nvim-treesitter.incremental_selection'
-      -- map('v', 'grn', function()
-      --   local node_incremental = selection.node_incremental
-      --   for _ = 1, math.max(vim.v.count, 1) do
-      --     node_incremental()
-      --   end
-      -- end)
-      --
-      -- map('v', 'grc', function()
-      --   local scope_incremental = selection.scope_incremental
-      --   for _ = 1, math.max(vim.v.count, 1) do
-      --     scope_incremental()
-      --   end
-      -- end)
-      --
-      -- map('v', 'grm', function()
-      --   local node_decremental = selection.node_decremental
-      --   for _ = 1, math.max(vim.v.count, 1) do
-      --     node_decremental()
-      --   end
-      -- end)
     end,
   },
   {
@@ -931,6 +905,7 @@ require('lazy').setup({
     dependencies = {
       -- Creates a beautiful debugger UI
       'rcarriga/nvim-dap-ui',
+      'nvim-neotest/nvim-nio',
 
       -- Installs the debug adapters for you
       'williamboman/mason.nvim',
