@@ -7,5 +7,6 @@ function install {
         tlrc \
 }
 
+echo Install cargo packages
 install || echo Failed to update cargo packages
 

@@ -30,5 +30,6 @@ function install {
         zip \
 }
 
+echo Update apt packages
 install || echo Failed to update apt packages
 
