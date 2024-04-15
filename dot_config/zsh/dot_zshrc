@@ -16,6 +16,7 @@ if [[ ! -d "$XDG_STATE_HOME" ]]; then mkdir -p "$XDG_STATE_HOME"; fi
 if [[ ! -d "$XDG_CACHE_HOME" ]]; then mkdir -p "$XDG_CACHE_HOME"; fi
 
 source setup-antidote
+eval "$(direnv hook zsh)"
 
 GO_INSTALL_DIR="/usr/local/go"
 if [[ -d "$GO_INSTALL_DIR" ]]; then export PATH="$GO_INSTALL_DIR/bin:$PATH"; fi
