@@ -16,6 +16,7 @@ function install {
         btop \
         build-essential \
         ctop \
+        direnv \
         fzf \
         git \
         jq \

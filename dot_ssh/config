@@ -1,0 +1,18 @@
+User jonnyb
+
+Host homeserver jonnyb.name
+	HostName jonnyb.name
+
+Host hz1 muse discord
+	HostName 23.88.38.160
+
+Host gaming gaming.tazed.club
+	HostName gaming.tazed.club
+	User gaming
+
+Host tazed tazed.club
+	HostName tazed.club
+
+Host steamdeck deck
+	HostName jmdeck
+	User deck
