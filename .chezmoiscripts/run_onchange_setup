@@ -1,3 +1,49 @@
 #!/usr/bin/env zsh
 
+function install_apt {
+    if [ "$(id -u)" -eq 0 ]; then
+        SUDO=""
+    else
+       if ! command -v sudo &> /dev/null; then
+            echo "Error: sudo is not installed. Please install sudo or run as root."
+            exit 1
+        fi
+        SUDO="sudo"
+    fi
+
+    $SUDO apt-get install -y \
+        bat \
+        btop \
+        build-essential \
+        ctop \
+        direnv \
+        eza \
+        fzf \
+        git \
+        jq \
+        neofetch \
+        python3-pip \
+        python3-venv \
+        ripgrep \
+        software-properties-common \
+        tar \
+        tmux \
+        unzip \
+        zip \
+}
+
+
+function install_cargo {
+    cargo install \
+        du-dust \
+        eza \
+        tlrc \
+}
+
+echo Update apt packages
+install_apt || echo Failed to update apt packages
+
+echo Install cargo packages
+install_cargo || echo Failed to update cargo packages
+
 batcat cache --build
