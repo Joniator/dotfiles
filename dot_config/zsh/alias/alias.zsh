@@ -17,3 +17,5 @@ batdiff() {
     git diff --name-only --relative --diff-filter=d | xargs batcat --diff
 }
 
+alias yt-mp3='yt-dlp --extract-audio --audio-format mp3'
+alias yt-mp4='yt-dlp -S res,ext:mp4:m4a --recode mp4'
