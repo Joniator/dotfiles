@@ -10,6 +10,11 @@ ohmyzsh/ohmyzsh path:plugins/fzf
 MichaelAquilina/zsh-you-should-use
 zsh-users/zsh-autosuggestions
 zsh-users/zsh-completions
-zsh-users/zsh-syntax-highlighting
+
+zdharma-continuum/fast-syntax-highlighting
+catppuccin/zsh-fsh kind:clone
+
+# catppuccin/zsh-syntax-highlighting path:themes/catppuccin_macchiato-zsh-syntax-highlighting.zsh
+# zsh-users/zsh-syntax-highlighting
 
 $ZDOTDIR/alias
