@@ -91,14 +91,12 @@ vim.opt.termguicolors = true
 --  See `:help map()`
 local function map(mode, l, r, opts)
   opts = opts or {}
-  opts.buffer = bufnr
   vim.keymap.set(mode, l, r, opts)
 end
 
--- Set highlight on search, but clear on pressing <Esc> or <C-c> in normal mode
+-- Set highlight on search, but clear on pressing <Esc> in normal mode
 vim.opt.hlsearch = true
 map('n', '<Esc>', '<cmd>nohlsearch<CR>')
-map('n', '<C-c>', '<cmd>nohlsearch<CR>')
 
 -- Diagnostic keymaps
 map('n', '[d', vim.diagnostic.goto_prev, { desc = 'Go to previous [D]iagnostic message' })
@@ -131,14 +129,11 @@ map('i', '<A-k>', '<esc><cmd>m .-2<cr>==gi', { desc = 'Move up' })
 map('v', '<A-j>', ":m '>+1<cr>gv=gv", { desc = 'Move down' })
 map('v', '<A-k>', ":m '<-2<cr>gv=gv", { desc = 'Move up' })
 
+-- Linebreak on cursor
+map('n', '<leader>o', 'i<cr><esc>', { desc = 'Add a linebreak at current position' })
+
 -- Save file
 map({ 'i', 'v', 'n', 's' }, '<C-s>', '<cmd>w<cr><esc>', { desc = 'Save file' })
-
--- Move cursor inside command
-map('c', '<C-h>', '<Left>', { desc = 'Move cursor left' })
-map('c', '<C-j>', '<Down>', { desc = 'Move cursor down' })
-map('c', '<C-h>', '<Up>', { desc = 'Move cursor up' })
-map('c', '<C-l>', '<Right>', { desc = 'Move cursor right' })
 
 -- [[ Basic Autocommands ]]
 --  See `:help lua-guide-autocommands`
@@ -220,7 +215,12 @@ require('lazy').setup({
 
   'pearofducks/ansible-vim', -- Ansible syntax highlight and filetype detection
 
-  'aserowy/tmux.nvim',
+  {
+    'aserowy/tmux.nvim',
+    config = function()
+      return require('tmux').setup()
+    end,
+  },
 
   'xiyaowong/transparent.nvim',
 
@@ -780,6 +780,7 @@ require('lazy').setup({
           { name = 'nvim_lsp' },
           { name = 'luasnip' },
           { name = 'path' },
+          { name = 'buffer' },
         },
       }
     end,
