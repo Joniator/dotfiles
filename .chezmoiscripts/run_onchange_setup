@@ -17,7 +17,6 @@ function install_apt {
         build-essential \
         ctop \
         direnv \
-        eza \
         fzf \
         git \
         jq \

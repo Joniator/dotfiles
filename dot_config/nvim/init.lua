@@ -220,6 +220,10 @@ require('lazy').setup({
 
   'pearofducks/ansible-vim', -- Ansible syntax highlight and filetype detection
 
+  'aserowy/tmux.nvim',
+
+  'xiyaowong/transparent.nvim',
+
   {
     'folke/trouble.nvim',
     dependencies = { 'nvim-tree/nvim-web-devicons' },
