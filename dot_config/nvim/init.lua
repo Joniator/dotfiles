@@ -1,7 +1,6 @@
 --[[
 
 =====================================================================
-==================== READ THIS BEFORE CONTINUING ====================
 =====================================================================
 ========                                    .-----.          ========
 ========         .----------------------.   | === |          ========
@@ -20,26 +19,6 @@
 =====================================================================
 =====================================================================
 
-What is Kickstart?
-
-  Kickstart.nvim is *not* a distribution.
-
-  Kickstart.nvim is a starting point for your own configuration.
-    The goal is that you can read every line of code, top-to-bottom, understand
-    what your configuration is doing, and modify it to suit your needs.
-
-    Once you've done that, you can start exploring, configuring and tinkering to
-    make Neovim your own! That might mean leaving kickstart just the way it is for a while
-    or immediately breaking it into modular pieces. It's up to you!
-
-    If you don't know anything about Lua, I recommend taking some time to read through
-    a guide. One possible example which will only take 10-15 minutes:
-      - https://learnxinyminutes.com/docs/lua/
-
-    After understanding a bit more about Lua, you can use `:help lua-guide` as a
-    reference for how Neovim integrates Lua.
-    - :help lua-guide
-    - (or HTML version): https://neovim.io/doc/user/lua-guide.html
 --]]
 
 vim.g.mapleader = ' '
@@ -208,10 +187,14 @@ local lazy_config = {
   },
 }
 require('lazy').setup({
+  -- Highlightings
+  'isobit/vim-caddyfile',
+
   'equalsraf/neovim-gui-shim',
   'alker0/chezmoi.vim',
   'tpope/vim-sleuth', -- Detect tabstop and shiftwidth automatically
   'tpope/vim-fugitive',
+  'xiyaowong/transparent.nvim',
 
   'pearofducks/ansible-vim', -- Ansible syntax highlight and filetype detection
 
@@ -618,19 +601,19 @@ require('lazy').setup({
         },
       }
 
-      if vim.fn.executable 'ansible' then
+      if vim.fn.executable 'ansible' == 1 and vim.fn.executable 'npm' == 1 then
         servers['ansiblels'] = {}
       end
 
-      if vim.fn.executable 'go' then
+      if vim.fn.executable 'go' == 1 then
         servers['gopls'] = {}
       end
 
-      if vim.fn.executable 'terraform' then
+      if vim.fn.executable 'terraform' == 1 then
         servers['terraform-ls'] = {}
       end
 
-      if vim.fn.executable 'node' then
+      if vim.fn.executable 'node' == 1 then
         servers['html'] = {
           cmd = { '/usr/local/bin/vscode-html-language-server', '--stdio' },
         }
