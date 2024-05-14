@@ -1,0 +1,13 @@
+#!/usr/bin/env zsh
+
+function install {
+    if command -v fnm &> /dev/null; then
+        echo "nfm is already installed"
+        return
+    fi
+
+    curl -fsSL https://fnm.vercel.app/install | bash -s -- -s
+    $XDG_DATA_HOME/fnm/fnm use --install-if-missing 20
+}
+
+install || echo Failed to install fnm

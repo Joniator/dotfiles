@@ -605,6 +605,11 @@ require('lazy').setup({
         servers['ansiblels'] = {}
       end
 
+      if vim.fn.executable 'docker' == 1 then
+        servers['dockerls'] = {}
+        servers['docker_compose_language_service'] = {}
+      end
+
       if vim.fn.executable 'go' == 1 then
         servers['gopls'] = {}
       end
