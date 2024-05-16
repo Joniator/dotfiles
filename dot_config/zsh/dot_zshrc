@@ -1,5 +1,6 @@
 #!/usr/bin/env zsh
 
+eval "$(direnv hook zsh)"
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.config/zsh/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
 # confirmations, etc.) must go above this block; everything else may go below.
@@ -17,7 +18,6 @@ if [[ ! -d "$XDG_CACHE_HOME" ]]; then mkdir -p "$XDG_CACHE_HOME"; fi
 
 source setup-antidote
 fast-theme -q $XDG_CACHE_HOME/antidote/catppuccin/zsh-fsh/themes/catppuccin-macchiato.ini
-eval "$(direnv hook zsh)"
 
 GO_INSTALL_DIR="/usr/local/go"
 if [[ -d "$GO_INSTALL_DIR" ]]; then export PATH="$GO_INSTALL_DIR/bin:$PATH"; fi

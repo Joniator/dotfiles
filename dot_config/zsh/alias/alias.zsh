@@ -5,6 +5,7 @@ alias fzf='fzf --preview "batcat --color=always --style=numbers --line-range=:50
 alias bat='batcat'
 alias cat='bat'
 alias zshsrc='source $HOME/.config/zsh/.zshrc'
+alias suvi='sudo -E nvim'
 
 alias gacp='gaa && gc && gp'
 
