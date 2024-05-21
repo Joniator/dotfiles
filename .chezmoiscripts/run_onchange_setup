@@ -15,7 +15,6 @@ function install_apt {
         bat \
         btop \
         build-essential \
-        ctop \
         direnv \
         fzf \
         git \
