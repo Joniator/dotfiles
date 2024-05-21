@@ -23,7 +23,7 @@ print_help () {
 install_dependencies () {
   if apt="$(command -v apt)"; then 
     echo "Installing dependencies"
-    packages="curl zsh git gettext"
+    packages="curl zsh git gettext zip unzip build-essential"
     if sudo=$(command -v sudo); then
       sudo apt-get update
       sudo apt-get install -y $packages
