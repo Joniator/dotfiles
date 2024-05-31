@@ -2,7 +2,7 @@
 
 function install {
     if command -v fnm &> /dev/null; then
-        echo "nfm is already installed"
+        echo "fnm is already installed"
         return
     fi
 
