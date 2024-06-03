@@ -6,7 +6,7 @@ local resize_small = 1
 local resize_big = 15
 local key_timeout = 1000
 
-function set_keymap(name)
+local function set_keymap(name)
 	return act.ActivateKeyTable({
 		name = name,
 		timeout_milliseconds = key_timeout,
