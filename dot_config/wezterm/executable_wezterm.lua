@@ -14,6 +14,18 @@ local function set_keymap(name)
 	})
 end
 
+local function generate_tab_table()
+	local keys = {}
+	for i = 1, 9 do
+		-- CTRL+ALT + number to activate that tab
+		table.insert(keys, {
+			key = tostring(i),
+			action = act.ActivateTab(i - 1),
+		})
+	end
+	return keys
+end
+
 config.default_prog = { "wsl" }
 config.default_cwd = "~"
 
@@ -60,6 +72,9 @@ config.keys = {
 	{ key = "n", mods = "LEADER", action = act.SpawnTab("CurrentPaneDomain") },
 	{ key = "n", mods = "LEADER|SHIFT", action = act.SpawnTab("DefaultDomain") },
 	{ key = "x", mods = "LEADER|SHIFT", action = act.CloseCurrentTab({ confirm = false }) },
+	{ key = "t", mods = "LEADER", action = act.ActivateKeyTable({ name = "activate_tab" }) },
+	{ key = "Tab", mods = "LEADER", action = act.ActivateTabRelative(1) },
+	{ key = "Tab", mods = "LEADER|SHIFT", action = act.ActivateTabRelative(-1) },
 
 	-- Panes
 	{ key = "h", mods = "LEADER", action = act.ActivatePaneDirection("Left") },
@@ -93,6 +108,7 @@ config.key_tables = {
 		{ key = "k", action = act.ActivatePaneDirection("Up") },
 		{ key = "l", action = act.ActivatePaneDirection("Right") },
 	},
+	activate_tab = generate_tab_table(),
 }
 
 return config
