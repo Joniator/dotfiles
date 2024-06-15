@@ -1,22 +1,21 @@
 #!/usr/bin/env zsh
 
-function install_apt {
-    if [ "$(id -u)" -eq 0 ]; then
-        SUDO=""
-    else
-       if ! command -v sudo &> /dev/null; then
-            echo "Error: sudo is not installed. Please install sudo or run as root."
-            exit 1
-        fi
-        SUDO="sudo"
+if [ "$(id -u)" -eq 0 ]; then
+    SUDO=""
+else
+    if ! command -v sudo &> /dev/null; then
+        echo "Error: sudo is not installed. Please install sudo or run as root."
+        exit 1
     fi
+    SUDO="sudo"
+fi
 
+function install_apt {
     $SUDO apt-get install -y \
         bat \
         btop \
         build-essential \
         direnv \
-        fzf \
         git \
         jq \
         neofetch \
@@ -30,8 +29,17 @@ function install_apt {
         zip \
 }
 
+function uninstall {
+    $SUDO apt-get remove -y /
+        fzf/
+}
+
 
 echo Update apt packages
 install_apt || echo Failed to update apt packages
 
+echo Removing old packages
+uninstall
+
+echo Update batcat cache
 batcat cache --build

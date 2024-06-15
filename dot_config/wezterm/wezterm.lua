@@ -62,6 +62,7 @@ config.keys = {
 	-- Pass through leader
 	{ key = ";", mods = "LEADER|CTRL", action = act.SendKey({ key = "a", mods = "CTRL" }) },
 	{ key = "Enter", mods = "LEADER", action = act.ShowLauncher },
+	{ key = "p", mods = "LEADER", action = act.ActivateCommandPalette },
 
 	-- Copy & Paste
 	{ key = "c", mods = "LEADER", action = act.ActivateCopyMode },

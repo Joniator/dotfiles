@@ -1,5 +1,7 @@
 #!/usr/bin/env zsh
 
+source "$JLIB" 
+
 function install {
     if command -v entr &> /dev/null; then
         echo "Entr is already installed"

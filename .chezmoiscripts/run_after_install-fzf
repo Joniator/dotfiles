@@ -1,0 +1,25 @@
+#!/usr/bin/env zsh
+
+VERSION='0.53.0'
+
+function install {
+    if command -v fzf &> /dev/null; then
+        if [[ $(go version) =~ $VERSION ]]; then
+            echo "fzf is up to date"
+            return
+        fi
+    fi
+
+    ARCH=$(uname -m)
+    if [ $ARCH != "x86_64" ]; then
+        echo "$ARCH is not supported"
+        return
+    fi
+
+    wget -qO- "https://github.com/junegunn/fzf/releases/download/$VERSION/fzf-$VERSION-linux_amd64.tar.gz" \
+        | tar -xz -C $HOME/.local/bin
+    chmod +x "$HOME/.local/bin/fzf"
+}
+
+
+install || echo "Failed to install fzf"
