@@ -50,6 +50,7 @@ install_chezmoi () {
     sh -c "${chezmoi_install_script}" -- -b "${bin_dir}"
     unset chezmoi_install_script bin_dir
   fi
+  echo $chezmoi
 }
 
 arg_mode=local
@@ -66,7 +67,7 @@ while [ $# -gt 0 ]; do
 done
 
 install_dependencies
-install_chezmoi
+chezmoi=$(install_chezmoi)
 
 set -- init --apply
 if [ $arg_mode = "local" ]; then
@@ -83,7 +84,6 @@ if [ $flag_ssh = true ]; then
   set -- "$@" --ssh
 fi
 
-chezmoi="$(command -v chezmoi)"
 echo "Running '$chezmoi $*'" >&2
 # exec: replace current process with chezmoi
 exec "$chezmoi" "$@"
