@@ -31,17 +31,7 @@ function install_apt {
 }
 
 
-function install_cargo {
-    cargo install \
-        du-dust \
-        eza \
-        tlrc \
-}
-
 echo Update apt packages
 install_apt || echo Failed to update apt packages
-
-echo Install cargo packages
-install_cargo || echo Failed to update cargo packages
 
 batcat cache --build
