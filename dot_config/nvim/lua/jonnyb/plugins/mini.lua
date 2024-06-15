@@ -10,6 +10,12 @@ return {
       --  - ci'  - [C]hange [I]nside [']quote
       require('mini.ai').setup { n_lines = 500 }
 
+      -- Alt hjkl movement in visual mode
+      require('mini.move').setup()
+
+      -- Split/Join lists with gS
+      require('mini.splitjoin').setup()
+
       -- Add/delete/replace surroundings (brackets, quotes, etc.)
       --
       -- - saiw) - [S]urround [A]dd [I]nner [W]ord [)]Paren
