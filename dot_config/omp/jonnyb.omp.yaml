@@ -15,7 +15,7 @@ transient_prompt:
   - "{{if ne .Code 0}}p:red{{end}}"
   - "{{if eq .Code 0}}p:green{{end}}"
   background: 'transparent'
-  template: '❯ ({{.Code}}) '
+  template: '❯ '
 
 blocks:
 - type: prompt
