@@ -36,9 +36,9 @@ blocks:
     powerline_symbol: 
     foreground: "#000000"
     background: "p:mauve"
-    template: " \uf07c {{ .Path }} "
+    template: "{{ if eq .Path \"~\" }}  {{ else }} \uf07c {{ end }} {{ .Path }} "
     properties:
-      home_icon: ~
+      home_icon: "~"
       style: full
   - type: git
     style: powerline
@@ -58,6 +58,7 @@ blocks:
       fetch_upstream_icon: true
 - type: prompt
   alignment: right
+  filler: "<p:text,transparent>─</>"
   segments:
   - type: node
     style: powerline
