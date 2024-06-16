@@ -6,6 +6,7 @@ final_space: true
 palette:
   base: "#1e2030"
   mauve: "#c6a0f6"
+  teal: "#8bd5ca"
   red: "#ed8796"
   green: "#a6da95"
   text: "#cad3f5"
@@ -36,7 +37,10 @@ blocks:
     powerline_symbol: 
     foreground: "#000000"
     background: "p:mauve"
-    template: "{{ if eq .Path \"~\" }}  {{ else }} \uf07c {{ end }} {{ .Path }} "
+    templates: 
+        - "{{ if eq .Path \"~\" }}   {{ end }}"
+        - "{{ if ne .Path \"~\" }} \uf07c {{ end }}"
+        - " {{ .Path }} "
     properties:
       home_icon: "~"
       style: full
@@ -60,6 +64,13 @@ blocks:
   alignment: right
   filler: "<p:text,transparent>─</>"
   segments:
+  - type: text
+    style: powerline
+    powerline_symbol: 
+    invert_powerline: true
+    foreground: "#000000"
+    background: "p:teal"
+    template: "{{ if .Env.CHEZMOI }}  chezmoi {{ end }}"
   - type: node
     style: powerline
     powerline_symbol: 
