@@ -1,5 +1,4 @@
 ohmyzsh/ohmyzsh path:lib
-romkatv/powerlevel10k path:powerlevel10k.zsh-theme
 
 ohmyzsh/ohmyzsh path:plugins/colorize
 ohmyzsh/ohmyzsh path:plugins/docker-compose
@@ -13,8 +12,5 @@ zsh-users/zsh-completions
 
 zdharma-continuum/fast-syntax-highlighting
 catppuccin/zsh-fsh kind:clone
-
-# catppuccin/zsh-syntax-highlighting path:themes/catppuccin_macchiato-zsh-syntax-highlighting.zsh
-# zsh-users/zsh-syntax-highlighting
 
 $ZDOTDIR/alias
