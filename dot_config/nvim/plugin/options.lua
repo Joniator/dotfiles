@@ -44,3 +44,17 @@ opt.termguicolors = true
 
 -- Set highlight on search, but clear on pressing <Esc> in normal mode
 opt.hlsearch = true
+
+local function get_titlestring()
+  local ssh = ''
+  if os.getenv 'SSH_CONNECTION' then
+    ssh = 'ssh :: '
+  end
+  local user = os.getenv 'USER'
+  if not user then
+    user = os.getenv 'USERNAME' -- Windows fallback
+  end
+  return ssh .. user .. '@' .. vim.fn.hostname() .. ' :: nvim :: ' .. vim.fn.getcwd() .. ' :: %F'
+end
+opt.title = true
+opt.titlestring = get_titlestring()
