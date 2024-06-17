@@ -46,14 +46,8 @@ opt.termguicolors = true
 opt.hlsearch = true
 
 local function get_titlestring()
-  local ssh = ''
-  if os.getenv 'SSH_CONNECTION' then
-    ssh = 'ssh :: '
-  end
-  local user = os.getenv 'USER'
-  if not user then
-    user = os.getenv 'USERNAME' -- Windows fallback
-  end
+  local ssh = os.getenv 'SSH_CONNECTION' and 'ssh :: ' or ''
+  local user = os.getenv 'USER' or os.getenv 'USERNAME' or ''
   return ssh .. user .. '@' .. vim.fn.hostname() .. ' :: nvim :: ' .. vim.fn.getcwd() .. ' :: %F'
 end
 opt.title = true
