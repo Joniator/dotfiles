@@ -3,6 +3,10 @@
 version: 2
 final_space: true
 
+console_title_template: >-
+  {{- if .Env.SSH_CONNECTION }}ssh :: {{ end -}}
+  {{ .UserName }}@{{ .HostName }} :: {{ .Shell }} :: {{.PWD}}
+
 palette:
   base: "#1e2030"
   mauve: "#c6a0f6"
