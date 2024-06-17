@@ -4,20 +4,22 @@ version='go1.22.1'
 function install {
     if command -v go &> /dev/null; then
         if [[ $(go version) =~ $version ]]; then
-            echo "Go is up to date"
+            echo "✅ $NAME is up to date"
             return
         fi
     fi
 
     ARCH=$(uname -m)
     if [ $ARCH != "x86_64" ]; then
-        echo "$ARCH is not supported"
+        echo "❌ $ARCH is not supported"
         return
     fi
 
     mkdir -p ~/.local/lib
     zsh -c "tar -C ~/.local/lib -xzf <(curl -sL https://go.dev/dl/go1.22.1.linux-amd64.tar.gz)"
     ln -s ~/.local/lib/go/bin/go ~/.local/bin/ || true
+    echo "✅ $NAME installed successfully"
 }
 
-install || echo Failed to install Go
+echo "⚙️  Installing $NAME"
+install || echo "❌ Failed to install $NAME"

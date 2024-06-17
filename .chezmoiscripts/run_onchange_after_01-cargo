@@ -1,0 +1,14 @@
+#!/usr/bin/env zsh
+
+function install_cargo {
+    cargo install \
+        du-dust \
+        eza \
+        tlrc \
+        && \
+        echo "✅ Cargo packages installed successfully"
+}
+
+echo "⚙️  Installing cargo packages"
+install_cargo || echo "❌ Failed to install cargo packages"
+

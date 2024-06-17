@@ -1,10 +1,10 @@
 #!/usr/bin/env zsh
 
-source "$JLIB" 
+NAME="Entr"
 
 function install {
     if command -v entr &> /dev/null; then
-        echo "Entr is already installed"
+        echo "✅ $NAME is already installed"
         return
     fi
 
@@ -17,7 +17,9 @@ function install {
     ./configure
     make test
     PREFIX=~/.local make install
+    echo "✅ $NAME installed successfully"
 }
 
-install || echo Failed to install Entr
+echo "⚙️  Installing $NAME"
+install || echo "❌ Failed to install $NAME"
 

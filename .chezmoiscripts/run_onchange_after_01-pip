@@ -1,0 +1,13 @@
+#!/usr/bin/env zsh
+
+function install {
+    pip install \
+        ansible \
+        yt-dlp \
+        && \
+        echo "✅ Pip packages installed successfully"
+}
+
+echo "⚙️  Installing pip packages"
+install || echo "❌ Failed to update pip packages"
+

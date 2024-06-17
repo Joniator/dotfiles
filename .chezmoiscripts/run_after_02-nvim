@@ -1,8 +1,9 @@
 #!/usr/bin/env zsh
 
+NAME="Neovim"
 function install {
     if command -v nvim &> /dev/null; then
-        echo "nvim is already installed"
+        echo "✅ $NAME is already installed"
         return
     fi
 
@@ -10,7 +11,7 @@ function install {
         SUDO=""
     else
         if ! command -v sudo &> /dev/null; then
-            echo "Error: sudo is not installed. Please install sudo or run as root."
+            echo "❌ sudo is not installed. Please install sudo or run as root."
             exit 1
         fi
         SUDO="sudo"
@@ -19,7 +20,9 @@ function install {
     $SUDO add-apt-repository -y ppa:neovim-ppa/unstable
     $SUDO apt-get update
     $SUDO apt-get install -y neovim ripgrep fd-find
+    echo "✅ $NAME installed successfully"
 }
 
-install || echo Failed to install nvim
+echo "⚙️  Installing $NAME"
+install || echo "❌ Failed to install $NAME"
 

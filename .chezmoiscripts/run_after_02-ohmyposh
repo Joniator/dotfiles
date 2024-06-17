@@ -1,0 +1,14 @@
+#! /usr/bin/env zsh
+
+NAME="Oh My Posh"
+
+function install {
+  if [[ ! -s "$HOME/.local/bin/oh-my-posh" && ! -d $XDG_CACHE_HOME/oh-my-posh ]]; then
+     curl -s https://ohmyposh.dev/install.sh | bash -s -- -d ~/.local/bin
+  else 
+     echo "✅ $NAME is already installed"
+  fi
+}
+
+echo "⚙️  Installing $NAME"
+install || echo "❌ Failed to install $NAME"

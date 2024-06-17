@@ -1,13 +1,17 @@
 #!/usr/bin/env zsh
 
+NAME="fnm"
+
 function install {
     if command -v fnm &> /dev/null; then
-        echo "fnm is already installed"
+        echo "✅ $NAME is already installed"
         return
     fi
 
     curl -fsSL https://fnm.vercel.app/install | bash -s -- -s
     $XDG_DATA_HOME/fnm/fnm use --install-if-missing 20
+    echo "✅ $NAME installed successfully"
 }
 
-install || echo Failed to install fnm
+echo "⚙️  Installing $NAME"
+install || echo "❌ Failed to install $NAME"

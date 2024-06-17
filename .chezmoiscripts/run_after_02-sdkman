@@ -1,13 +1,16 @@
 #!/usr/bin/env bash
 
+NAME="SDKMan"
+
 function install {
   if [[ ! -s "$SDKMAN_DIR/bin/sdkman-init.sh" ]]; then
     source <(curl -s "https://get.sdkman.io?rcupdate=false")
     source "$SDKMAN_DIR/bin/sdkman-init.sh"
   else 
-    echo SDKman already installed
+     echo "✅ $NAME is already installed"
   fi
 }
 
-install || echo Failed to install SDKman
+echo "⚙️  Installing $NAME"
+install || echo "❌ Failed to install $NAME"
 

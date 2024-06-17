@@ -1,0 +1,51 @@
+#!/usr/bin/env zsh
+
+if [ "$(id -u)" -eq 0 ]; then
+    SUDO=""
+else
+    if ! command -v sudo &> /dev/null; then
+        echo "❌ sudo is not installed. Please install sudo or run as root."
+        exit 1
+    fi
+    SUDO="sudo"
+fi
+
+function install {
+    $SUDO apt-get install -y \
+        bat \
+        btop \
+        build-essential \
+        direnv \
+        ffmpeg \
+        git \
+        jq \
+        neofetch \
+        python3-pip \
+        python3-venv \
+        ripgrep \
+        software-properties-common \
+        tar \
+        tmux \
+        unzip \
+        zip \
+        && \
+        echo "✅ Apt packages installed successfully"
+    }
+
+function uninstall {
+    $SUDO apt-get remove -y \
+        fzf \
+        && \
+        echo "✅ Old packages removed successfully"
+}
+
+
+echo "⚙️  Updating apt packages"
+install || echo "❌ Failed to install apt packages"
+
+echo "⚙️  Removing old packages"
+uninstall || echo "❌ Failed to remove old apt packages"
+
+echo "⚙️  Updating batcat cache"
+batcat cache --build || echo "❌ Failed to build batcat cache"
+echo "✅ Batcat cache successfully built"
