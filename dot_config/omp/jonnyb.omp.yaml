@@ -42,7 +42,7 @@ blocks:
     foreground: "#000000"
     background: "p:mauve"
     templates: 
-        - "{{ if eq .Path \"~\" }}   {{ end }}"
+        - "{{ if eq .Path \"~\" }} \uf015 {{ end }}"
         - "{{ if ne .Path \"~\" }} \uf07c {{ end }}"
         - " {{ .Path }} "
     properties:
@@ -76,7 +76,7 @@ blocks:
     invert_powerline: true
     foreground: "#000000"
     background: "p:teal"
-    template: "{{ if .Env.CHEZMOI }}  chezmoi {{ end }}"
+    template: "{{ if .Env.CHEZMOI }} \ue259 chezmoi {{ end }}"
   - type: node
     style: powerline
     powerline_symbol: 
