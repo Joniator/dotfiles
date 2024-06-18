@@ -4,7 +4,6 @@ map('n', '<Esc>', '<cmd>nohlsearch<CR>')
 map('t', '<Esc><Esc>', '<C-\\><C-n>', { desc = 'Exit terminal mode' })
 
 map('n', '<leader>o', 'i<cr><esc>', { desc = 'Add a linebreak at current position' })
-map('n', '<leader>-', '<cmd>Oil<CR>', { desc = 'File Manager' })
 
 -- Diagnostic keymaps
 map('n', '[d', vim.diagnostic.goto_prev, { desc = 'Go to previous [D]iagnostic message' })
