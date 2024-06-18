@@ -13,4 +13,4 @@ zsh-users/zsh-completions
 zdharma-continuum/fast-syntax-highlighting
 catppuccin/zsh-fsh kind:clone
 
-$ZDOTDIR/alias
+$ZDOTDIR/custom
