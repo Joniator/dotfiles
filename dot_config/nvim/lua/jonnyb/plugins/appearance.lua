@@ -36,6 +36,14 @@ return {
   },
 
   {
+    'lukas-reineke/indent-blankline.nvim',
+    main = 'ibl',
+    opts = {},
+  },
+
+  'HiPhish/rainbow-delimiters.nvim',
+
+  {
     'j-hui/fidget.nvim',
     opts = {
       notification = {
