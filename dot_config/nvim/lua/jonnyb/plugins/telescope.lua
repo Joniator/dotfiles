@@ -14,7 +14,7 @@ return {
       },
       'nvim-telescope/telescope-ui-select.nvim',
       'nvim-tree/nvim-web-devicons',
-      'barrett-ruth/telescope-http.nvim',
+      'barrett-ruth/http-codes.nvim',
       'xiyaowong/telescope-emoji.nvim',
     },
     config = function()
