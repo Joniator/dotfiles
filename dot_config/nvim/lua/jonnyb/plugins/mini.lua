@@ -26,13 +26,6 @@ return {
       -- Align text
       -- - ga=  - Align equal signs in selection
       require('mini.align').setup()
-
-      local indent = require 'mini.indentscope'
-      indent.setup {
-        draw = {
-          animation = indent.gen_animation.none(),
-        },
-      }
     end,
   },
 }
