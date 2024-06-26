@@ -33,7 +33,7 @@ config.default_cwd = "~"
 -- Appearance
 --]
 config.color_scheme = "catppuccin-macchiato"
-config.window_background_image = "C:/Users/jboec/Pictures/cats-pastel-desktop-4kpxn51m2hfhb5qz.jpg"
+config.window_background_image = "%USERPROFILE%/.config/wezterm/background.jpg"
 config.window_background_image_hsb = { brightness = 0.005 }
 config.hide_tab_bar_if_only_one_tab = true
 config.font = wezterm.font_with_fallback({
@@ -82,8 +82,8 @@ config.keys = {
 	{ key = "j", mods = "LEADER", action = act.ActivatePaneDirection("Down") },
 	{ key = "k", mods = "LEADER", action = act.ActivatePaneDirection("Up") },
 	{ key = "l", mods = "LEADER", action = act.ActivatePaneDirection("Right") },
-	{ key = "s", mods = "LEADER", action = act.SplitHorizontal({ domain = "CurrentPaneDomain" }) },
-	{ key = "v", mods = "LEADER", action = act.SplitVertical({ domain = "CurrentPaneDomain" }) },
+	{ key = "v", mods = "LEADER", action = act.SplitHorizontal({ domain = "CurrentPaneDomain" }) },
+	{ key = "s", mods = "LEADER", action = act.SplitVertical({ domain = "CurrentPaneDomain" }) },
 	{ key = "m", mods = "LEADER", action = act.TogglePaneZoomState },
 	{ key = "0", mods = "LEADER", action = act.PaneSelect({ mode = "SwapWithActive" }) },
 	{ key = "x", mods = "LEADER", action = act.CloseCurrentPane({ confirm = false }) },
