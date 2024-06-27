@@ -3,5 +3,5 @@
 {{ if .isWSL -}}
 {{ template "copy_to_windows" }}
 {{ else }}
-echo "❌ No WSL detected, skip copying files to windows"
+echo "ℹ️ No WSL detected, skip copying files to windows"
 {{- end }}
