@@ -17,9 +17,11 @@ function install {
 
     mkdir -p ~/.local/lib
     zsh -c "tar -C ~/.local/lib -xzf <(curl -sL https://go.dev/dl/go1.22.1.linux-amd64.tar.gz)"
+
     if [[ -L ~/.local/bin/go ]]; then
         unlink ~/.local/bin/go
-    end
+    fi
+
     ln -s ~/.local/lib/go/bin/go ~/.local/bin/ || true
     echo "✅ $NAME installed successfully"
 }
