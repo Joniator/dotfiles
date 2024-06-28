@@ -175,8 +175,12 @@ blocks:
     invert_powerline: true
     foreground: "#000000"
     background: "p:mauve"
-    trailing_diamond: ─╮
+    trailing_diamond: 
     template: " {{ .CurrentDate | date .Format }} \uf017 "
+  - type: text
+    style: plain
+    foreground: "p:text"
+    template: ─╮
 - type: prompt
   alignment: left
   segments:
