@@ -1,0 +1,24 @@
+#!/usr/bin/env zsh
+
+set -o xtrace
+NAME='atuin'
+function install {
+    if command -v atuin &> /dev/null; then
+        echo "✅ $NAME is up to date"
+        return
+    fi
+
+    ARCH=$(uname -m)
+    if [ $ARCH != "x86_64" ]; then
+        echo "❌ $ARCH is not supported"
+        return
+    fi
+
+    mkdir -p ~/.local/lib/atuin
+    tar -C ~/.local/lib/atuin --strip-components 1 -xzf <(curl -sL https://github.com/atuinsh/atuin/releases/download/v18.4.0-beta.1/atuin-x86_64-unknown-linux-gnu.tar.gz)
+    ln -s ~/.local/lib/atuin/atuin ~/.local/bin/ || true
+    echo "✅ $NAME installed successfully"
+}
+
+echo "⚙️  Installing $NAME"
+install || echo "❌ Failed to install $NAME"

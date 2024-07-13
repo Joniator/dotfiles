@@ -22,6 +22,7 @@ FNM_PATH="$HOME/.local/share/fnm"
 if [[ -d $FNM_PATH ]]; then export PATH="$FNM_PATH:$PATH"; eval "`fnm env`"; fi
 
 if command -v fzf &> /dev/null; then source <(fzf --zsh); fi
+bindkey "^R" atuin-search # Override fzf ctrl-r with historized atuin
 
 if command -v zoxide &> /dev/null; then eval "$(zoxide init --cmd cd zsh)"; fi
 
