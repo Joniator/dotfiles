@@ -2,6 +2,7 @@ local wezterm = require("wezterm")
 local config = wezterm.config_builder()
 local act = wezterm.action
 
+local home = os.getenv("USERPROFILE") or os.getenv("HOME") or "~"
 local resize_small = 1
 local resize_big = 15
 local key_timeout = 1000
@@ -32,9 +33,8 @@ config.default_cwd = "~"
 --[
 -- Appearance
 --]
-local home = os.getenv("USERPROFILE") or os.getenv("HOME") or "~"
 config.color_scheme = "catppuccin-macchiato"
-config.window_background_image = home + "/.config/wezterm/background.jpg"
+config.window_background_image = home .. "/.config/wezterm/background.jpg"
 config.window_background_image_hsb = { brightness = 0.005 }
 config.hide_tab_bar_if_only_one_tab = true
 config.font = wezterm.font_with_fallback({
