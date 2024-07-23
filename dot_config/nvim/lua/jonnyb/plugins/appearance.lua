@@ -10,10 +10,22 @@ return {
     name = 'catppuccin',
     lazy = false,
     priority = 1000,
-    opts = {
-      flavour = 'macchiato',
-    },
     config = function()
+      local config = {}
+      if os.getenv 'LIGHT_MODE' == 'true' then
+        config = {
+          flavour = 'latte',
+          transparent_background = false,
+        }
+      else
+        config = {
+          flavour = 'macchiato',
+          transparent_background = true,
+        }
+      end
+
+      require('catppuccin').setup(config)
+
       vim.cmd.colorscheme 'catppuccin'
     end,
   },

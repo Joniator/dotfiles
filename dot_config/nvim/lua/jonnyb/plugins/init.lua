@@ -6,6 +6,5 @@ return {
   'tpope/vim-sleuth',
   'tpope/vim-fugitive',
   'numToStr/Comment.nvim',
-  'xiyaowong/transparent.nvim',
   'mbbill/undotree',
 }

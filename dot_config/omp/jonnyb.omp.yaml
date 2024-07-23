@@ -7,13 +7,23 @@ console_title_template: >-
   {{- if .Env.SSH_CONNECTION }}ssh :: {{ end -}}
   {{ .UserName }}@{{ .HostName }} :: {{ .Shell }} :: {{.PWD}}
 
-palette:
-  base: "#1e2030"
-  mauve: "#c6a0f6"
-  teal: "#8bd5ca"
-  red: "#ed8796"
-  green: "#a6da95"
-  text: "#cad3f5"
+palettes:
+  template: "{{ if eq .Env.LIGHT_MODE \"true\" }}latte{{ else }}macchiato{{ end }}"
+  list:
+    macchiato:
+      base: "#1e2030"
+      mauve: "#c6a0f6"
+      teal: "#8bd5ca"
+      red: "#ed8796"
+      green: "#a6da95"
+      text: "#cad3f5"
+    latte:
+      base: "#e6e9ef"
+      mauve: "#8839ef"
+      teal: "#179299"
+      red: "#d20f39"
+      green: "#40a02b"
+      text: "#4c4f69"
 
 transient_prompt:
   foreground_templates:
