@@ -6,6 +6,7 @@ alias bat='batcat'
 alias cat='bat'
 alias zshsrc='source $HOME/.config/zsh/.zshrc'
 alias suvi='sudo -E nvim'
+alias suz='sudo -E zsh'
 
 alias gacp='gaa && gc && gp'
 
