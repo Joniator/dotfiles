@@ -131,7 +131,6 @@ return {
 
         if vim.fn.executable 'ansible' == 1 and vim.fn.executable 'npm' == 1 then
           servers['ansiblels'] = {}
-          servers['ansible-lint'] = {}
         end
 
         if vim.fn.executable 'docker' == 1 then
