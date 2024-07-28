@@ -1,4 +1,4 @@
-{{- else if contains .chezmoi.osRelease.idLike "rhel" -}}
+{{- if contains .chezmoi.osRelease.idLike "rhel" -}}
 #!/usr/bin/env zsh
 # vi: ft=zsh.template.chezmoitemplate
 

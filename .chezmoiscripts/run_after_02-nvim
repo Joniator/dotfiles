@@ -4,10 +4,10 @@ NAME="Neovim"
 DISTRO="$(awk -F= '/^ID_LIKE/{print $2}' /etc/os-release)"
 
 function install {
-    # if command -v nvim &> /dev/null; then
-    #     echo "✅ $NAME is already installed"
-    #     return
-    # fi
+    if command -v nvim &> /dev/null; then
+        echo "✅ $NAME is already installed"
+        return
+    fi
 
     if [ "$(id -u)" -eq 0 ]; then
         SUDO=""
