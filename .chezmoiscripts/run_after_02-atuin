@@ -2,9 +2,10 @@
 
 NAME='atuin'
 VERSION='18.4.0-beta.1'
+ARCH=$(uname -m)
 
-_LIB="$HOME/.local/lib/atuin"
 _BIN="$HOME/.local/bin/atuin"
+_LIB="$HOME/.local/lib/atuin"
 
 function install {
     if command -v atuin &> /dev/null; then
@@ -14,25 +15,13 @@ function install {
         fi
     fi
 
-    ARCH=$(uname -m)
-    if [ $ARCH != "x86_64" ]; then
-        echo "❌ $ARCH is not supported"
-        return
-    fi
-
-    if [[ -d "$_LIB" ]]; then
-        rm -rf "$_LIB/{*,.*}"
-    else
-        mkdir -p ~/.local/lib/atuin 
-    fi
-    tar -C "$_LIB" --strip-components 1 -xzf <(curl -sL "https://github.com/atuinsh/atuin/releases/download/v$VERSION/atuin-x86_64-unknown-linux-gnu.tar.gz")
-
-    if [[ ! -e "$_BIN" ]]; then
-        ln -s "$_LIB/atuin" "$_BIN"
-    fi
-
+    [[ -e "$_BIN" ]] && rm -rf "$_BIN"
+    [[ -d "$_LIB" ]] && rm -rf "$_LIB/{*,.*}"
+    mkdir -p $_LIB || return 3
+    tar -C "$_LIB" --strip-components 1 -xzf <(curl -sL "https://github.com/atuinsh/atuin/releases/download/v$VERSION/atuin-$ARCH-unknown-linux-gnu.tar.gz") || return 4
+    ln -s "$_LIB/atuin" "$_BIN" || return 5
     echo "✅ $NAME installed successfully"
 }
 
 echo "⚙️  Installing $NAME"
-install || echo "❌ Failed to install $NAME"
+install || echo "❌ Failed to install $NAME: $?"

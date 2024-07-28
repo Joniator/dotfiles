@@ -8,10 +8,10 @@ function install {
         return
     fi
 
-    curl -fsSL https://fnm.vercel.app/install | bash -s -- -s
-    $XDG_DATA_HOME/fnm/fnm use --install-if-missing 20
+    curl -fsSL https://fnm.vercel.app/install | bash -s -- -s || return 1
+    $XDG_DATA_HOME/fnm/fnm use --install-if-missing 20 --return 2
     echo "✅ $NAME installed successfully"
 }
 
 echo "⚙️  Installing $NAME"
-install || echo "❌ Failed to install $NAME"
+install || echo "❌ Failed to install $NAME: $?"

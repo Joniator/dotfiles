@@ -1,11 +1,8 @@
+{{- if contains .chezmoi.osRelease.idLike "debian" -}}
 #!/usr/bin/env zsh
+# vi: ft=zsh.template.chezmoitemplate
 
 PACKAGES=(
-    # {{ if contains .chezmoi.osRelease.idLike "debian" }}
-    #
-    # {{ else if contains .chezmoi.osRelease.idLike "rhel" }}
-    #
-    # {{ end }}
     bat
     btop
     build-essential
@@ -38,14 +35,14 @@ function install {
     $SUDO apt-get install -y \
         $PACKAGES \
         && \
-        echo "✅ Packages installed successfully"
+        echo "✅ Packages installed successfully" || return 1
     }
 
 function uninstall {
     $SUDO apt-get remove -y \
         fzf \
         && \
-        echo "✅ Old packages removed successfully"
+        echo "✅ Old packages removed successfully" || return 2
 }
 
 
@@ -58,3 +55,5 @@ uninstall || echo "❌ Failed to remove old packages"
 echo "⚙️  Updating batcat cache"
 batcat cache --build || echo "❌ Failed to build batcat cache"
 echo "✅ Batcat cache successfully built"
+
+{{ end }}

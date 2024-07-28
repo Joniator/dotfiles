@@ -1,31 +1,34 @@
 #!/usr/bin/env zsh
 
 NAME='go'
-version='go1.22.1'
+VERSION='go1.22.1'
+ARCH=$(uname -m)
+_LIB="$HOME/.local/lib/go"
+_LIB="$HOME/.local/bin/go"
 function install {
     if command -v go &> /dev/null; then
-        if [[ $(go version) =~ $version ]]; then
+        if [[ $(go version) =~ $VERSION ]]; then
             echo "✅ $NAME is up to date"
             return
         fi
     fi
 
-    ARCH=$(uname -m)
-    if [ $ARCH != "x86_64" ]; then
+    if [[ $ARCH -eq "x86_64" ]]; then
+        ARCH="amd64"
+    elif [[ $ARCH -eq "arm64" ]]; then
+        ARCH="arm64"
+    else
         echo "❌ $ARCH is not supported"
-        return
+        return 1
     fi
 
-    mkdir -p ~/.local/lib
-    zsh -c "tar -C ~/.local/lib -xzf <(curl -sL https://go.dev/dl/go1.22.1.linux-amd64.tar.gz)"
-
-    if [[ -L ~/.local/bin/go ]]; then
-        unlink ~/.local/bin/go
-    fi
-
-    ln -s ~/.local/lib/go/bin/go ~/.local/bin/ || true
+    [[ -d "$_LIB" ]] && rm "$_LIB"
+    [[ -e ~/.local/bin/go ]] unlink ~/.local/bin/go
+    mkdir -p "$_LIB" || return 1
+    zsh -c "tar -C ~/.local/lib -xzf <(curl -sL https://go.dev/dl/go1.22.1.linux-amd64.tar.gz)" || return 2
+    ln -s "$_LIB/bin/go" "$_BIN" || return 3
     echo "✅ $NAME installed successfully"
 }
 
 echo "⚙️  Installing $NAME"
-install || echo "❌ Failed to install $NAME"
+install || echo "❌ Failed to install $NAME: $?"

@@ -8,10 +8,10 @@ function install {
         return
     fi
 
-    curl https://sh.rustup.rs -sSf | sh -s -- -y
+    curl https://sh.rustup.rs -sSf | sh -s -- -y || return 1
     echo "✅ $NAME installed successfully"
 }
 
 echo "⚙️  Installing $NAME"
-install || echo "❌ Failed to install $NAME"
+install || echo "❌ Failed to install $NAME: $?"
 

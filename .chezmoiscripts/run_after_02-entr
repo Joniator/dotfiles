@@ -8,18 +8,18 @@ function install {
         return
     fi
 
-    SUDO=$(get-sudo)
-    TMP="$(mktemp -d)"
-
-    cd $TMP
-    git clone https://github.com/eradman/entr.git
-    cd entr
-    ./configure
-    make test
-    PREFIX=~/.local make install
-    echo "✅ $NAME installed successfully"
+    (
+        TMP="$(mktemp -d)"
+        cd $TMP
+        git clone https://github.com/eradman/entr.git || return 1
+        cd entr
+        ./configure || return 2
+        make testa || return 3
+        PREFIX=~/.local make install || return 4
+        echo "✅ $NAME installed successfully"
+    ) || return $?
 }
 
 echo "⚙️  Installing $NAME"
-install || echo "❌ Failed to install $NAME"
+install || echo "❌ Failed to install $NAME: $?"
 
