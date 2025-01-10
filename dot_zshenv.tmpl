@@ -1,5 +1,5 @@
 # vi: ft=bash
-{{- if .isCodespace -}}
+{{ if .isCodespace -}}
     export EDITOR="code --wait"
 {{- else -}}
     export EDITOR="nvim"
