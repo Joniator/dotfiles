@@ -1,8 +1,0 @@
-#! /usr/bin/env bash
-
-if [[ ! -d ~/.config/lazyvim ]]; then
-  git clone https://github.com/LazyVim/starter ~/.config/lazyvim
-  sudo apt install lazygit fzf curl ripgrep
-fi
-
-NVIM_APPNAME=lazyvim nvim
