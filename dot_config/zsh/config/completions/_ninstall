@@ -1,0 +1,17 @@
+#compdef _ninstall ninstall
+
+function _ninstall {
+      local line
+
+    _arguments -C \
+        "1: :(quietly loudly)" \
+
+    case $line[1] in
+        loudly)
+            _hello_loudly
+        ;;
+        quietly)
+            _hello_quietly
+        ;;
+    esac
+}
