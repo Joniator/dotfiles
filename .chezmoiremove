@@ -1,4 +1,4 @@
-~/.config/zsh/alias
-~/.config/zsh/custom
-~/.config/bin/setup-antidote
-~/.config/bin/setup-sdkman
+.config/zsh/alias
+.config/zsh/custom
+.config/bin/setup-antidote
+.config/bin/setup-sdkman
