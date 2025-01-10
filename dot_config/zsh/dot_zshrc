@@ -9,24 +9,29 @@ if [[ ! -d "$XDG_DATA_HOME" ]]; then mkdir -p "$XDG_DATA_HOME"; fi
 if [[ ! -d "$XDG_STATE_HOME" ]]; then mkdir -p "$XDG_STATE_HOME"; fi
 if [[ ! -d "$XDG_CACHE_HOME" ]]; then mkdir -p "$XDG_CACHE_HOME"; fi
 
-source setup-antidote
-fast-theme -q $XDG_CACHE_HOME/antidote/catppuccin/zsh-fsh/themes/catppuccin-macchiato.ini
+# Use friendly folder names
+zstyle ':antidote:bundle' use-friendly-names 'yes'
 
-GO_INSTALL_DIR="/usr/local/go"
-if [[ -d "$GO_INSTALL_DIR" ]]; then export PATH="$GO_INSTALL_DIR/bin:$PATH"; fi
-if [[ -d "$SDKMAN_DIR" ]]; then source setup-sdkman; fi
-if [[ -d "$HOME/.cargo/env" ]]; then source "$HOME/.cargo/env"; fi
+source ${ZDOTDIR:-~}/antidote/antidote.zsh
+antidote_dir=${ZDOTDIR:-~}/antidote
+plugins_txt=${ZDOTDIR:-~}/plugins
+static_file=${ZDOTDIR:-~}/plugins.zsh
+config_folder=${ZDOTDIR:-~}/config
 
-# asdf
-if [[ -d "$ASDF_DIR" ]]; then source "$ASDF_DIR/asdf.sh"; fi
+# Generate a static plugin file.
+if [[ $plugins_txt -nt $static_file || $config_folder -nt $static_file || ! -s $static_file ]]; then
+  (
+    . $antidote_dir/antidote.zsh
+    [[ -e $plugins_txt ]] || touch $plugins_txt
+    envsubst < $plugins_txt | antidote bundle >$static_file
+  )
+fi
 
-# fnm
-FNM_PATH="$HOME/.local/share/fnm"
-if [[ -d $FNM_PATH ]]; then export PATH="$FNM_PATH:$PATH"; eval "`fnm env`"; fi
+autoload -Uz $antidote_dir/functions/antidote
 
-if command -v fzf &> /dev/null; then source <(fzf --zsh); fi
-bindkey "^R" atuin-search # Override fzf ctrl-r with historized atuin
+# source the static plugins file
+source $static_file
 
-if command -v zoxide &> /dev/null; then eval "$(zoxide init --cmd cd zsh)"; fi
+# cleanup
+unset antidote_dir plugins_txt static_file alias_folder
 
-eval "$(oh-my-posh init zsh --config $XDG_CONFIG_HOME/omp/jonnyb.omp.yaml)"

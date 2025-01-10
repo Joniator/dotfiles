@@ -7,8 +7,6 @@ function executable_exists() {
     return $?
 }
 
-function ninstall() {
-  echo $1
-}
-
+source ${0:A:h}/setup.zsh
 source ${0:A:h}/alias.zsh
+
