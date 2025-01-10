@@ -13,4 +13,4 @@ zdharma-continuum/fast-syntax-highlighting
 catppuccin/zsh-fsh kind:clone
 atuinsh/atuin
 
-$ZDOTDIR/custom
+$ZDOTDIR/config
