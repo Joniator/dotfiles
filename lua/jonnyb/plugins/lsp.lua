@@ -4,6 +4,7 @@ return {
 		"williamboman/mason.nvim",
 		"WhoIsSethDaniel/mason-tool-installer.nvim",
 		"williamboman/mason-lspconfig.nvim",
+		"folke/neodev.nvim",
 	},
 	config = function()
 		require("mason").setup()

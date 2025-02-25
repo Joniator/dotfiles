@@ -51,14 +51,15 @@ opt.termguicolors = true
 opt.hlsearch = true
 
 local function get_titlestring()
-	local ssh = os.getenv("SSH_CONNECTION") and "ssh :: " or ""
-	return ssh .. g.username .. "@" .. vim.fn.hostname() .. " :: nvim :: " .. vim.fn.getcwd() .. " :: %F"
+    local ssh = os.getenv("SSH_CONNECTION") and "ssh :: " or ""
+    return ssh .. g.username .. "@" .. vim.fn.hostname() .. " :: nvim :: " .. vim.fn.getcwd() .. " :: %F"
 end
+
 opt.title = true
 opt.titlestring = get_titlestring()
 
 if g.win then
-	vim.cmd([[
+    vim.cmd([[
         let &shell = executable('pwsh') ? 'pwsh' : 'powershell'
         let &shellcmdflag = '-NoLogo -NonInteractive -ExecutionPolicy RemoteSigned -Command [Console]::InputEncoding=[Console]::OutputEncoding=[System.Text.UTF8Encoding]::new();$PSDefaultParameterValues[''Out-File:Encoding'']=''utf8'';$PSStyle.OutputRendering=''plaintext'';Remove-Alias -Force -ErrorAction SilentlyContinue tee;'
         let &shellredir = '2>&1 | %%{ "$_" } | Out-File %s; exit $LastExitCode'
