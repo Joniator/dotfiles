@@ -116,18 +116,6 @@ return {
               end,
               desc = "Blame",
             },
-            {
-              "<leader>gtb",
-              gitsigns.toggle_current_line_blame,
-            },
-            {
-              "<leader>gtd",
-              gitsigns.toggle_deleted,
-            },
-            {
-              "<leader>gtw",
-              gitsigns.toggle_word_diff,
-            },
           })
         end,
       })
