@@ -43,7 +43,7 @@ return {
         "http",
       }
       for key, value in ipairs(extensions) do
-        pcall(require("telescope").load_extenseion, value)
+        pcall(require("telescope").load_extension, value)
       end
 
       local wk = require("which-key")
