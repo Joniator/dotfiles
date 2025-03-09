@@ -48,36 +48,4 @@ require("which-key").add({
     vim.diagnostic.setloclist,
     desc = "Open diagnostic [Q]uickfix list",
   },
-
-  -- Move Lines
-  {
-    "<A-j>",
-    "<cmd>m .+1<cr>==",
-    desc = "Move down",
-  },
-  {
-    "<A-k>",
-    "<cmd>m .-2<cr>==",
-    desc = "Move up",
-  },
-  {
-    "<A-j>",
-    "<esc><cmd>m .+1<cr>==gi",
-    desc = "Move down",
-  },
-  {
-    "<A-k>",
-    "<esc><cmd>m .-2<cr>==gi",
-    desc = "Move up",
-  },
-  {
-    "<A-j>",
-    ":m '>+1<cr>gv=gv",
-    desc = "Move down",
-  },
-  {
-    "<A-k>",
-    ":m '<-2<cr>gv=gv",
-    desc = "Move up",
-  },
 })
