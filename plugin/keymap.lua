@@ -1,5 +1,3 @@
-local map = vim.keymap.set
-
 require("which-key").add({
   {
     "<Esc><Esc>",

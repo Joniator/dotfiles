@@ -124,7 +124,6 @@ return {
               gitsigns.blame_line({ full = true })
             end,
             desc = "Blame",
-            buffer = bufnr,
           },
         })
       end,
