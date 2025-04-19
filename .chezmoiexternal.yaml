@@ -1,0 +1,23 @@
+".config/nvim":
+  type: "git-repo"
+  url: "https://github.com/Joniator/nvim.git"
+  refreshPeriod: "168h"
+
+".config/zsh/antidote":
+  type: "git-repo"
+  url: "https://github.com/mattmc3/antidote.git"
+  refreshPeriod: "168h"
+
+".local/bin/asdf":
+  type: "archive-file"
+  url: "https://github.com/asdf-vm/asdf/releases/download/v0.16.7/asdf-v0.16.7-linux-amd64.tar.gz"
+  refreshPeriod: "168h"
+  path: asdf
+  executable: true
+
+".local/bin/nvim":
+  type: "file"
+  url: "https://github.com/neovim/neovim/releases/download/nightly/nvim-linux-x86_64.appimage"
+  refreshPeriod: "168h"
+  executable: true
+
