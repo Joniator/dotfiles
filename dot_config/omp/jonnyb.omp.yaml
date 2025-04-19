@@ -1,0 +1,229 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/JanDeDobbeleer/oh-my-posh/main/themes/schema.json
+
+palettes:
+    list:
+        latte:
+            base: '#e6e9ef'
+            green: '#40a02b'
+            mauve: '#8839ef'
+            red: '#d20f39'
+            teal: '#179299'
+            text: '#4c4f69'
+        macchiato:
+            base: '#1e2030'
+            green: '#a6da95'
+            mauve: '#c6a0f6'
+            red: '#ed8796'
+            teal: '#8bd5ca'
+            text: '#cad3f5'
+    template: '{{ if eq .Env.LIGHT_MODE "true" }}latte{{ else }}macchiato{{ end }}'
+transient_prompt:
+    template: '❯ '
+    background: transparent
+    foreground_templates:
+        - '{{if ne .Code 0}}p:red{{end}}'
+        - '{{if eq .Code 0}}p:green{{end}}'
+console_title_template: '{{- if .Env.SSH_CONNECTION }}ssh :: {{ end -}} {{ .UserName }}@{{ .HostName }} :: {{ .Shell }} :: {{.PWD}}'
+blocks:
+    - type: prompt
+      alignment: left
+      segments:
+        - properties:
+            cache_duration: none
+          template: ╭─
+          foreground: p:text
+          type: text
+          style: plain
+        - properties:
+            cache_duration: none
+          leading_diamond: 
+          template: ' {{ if .WSL }}WSL at {{ end }}{{.Icon}} '
+          foreground: p:text
+          background: p:base
+          type: os
+          style: diamond
+        - properties:
+            cache_duration: none
+            home_icon: "~"
+            style: full
+          foreground: '#000000'
+          powerline_symbol: 
+          background: p:mauve
+          type: path
+          style: powerline
+          templates:
+            - '{{ if eq .Path "~" }}  {{ end }}'
+            - '{{ if ne .Path "~" }}  {{ end }}'
+            - ' {{ .Path }} '
+        - properties:
+            branch_icon: ' '
+            branch_max_length: 30
+            cache_duration: none
+            fetch_stash_count: true
+            fetch_status: true
+            fetch_upstream_icon: true
+            truncate_symbol: …
+          template: ' {{ .UpstreamIcon }}{{ .HEAD }}{{if .BranchStatus }} {{ .BranchStatus }}{{ end }}{{ if .Working.Changed }}  {{ .Working.String }}{{ end }}{{ if and (.Working.Changed) (.Staging.Changed) }} |{{ end }}{{ if .Staging.Changed }}  {{ .Staging.String }}{{ end }}{{ if gt .StashCount 0 }}  {{ .StashCount }}{{ end }} '
+          foreground: '#000000'
+          powerline_symbol: 
+          background: '#4e9a06'
+          type: git
+          style: powerline
+          background_templates:
+            - '{{ if or (.Working.Changed) (.Staging.Changed) }}#c4a000{{ end }}'
+            - '{{ if and (gt .Ahead 0) (gt .Behind 0) }}#f26d50{{ end }}'
+            - '{{ if gt .Ahead 0 }}#89d1dc{{ end }}'
+            - '{{ if gt .Behind 0 }}#4e9a06{{ end }}'
+    - type: prompt
+      alignment: right
+      filler: <p:text,transparent>─</>
+      segments:
+        - properties:
+            cache_duration: none
+          template: '{{ if .Env.CHEZMOI }}  chezmoi {{ end }}'
+          foreground: '#000000'
+          powerline_symbol: 
+          background: p:teal
+          type: text
+          style: powerline
+          invert_powerline: true
+        - properties:
+            cache_duration: none
+            fetch_version: true
+          template: ' {{ if .PackageManagerIcon }}{{ .PackageManagerIcon }} {{ end }}{{ .Full }}  '
+          foreground: '#ffffff'
+          powerline_symbol: 
+          background: '#689f63'
+          type: node
+          style: powerline
+          invert_powerline: true
+        - properties:
+            cache_duration: none
+            fetch_version: true
+          template: ' {{ if .Error }}{{ .Error }}{{ else }}{{ .Full }}{{ end }}  '
+          foreground: '#111111'
+          powerline_symbol: 
+          background: '#00acd7'
+          type: go
+          style: powerline
+          invert_powerline: true
+        - properties:
+            cache_duration: none
+            fetch_version: true
+          template: ' {{ if .Error }}{{ .Error }}{{ else }}{{ .Full }}{{ end }}  '
+          foreground: '#111111'
+          powerline_symbol: 
+          background: '#4063D8'
+          type: julia
+          style: powerline
+          invert_powerline: true
+        - properties:
+            cache_duration: none
+            display_mode: files
+            fetch_virtual_env: false
+          template: ' {{ if .Error }}{{ .Error }}{{ else }}{{ .Full }}{{ end }}  '
+          foreground: '#111111'
+          powerline_symbol: 
+          background: '#FFDE57'
+          type: python
+          style: powerline
+          invert_powerline: true
+        - properties:
+            cache_duration: none
+            display_mode: files
+            fetch_version: true
+          template: ' {{ if .Error }}{{ .Error }}{{ else }}{{ .Full }}{{ end }}  '
+          foreground: '#ffffff'
+          powerline_symbol: 
+          background: '#AE1401'
+          type: ruby
+          style: powerline
+          invert_powerline: true
+        - properties:
+            cache_duration: none
+            display_mode: files
+            fetch_version: false
+          template: ' {{ if .Error }}{{ .Error }}{{ else }}{{ .Full }}{{ end }} '
+          foreground: '#ffffff'
+          powerline_symbol: 
+          background: '#FEAC19'
+          type: azfunc
+          style: powerline
+          invert_powerline: true
+        - properties:
+            cache_duration: none
+            display_default: false
+          template: ' {{ .Profile }}{{ if .Region }}@{{ .Region }}{{ end }}  '
+          foreground: '#ffffff'
+          powerline_symbol: 
+          type: aws
+          style: powerline
+          background_templates:
+            - '{{if contains "default" .Profile}}#FFA400{{end}}'
+            - '{{if contains "jan" .Profile}}#f1184c{{end}}'
+          invert_powerline: true
+        - properties:
+            cache_duration: none
+          template: '  '
+          foreground: '#111111'
+          powerline_symbol: 
+          background: '#ffff66'
+          type: root
+          style: powerline
+          invert_powerline: true
+        - properties:
+            cache_duration: none
+          template: ' {{ .FormattedMs }}  '
+          foreground: '#000000'
+          powerline_symbol: 
+          background: '#c4a000'
+          type: executiontime
+          style: powerline
+          invert_powerline: true
+        - properties:
+            always_enabled: true
+            cache_duration: none
+          template: ' {{ if gt .Code 0 }}{{ reason .Code }}{{ else }}{{ end }} '
+          foreground: p:text
+          powerline_symbol: 
+          background: p:base
+          type: status
+          style: powerline
+          background_templates:
+            - '{{ if gt .Code 0 }}#cc2222{{ end }}'
+          invert_powerline: true
+        - properties:
+            cache_duration: none
+          trailing_diamond: 
+          template: ' {{ .CurrentDate | date .Format }}  '
+          foreground: '#000000'
+          background: p:mauve
+          type: time
+          style: diamond
+          invert_powerline: true
+        - properties:
+            cache_duration: none
+          template: ─╮
+          foreground: p:text
+          type: text
+          style: plain
+    - type: prompt
+      alignment: left
+      segments:
+        - properties:
+            cache_duration: none
+          template: ╰─
+          foreground: p:text
+          type: text
+          style: plain
+      newline: true
+    - type: rprompt
+      segments:
+        - properties:
+            cache_duration: none
+          template: ─╯
+          foreground: p:text
+          type: text
+          style: plain
+version: 3
+final_space: true
