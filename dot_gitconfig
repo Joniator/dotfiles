@@ -1,0 +1,33 @@
+[user]
+  email = jboeckel@mailbox.org
+  name = Jonathan Boeckel
+  signingkey = ~/.ssh/id_ed25519
+
+[gpg]
+  format = ssh
+
+[init]
+  defaultBranch = main
+
+[color]
+  ui = true
+
+[diff]
+  tool = nvimdiff
+
+[merge]
+  tool = nvimdiff
+
+[push]
+  autoSetupRemote = true
+
+[difftool]
+  prompt = false
+
+[core]
+  autocrlf = false
+
+[log]
+  decorate = true
+  showSignature = false
+  abbrevCommit = true
