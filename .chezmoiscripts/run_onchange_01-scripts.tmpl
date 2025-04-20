@@ -1,0 +1,7 @@
+#! /usr/bin/env nu
+
+if ((which oh-my-posh | length) == 0) {
+    curl -s https://ohmyposh.dev/install.sh | bash -s
+}
+
+# vi: ft=nu.template
