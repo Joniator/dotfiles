@@ -1,3 +1,8 @@
+alias l     = ls
+alias la    = ls -a
+alias ll    = ls -l
+alias lla   = ls -la
+
 ###
 # Chezmoi
 ###
@@ -34,8 +39,9 @@ alias g     = git
 alias ga    = git add
 alias gaa   = git add --all
 alias gc    = git commit
-alias gp    = git push
 alias gl    = git pull
+alias gp    = git push
+alias gst   = git status
 
 def gacp [] {
     gaa
