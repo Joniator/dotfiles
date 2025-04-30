@@ -1,3 +1,0 @@
-#!/usr/bin/env bash
-
-java -jar "$HOME"/.config/bin/bfg.jar "$@"
