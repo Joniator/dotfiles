@@ -12,3 +12,9 @@ let omp_config = "~/.config/omp/jonnyb.omp.yaml"
 if (($omp_path | path type) != "file") {
     oh-my-posh init nu --config $omp_config --print | save $omp_path
 }
+
+let carapace_path = $"($autoload_dir)/carapace.nu"
+$env.CARAPACE_BRIDGES = 'zsh,fish,bash,inshellisense'
+if (($carapace_path | path type) != "file") {
+    carapace _carapace nushell | save --force  $carapace_path
+}

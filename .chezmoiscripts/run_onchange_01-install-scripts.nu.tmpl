@@ -12,4 +12,17 @@ try {
     |err| log error $"Failed to install oh-my-posh ($err)"
 }
 
+try {
+    log info "Installing Carapace"
+    if ((which carapace | length) == 0) {
+        if $nu.os-info.name == "windows" {
+            scoop bucket add extras
+            scoop install extras/carapace-bin
+        }
+    }
+    log info "Installed Carapace"
+} catch {
+    |err| log error $"Failed to install Carapace ($err)"
+}
+
 # vi: ft=nu.template
