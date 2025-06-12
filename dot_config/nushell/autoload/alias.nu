@@ -36,6 +36,7 @@ alias dndn  = dc down
 ###
 # Git
 ###
+alias ng    = nvim +Neogit
 alias g     = git
 alias ga    = git add
 alias gaa   = git add --all

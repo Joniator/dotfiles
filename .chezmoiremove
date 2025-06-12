@@ -5,7 +5,6 @@
 .bash_profile
 .profile
 .motd_shown
-.sudo_as_admin_successful
 .viminfo
 .vim
 
