@@ -8,4 +8,17 @@ $env.XDG_DATA_HOME = $"($env.HOME)/.local/share"
 
 $env.Path = ($env.Path 
     | prepend $"($env.HOME)/.local/bin"
+    | prepend $"($env.XDG_DATA_HOME)/fnm"
 )
+
+if not (which fnm | is-empty) {
+    fnm env --json | from json | load-env
+
+    $env.PATH = $env.PATH | prepend ($env.FNM_MULTISHELL_PATH | path join "bin")
+
+    $env.config.hooks.env_change.PWD = (
+        $env.config.hooks.env_change.PWD? | append {
+            condition: {|| ['.nvmrc' '.node-version'] | any {|el| $el | path exists}}
+            code: {|| fnm use}
+        })
+}
