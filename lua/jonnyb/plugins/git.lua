@@ -8,6 +8,7 @@ return {
       -- Only one of these is needed.
       "nvim-telescope/telescope.nvim", -- optional
     },
+    cmd = "Neogit",
     keys = {
       {
         "<leader>g",
