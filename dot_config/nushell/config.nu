@@ -22,6 +22,13 @@ if ((which carapace | length) != 0) {
     }
 }
 
+if ((which zoxide | length) != 0) {
+    let zoxide_path = $"($autoload_dir)/zoxide.nu"
+    if (($zoxide_path | path type) != "file") {
+        zoxide init --cmd cd nushell | save --force  $zoxide_path
+    }
+}
+
 # Workaround to get ssh_agent working
 if $nu.os-info.name == "linux" {
     do --env {
