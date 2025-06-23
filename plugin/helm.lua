@@ -2,21 +2,21 @@ local helmAuGroup = vim.api.nvim_create_augroup("HelmGroup", { clear = true })
 
 vim.api.nvim_create_autocmd("BufEnter", {
   group = helmAuGroup,
-  pattern = "preview-fss",
-  callback = function()
-    local output = vim.fn.system("helm template ./deployment/helm/fss")
-    local lines = vim.split(output, "\n")
-    vim.api.nvim_buf_set_lines(0, 0, -1, false, lines)
-  end,
-})
+  pattern = { "preview-*" },
+  callback = function(args)
+    local bufname = vim.api.nvim_buf_get_name(args.buf)
+    local basename = vim.fn.fnamemodify(bufname, ":t")
+    local folder = basename:match("^preview%-(.+)$")
 
-vim.api.nvim_create_autocmd("BufEnter", {
-  group = helmAuGroup,
-  pattern = "preview-fss",
-  callback = function()
-    local output = vim.fn.system("helm template ./deployment/helm/fss")
-    local lines = vim.split(output, "\n")
-    vim.api.nvim_buf_set_lines(0, 0, -1, false, lines)
+    if folder then
+      local helm_cmd = "helm template ./deployment/helm/" .. folder
+      local output = vim.fn.systemlist(helm_cmd)
+      if vim.v.shell_error == 0 then
+        vim.api.nvim_buf_set_lines(args.buf, 0, -1, false, output)
+      else
+        vim.notify("Helm template failed: " .. table.concat(output, "\n"), vim.log.levels.ERROR)
+      end
+    end
   end,
 })
 
