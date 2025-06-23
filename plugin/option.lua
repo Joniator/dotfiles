@@ -58,6 +58,8 @@ end
 opt.title = true
 opt.titlestring = get_titlestring()
 
+opt.foldtext = [[ getline(v:foldstart) ]]
+
 if globals.win then
   vim.cmd([[
         let &shell = executable('pwsh') ? 'pwsh' : 'powershell'
