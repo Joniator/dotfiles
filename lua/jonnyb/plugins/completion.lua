@@ -34,6 +34,10 @@ return {
           luasnip.lsp_expand(args.body)
         end,
       },
+      window = {
+        documentation = cmp.config.window.bordered(),
+        completion = cmp.config.window.bordered(),
+      },
       completion = { completeopt = "menu,menuone,noinsert" },
       mapping = cmp.mapping.preset.insert({
         ["<C-b>"] = cmp.mapping.scroll_docs(-4),
@@ -66,6 +70,7 @@ return {
         end),
       }),
       sources = {
+        { name = "lazydev", group_index = 0 },
         { name = "nvim_lsp" },
         { name = "nvim_lsp_signature_help" },
         { name = "luasnip" },
