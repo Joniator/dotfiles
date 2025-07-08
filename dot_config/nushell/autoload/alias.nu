@@ -1,3 +1,4 @@
+alias _ = sudo
 alias vi = nvim
 alias l     = ls
 alias la    = ls -a

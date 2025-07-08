@@ -1,0 +1,121 @@
+use ./version.nu
+
+export def linux_dependencies [] {
+    install ripgrep
+    install fd
+    install nvim
+    install oh-my-posh
+    install zoxide
+    install carapace
+}
+
+export def windows_dependencies [] {
+    [ 
+        ripgrep,
+        fd,
+        versions/neovim-nightly,
+        oh-my-posh,
+        zoxide,
+        extras/carapace,
+
+    ]
+    | each { |name|
+        scoop install $name
+    }
+}
+
+def install_release [ repo: string, selector: string, unpack: closure, install: closure] {
+    let headers = []
+    let temp = mktemp -d "dotfiles.XXXXX"
+    do {
+        cd $temp
+        let tar_file = "download"
+        let release = http get --headers $headers $"https://api.github.com/repos/($repo)/releases/latest"
+        let release_id = $"($release.id)"
+        let installed_version = version get_version $repo
+        if (($installed_version | is-empty) or ($installed_version != $release_id)) {
+            print $"Installing ($repo) version ($release_id)"
+            $release.assets
+            | where name =~ $selector
+            | first
+            | http get --headers $headers $in.url
+            | http get --headers $headers $in.browser_download_url
+            | save "download"
+            do $unpack ($tar_file)
+            do $install
+            version put $repo $"($release_id)"
+        } else {
+            print $"($repo) already up to date"
+        }
+    }
+    rm -r $temp
+}
+
+def "install ripgrep" [] {
+    let repo = "BurntSushi/ripgrep"
+    let selector =  "x86_64-unknown-linux-musl.tar.gz$"
+    let unpack = { |file| tar xzf $file }
+    let install = { || mv ripgrep*/rg ~/.local/bin/rg }
+    install_release $repo $selector $unpack $install
+}
+
+def "install fd" [] {
+    let repo = "sharkdp/fd"
+    let selector =  "x86_64-unknown-linux-gnu.tar.gz$"
+    let unpack = { |file| tar xzf $file }
+    let install = { || mv fd*/fd ~/.local/bin/fd }
+    install_release $repo $selector $unpack $install
+}
+
+def "install nvim" [] {
+    if (which nvim | is-empty) {
+        mut sudo = if ((whoami) != root) { "sudo " } else { "" }
+        $'($sudo) add-ap-repository -y ppa:neovim-ppa/unstable
+        ($sudo) apt-get install -y neovim build-essential' | bash
+        log installed neovim
+    } else {
+        log already_installed neovim
+    }
+}
+
+def "install oh-my-posh" [] {
+    if (which oh-my-posh | is-empty) {
+        mut sudo = if ((whoami) != root) { "sudo " } else { "" }
+        $"($sudo) apt-get install -y unzip" | bash
+        curl -s https://ohmyposh.dev/install.sh | bash -s -- -d ~/.local/bin
+        log installed oh-my-posh
+    } else {
+        log already_installed oh-my-posh
+    }
+}
+
+def "install zoxide" [] {
+    http get https://raw.githubusercontent.com/ajeetdsouza/zoxide/main/install.sh | sh
+}
+
+def "install carapace" [] {
+    if (which carapace | is-empty) {
+        mut sudo = if ((whoami) != root) { "sudo " } else { "" }
+        $'($sudo) apt-get install -y carapace-bin' | bash
+        log installed carapace
+    } else {
+        log already_installed oh-my-posh
+    }
+
+}
+
+def "log already_installed" [ name: string ] {
+    print $"($name) is already installed"
+}
+
+def "log up_to_date" [ name: string ] {
+    print $"($name) is up to date"
+}
+
+def "log installed" [ name: string ] {
+    print $"($name) was installed"
+}
+
+def "log updated" [ name: string ] {
+    print $"($name) was updated"
+}

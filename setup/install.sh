@@ -1,16 +1,8 @@
 #! /usr/bin/env bash
 
-if [ "$(id -u)" -eq 0 ]; then
-    SUDO=""
-else
-    if ! command -v sudo &> /dev/null; then
-        echo "❌ sudo is not installed. Please install sudo or run as root."
-        exit 1
-    fi
-    SUDO="sudo"
-fi
+curl -fsSL https://apt.fury.io/nushell/gpg.key | sudo gpg --dearmor --batch --yes -o /etc/apt/trusted.gpg.d/fury-nushell.gpg
+echo "deb https://apt.fury.io/nushell/ /" | sudo tee /etc/apt/sources.list.d/fury.list
+sudo apt update
+sudo apt install nushell
 
-$SUDO apt update
-$SUDO apt install -y pipx
-pipx install --include-deps ansible
-pipx ensurepath
+nu install.nu
