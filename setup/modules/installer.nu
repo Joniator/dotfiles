@@ -94,14 +94,11 @@ def "install zoxide" [] {
 }
 
 def "install carapace" [] {
-    if (which carapace | is-empty) {
-        mut sudo = if ((whoami) != root) { "sudo " } else { "" }
-        $'($sudo) apt-get install -y carapace-bin' | bash
-        log installed carapace
-    } else {
-        log already_installed oh-my-posh
-    }
-
+    let repo = "carapace-sh/carapace-bin"
+    let selector =  "linux_amd64.tar.gz"
+    let unpack = { |file| tar xzf $file }
+    let install = { || mv carapace ~/.local/bin/carapace }
+    install_release $repo $selector $unpack $install
 }
 
 def "log already_installed" [ name: string ] {
