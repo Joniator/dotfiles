@@ -33,7 +33,7 @@ if ((which zoxide | length) != 0) {
 if $nu.os-info.name == "linux" {
     do --env {
         let ssh_agent_file = (
-            $nu.temp-path | path join $"ssh-agent-($env.USER).nuon"
+            $nu.temp-path | path join $"ssh-agent-(whoami).nuon"
         )
 
         if ($ssh_agent_file | path exists) {
