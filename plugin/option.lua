@@ -69,3 +69,6 @@ if globals.win then
         set shellquote= shellxquote=
     ]])
 end
+
+vim.o.winborder = "rounded"
+vim.diagnostic.config({ virtual_text = false, float = { header = false, border = "rounded", focusable = true } })
