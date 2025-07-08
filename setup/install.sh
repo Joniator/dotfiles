@@ -1,9 +1,11 @@
 #! /usr/bin/env bash
 
+sudo apt-get update
+sudo apt-get install -y gpg git
 curl -fsSL https://apt.fury.io/nushell/gpg.key | sudo gpg --dearmor --batch --yes -o /etc/apt/trusted.gpg.d/fury-nushell.gpg
 echo "deb https://apt.fury.io/nushell/ /" | sudo tee /etc/apt/sources.list.d/fury.list
 sudo apt-get update
-sudo apt-get install -y nushell git
+sudo apt-get install -y nushell
 
 if [ ! -d "~/.local/share/chezmoi" ]; then
     if [ -f "~/.ssh/id_ed25519" ]; then
