@@ -17,4 +17,6 @@ if [ ! -d "~/.local/share/chezmoi" ]; then
     sh -c "$(curl -fsLS get.chezmoi.io/lb)" -- init --apply "$dotfiles_url"
 fi
 
-nu ~/.local/share/chezmoi/setup/install.nu
+nu  --config ~/.config/nushell/config.nu \
+    --env-config ~/.config/nushell/env.nu \
+    ~/.local/share/chezmoi/setup/install.nu

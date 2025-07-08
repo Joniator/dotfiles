@@ -17,7 +17,9 @@ export def get_version [ repo: string ] {
 }
 
 def get_catalog [] {
-    let file = $env.XDG_DATA_HOME | path join "dotfiles" "versions.yaml"
+    let dotfiles = $env.XDG_DATA_HOME | path join "dotfiles"
+    let file = $dotfiles | path join "versions.yaml"
+    mkdir $dotfiles
     if ($file | path exists) == false {
         touch $file
     }
