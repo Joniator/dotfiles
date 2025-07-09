@@ -1,4 +1,4 @@
-".config/nvim":
+.config/nvim":
   type: "git-repo"
   url: "https://codeberg.org/JonnyB/nvim.git"
   refreshPeriod: "168h"
@@ -7,10 +7,3 @@
   type: "git-repo"
   url: "https://github.com/mattmc3/antidote.git"
   refreshPeriod: "168h"
-
-".local/bin/nvim":
-  type: "file"
-  url: "https://github.com/neovim/neovim/releases/download/nightly/nvim-linux-x86_64.appimage"
-  refreshPeriod: "168h"
-  executable: true
-

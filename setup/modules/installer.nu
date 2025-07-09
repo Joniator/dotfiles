@@ -70,7 +70,7 @@ def "install fd" [] {
 def "install nvim" [] {
     if (which nvim | is-empty) {
         mut sudo = if ((whoami) != root) { "sudo " } else { "" }
-        $'($sudo) add-ap-repository -y ppa:neovim-ppa/unstable
+        $'($sudo) add-apt-repository -y ppa:neovim-ppa/unstable
         ($sudo) apt-get install -y neovim build-essential' | bash
         log installed neovim
     } else {
