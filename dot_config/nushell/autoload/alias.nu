@@ -15,6 +15,9 @@ alias cg    = chezmoi git
 alias cr    = chezmoi re-add
 alias cu    = chezmoi update
 
+def "ce nvim" [] { ce ~/.config/nvim }
+def "ce nu" [] { ce ~/.config/nushell; exec nu }
+
 ###
 # Docker
 ###
