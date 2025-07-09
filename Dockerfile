@@ -15,7 +15,7 @@ RUN apt-get update && \
 USER jonnyb:jonnyb
 WORKDIR /home/$USERNAME
 
-RUN curl -o- https://codeberg.org/JonnyB/dotfiles/raw/branch/main/setup/install.sh | bash
-# RUN /usr/local/bin/nvim --headless +qa
+RUN curl -o- -s https://codeberg.org/JonnyB/dotfiles/raw/branch/main/setup/install.sh | bash && \
+    nvim --headless +qa
 
 CMD [ "/usr/bin/nu" ]

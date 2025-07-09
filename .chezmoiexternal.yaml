@@ -1,4 +1,4 @@
-.config/nvim":
+".config/nvim":
   type: "git-repo"
   url: "https://codeberg.org/JonnyB/nvim.git"
   refreshPeriod: "168h"
