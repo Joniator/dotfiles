@@ -1,9 +1,21 @@
-## On Windows
+# Dotfiles
 
-* Add environment variables
-** HOME
-** XDG_CONFIG_HOME
-* Install [nushell](https://www.nushell.sh)
-* Install [neovim](https://github.com/neovim/neovim/releases)
-* Install [chezmoi](https://chezmoi.io)
-* `chezmoi init --apply https://codeberg.org/JonnyB/dotfiles.git`
+## Ubuntu installer
+
+`curl -o- https://codeberg.org/JonnyB/dotfiles/raw/branch/main/setup/install.sh`
+
+
+## Windows installer
+
+`Invoke-RestMethod -Uri https://codeberg.org/JonnyB/dotfiles/raw/branch/main/setup/install.ps1 | Invoke-Expression`
+
+## Docker
+
+### Run
+
+`docker run --rm -it joniator/dotfiles`
+
+
+### Build
+
+`./build/docker.nu`
