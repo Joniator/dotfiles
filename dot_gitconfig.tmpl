@@ -1,5 +1,9 @@
 [user]
+{{- if contains .chezmoi.hostname "msgn" }}
   email = jboeckel@mailbox.org
+{{- else }}
+  email = jonathan.boeckel@msg.group
+{{- end }}
   name = Jonathan Boeckel
   signingkey = ~/.ssh/id_ed25519
 
@@ -31,6 +35,17 @@
   autocrlf = false
 
 [log]
-  decorate = true
+  decorate      = true
   showSignature = false
-  abbrevCommit = true
+  abbrevCommit  = true
+
+[alias]
+  P  = push
+  a  = add
+  aa = add --all
+  c  = commit
+  f  = fetch
+  p  = pull
+  st = status
+
+# vi: ft=gitconfig

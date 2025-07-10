@@ -1,19 +1,19 @@
-alias _ = sudo
-alias vi = nvim
-alias l     = ls
-alias la    = ls -a
-alias ll    = ls -l
-alias lla   = ls -la
+alias _   = sudo
+alias vi  = nvim
+alias l   = ls
+alias la  = ls -a
+alias ll  = ls -l
+alias lla = ls -la
 
 ###
 # Chezmoi
 ###
-alias ca    = chezmoi apply
-alias ccd   = chezmoi cd
-alias ce    = chezmoi edit --apply
-alias cg    = chezmoi git
-alias cr    = chezmoi re-add
-alias cu    = chezmoi update
+alias ca  = chezmoi apply
+alias ccd = chezmoi cd
+alias ce  = chezmoi edit --apply
+alias cg  = chezmoi git
+alias cr  = chezmoi re-add
+alias cu  = chezmoi update
 
 def "ce nvim" [] { ce ~/.config/nvim }
 def "ce nu" [] { ce ~/.config/nushell; exec nu }
@@ -21,9 +21,9 @@ def "ce nu" [] { ce ~/.config/nushell; exec nu }
 ###
 # Docker
 ###
-alias dps   = docker ps
-alias dpsa  = docker ps -a
-alias drit  = docker run --rm -it
+alias dps  = docker ps
+alias dpsa = docker ps -a
+alias drit = docker run --rm -it
 
 ###
 # Docker Compose
@@ -37,20 +37,12 @@ alias dcup  = dc up
 alias dcupd = dc up -d
 alias dndn  = dc down
 
-###
-# Git
-###
-alias ng    = nvim +Neogit
-alias g     = git
-alias ga    = git add
-alias gaa   = git add --all
-alias gc    = git commit
-alias gl    = git pull
-alias gp    = git push
-alias gst   = git status
+alias g  = git
+alias ng = nvim +Neogit
+alias g  = git
 
 def gacp [] {
-    gaa
-    gc
-    gp
+    g aa
+    g c
+    g p
 }
