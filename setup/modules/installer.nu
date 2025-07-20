@@ -10,13 +10,14 @@ export def linux_dependencies [] {
 
     if ($os == "cachyos") {
         echo "cachy"
-        paru -S ripgrep fd neovim zoxide
+        paru -S ripgrep fd neovim zoxide go
     } else {
         echo $os
         install ripgrep
         install fd
         install nvim
         install zoxide
+        install go
     }
     install carapace
     install oh-my-posh
@@ -30,6 +31,7 @@ export def windows_dependencies [] {
         oh-my-posh,
         zoxide,
         extras/carapace,
+        go,
 
     ]
     | each { |name|
@@ -99,6 +101,20 @@ def "install oh-my-posh" [] {
         log installed oh-my-posh
     } else {
         log already_installed oh-my-posh
+    }
+}
+
+def "install go" [] {
+    if (which go | is-empty) {
+        let temp = mktemp -d "dotfiles.XXXXX"
+        let tar = $"($temp)/go.tar.gz"
+        http get https://go.dev/dl/go1.24.5.linux-amd64.tar.gz
+        | save $tar
+        tar -C ~/.local -xzf $tar
+        rm -r $temp
+        log installed go
+    } else {
+        log already_installed go
     }
 }
 

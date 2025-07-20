@@ -11,6 +11,11 @@ $env.Path = ($env.Path
     | prepend $"($env.XDG_DATA_HOME)/fnm"
 )
 
+$env.GOPATH = $"($env.XDG_DATA_HOME)/go"
+$env.Path = $env.Path 
+| prepend $"($env.HOME)/.local/go/bin"
+| prepend $"($env.GOPATH)/bin"
+
 if not (which fnm | is-empty) {
     fnm env --json | from json | load-env
 
