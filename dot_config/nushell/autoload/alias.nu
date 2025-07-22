@@ -1,9 +1,10 @@
 alias _   = sudo
-alias vi  = nvim
+alias cat = open --raw
 alias l   = ls
 alias la  = ls -a
 alias ll  = ls -l
 alias lla = ls -la
+alias vi  = nvim
 
 ###
 # Chezmoi
