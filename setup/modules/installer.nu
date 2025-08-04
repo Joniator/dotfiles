@@ -1,12 +1,25 @@
 use ./version.nu
 
 export def linux_dependencies [] {
-    install ripgrep
-    install fd
-    install nvim
-    install oh-my-posh
-    install zoxide
+    let os = open /etc/os-release
+    | lines
+    | parse "{key}={value}"
+    | where key == "ID"
+    | get value
+    | first
+
+    if ($os == "cachyos") {
+        echo "cachy"
+        paru -S ripgrep fd neovim zoxide
+    } else {
+        echo $os
+        install ripgrep
+        install fd
+        install nvim
+        install zoxide
+    }
     install carapace
+    install oh-my-posh
 }
 
 export def windows_dependencies [] {

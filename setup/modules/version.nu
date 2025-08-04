@@ -13,7 +13,7 @@ export def get_version [ repo: string ] {
     get_catalog
     | get github
     | where repo == $repo
-    | get 0.version -i 
+    | get 0.version -o
 }
 
 def get_catalog [] {
