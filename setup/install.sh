@@ -5,7 +5,7 @@ set -x
 
 case "$ID" in
 	cachyos)
-		paru -S git nushell
+		paru --noconfirm -S git nushell
 		;;
 	ubuntu)
 		sudo apt-get update

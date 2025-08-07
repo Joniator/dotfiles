@@ -16,7 +16,7 @@ $env.Path = $env.Path
 | prepend $"($env.HOME)/.local/go/bin"
 | prepend $"($env.GOPATH)/bin"
 
-if not (which fnm | is-empty) {
+if (which fnm | is-not-empty) {
     fnm env --json | from json | load-env
 
     $env.PATH = $env.PATH | prepend ($env.FNM_MULTISHELL_PATH | path join "bin")
@@ -26,4 +26,8 @@ if not (which fnm | is-empty) {
             condition: {|| ['.nvmrc' '.node-version'] | any {|el| $el | path exists}}
             code: {|| fnm use}
         })
+}
+
+if (which mise | is-not-empty) {
+    use ($nu.default-config-dir | path join mise.nu)
 }

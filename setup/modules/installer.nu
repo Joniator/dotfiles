@@ -1,18 +1,18 @@
 use ./version.nu
 
-export def linux_dependencies [] {
-    let os = open /etc/os-release
+def get_os [] { 
+    open /etc/os-release
     | lines
     | parse "{key}={value}"
     | where key == "ID"
     | get value
     | first
+}
 
-    if ($os == "cachyos") {
-        echo "cachy"
-        paru -S ripgrep fd neovim zoxide go
+export def linux_dependencies [] {
+    if ((get_os) == "cachyos") {
+        paru --noconfirm -Sy ripgrep fd neovim zoxide
     } else {
-        echo $os
         install ripgrep
         install fd
         install nvim
@@ -95,8 +95,12 @@ def "install nvim" [] {
 
 def "install oh-my-posh" [] {
     if (which oh-my-posh | is-empty) {
-        mut sudo = if ((whoami) != root) { "sudo " } else { "" }
-        $"($sudo) apt-get install -y unzip" | bash
+        if ((get_os) == "cachyos") {
+            paru --noconfirm -S unzip
+        } else {
+            mut sudo = if ((whoami) != root) { "sudo " } else { "" }
+            $"($sudo) apt-get install -y unzip" | bash
+        }
         curl -s https://ohmyposh.dev/install.sh | bash -s -- -d ~/.local/bin
         log installed oh-my-posh
     } else {

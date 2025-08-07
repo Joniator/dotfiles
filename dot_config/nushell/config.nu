@@ -56,3 +56,8 @@ if $nu.os-info.name == "linux" {
         $ssh_agent_env | save --force $ssh_agent_file
     }
 }
+
+if (which mise | is-not-empty) {
+    let mise_path = $nu.default-config-dir | path join mise.nu
+    ^mise activate nu | save $mise_path --force
+}
