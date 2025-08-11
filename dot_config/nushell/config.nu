@@ -7,7 +7,7 @@ let autoload_dir = ($nu.data-dir | path join 'vendor/autoload')
 mkdir $autoload_dir
 
 if ((which oh-my-posh | length) != 0) {
-    let omp_path = $"($autoload_dir)/oh-my-posh.nu"
+    let omp_path = $autoload_dir | path join "oh-my-posh.nu"
     let omp_config = "~/.config/omp/jonnyb.omp.yaml"
     if (($omp_path | path type) != "file") {
         oh-my-posh init nu --config $omp_config --print | save $omp_path
@@ -15,7 +15,7 @@ if ((which oh-my-posh | length) != 0) {
 }
 
 if ((which carapace | length) != 0) {
-    let carapace_path = $"($autoload_dir)/carapace.nu"
+    let carapace_path = $autoload_dir | path join "carapace.nu"
     $env.CARAPACE_BRIDGES = 'zsh,fish,bash,inshellisense'
     if (($carapace_path | path type) != "file") {
         carapace _carapace nushell | save --force  $carapace_path
@@ -23,10 +23,15 @@ if ((which carapace | length) != 0) {
 }
 
 if ((which zoxide | length) != 0) {
-    let zoxide_path = $"($autoload_dir)/zoxide.nu"
+    let zoxide_path = $autoload_dir | path join "zoxide.nu"
     if (($zoxide_path | path type) != "file") {
-        zoxide init --cmd cd nushell | save --force  $zoxide_path
+        zoxide init --cmd cd nushell | save --force $zoxide_path
     }
+}
+
+if (which mise | is-not-empty) {
+    let mise_path = $autoload_dir | path join "mise.nu"
+    ^mise activate nu | save --force $mise_path
 }
 
 # Workaround to get ssh_agent working
@@ -55,9 +60,4 @@ if $nu.os-info.name == "linux" {
         load-env $ssh_agent_env
         $ssh_agent_env | save --force $ssh_agent_file
     }
-}
-
-if (which mise | is-not-empty) {
-    let mise_path = $nu.default-config-dir | path join mise.nu
-    ^mise activate nu | save $mise_path --force
 }

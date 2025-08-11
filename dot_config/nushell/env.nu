@@ -27,7 +27,3 @@ if (which fnm | is-not-empty) {
             code: {|| fnm use}
         })
 }
-
-if (which mise | is-not-empty) {
-    use ($nu.default-config-dir | path join mise.nu)
-}
