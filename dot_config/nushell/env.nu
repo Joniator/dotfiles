@@ -16,6 +16,12 @@ $env.Path = $env.Path
 | prepend $"($env.HOME)/.local/go/bin"
 | prepend $"($env.GOPATH)/bin"
 
+
+if (which mise | is-not-empty) {
+    let mise_path = $nu.data-dir | path join mise.nu
+    ^mise activate nu | save $mise_path --force
+}
+
 if (which fnm | is-not-empty) {
     fnm env --json | from json | load-env
 

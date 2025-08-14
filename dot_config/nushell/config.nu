@@ -3,7 +3,7 @@ use std/dirs
 $env.config.show_banner = false
 $env.config.edit_mode = "vi"
 
-let autoload_dir = ($nu.data-dir | path join 'vendor/autoload')
+let autoload_dir = ($nu.data-dir | path join 'vendor' 'autoload')
 mkdir $autoload_dir
 
 if ((which oh-my-posh | length) != 0) {
@@ -30,8 +30,7 @@ if ((which zoxide | length) != 0) {
 }
 
 if (which mise | is-not-empty) {
-    let mise_path = $autoload_dir | path join "mise.nu"
-    ^mise activate nu | save --force $mise_path
+    use ($nu.data-dir | path join mise.nu)
 }
 
 # Workaround to get ssh_agent working
