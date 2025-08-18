@@ -1,10 +1,18 @@
 $env.config.shell_integration.osc133 = false
 $env.EDITOR = "nvim"
 
-$env.XDG_CONFIG_HOME = $"($env.HOME)/.config"
-$env.XDG_CACHE_HOME = $"($env.HOME)/.local/cache"
-$env.XDG_STATE_HOME = $"($env.HOME)/.local/state"
-$env.XDG_DATA_HOME = $"($env.HOME)/.local/share"
+$env.XDG_CONFIG_HOME = ($env.HOME | path join .config)
+$env.XDG_CACHE_HOME = ($env.HOME | path join .local cache)
+$env.XDG_STATE_HOME = ($env.HOME | path join .local state)
+$env.XDG_DATA_HOME = ($env.HOME | path join .local share)
+
+if (sys host | get hostname | str contains -i "msgn") {
+    print "Configure msg environment"
+    const mise_root = ("/workspaces" | path join home mise)
+    $env.MISE_CACHE_DIR = $mise_root | path join "cache"
+    $env.MISE_STATE_DIR = $mise_root | path join "state"
+    $env.MISE_DATA_DIR = $mise_root | path join "data"
+}
 
 $env.Path = ($env.Path 
     | prepend $"($env.HOME)/.local/bin"
