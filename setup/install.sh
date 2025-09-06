@@ -16,16 +16,3 @@ case "$ID" in
 		sudo apt-get install -y nushell
 		;;
 esac
-
-if [ ! -d "~/.local/share/chezmoi" ]; then
-    if [ -f "~/.ssh/id_ed25519" ]; then
-        dotfiles_url="ssh://git@codeberg.org/JonnyB/dotfiles.git"
-    else
-        dotfiles_url="https://codeberg.org/JonnyB/dotfiles.git"
-    fi
-
-    sh -c "$(curl -fsLS get.chezmoi.io/lb)" -- init --apply "$dotfiles_url"
-fi
-nu  --config ~/.config/nushell/config.nu \
-    --env-config ~/.config/nushell/env.nu \
-    ~/.local/share/chezmoi/setup/install.nu

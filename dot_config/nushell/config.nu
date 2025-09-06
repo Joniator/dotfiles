@@ -6,6 +6,10 @@ $env.config.edit_mode = "vi"
 let autoload_dir = ($nu.data-dir | path join 'vendor' 'autoload')
 mkdir $autoload_dir
 
+if (which mise | is-not-empty) {
+    use ($nu.data-dir | path join mise.nu)
+}
+
 if ((which oh-my-posh | length) != 0) {
     let omp_path = $autoload_dir | path join "oh-my-posh.nu"
     let omp_config = "~/.config/omp/jonnyb.omp.yaml"
@@ -27,10 +31,6 @@ if ((which zoxide | length) != 0) {
     if (($zoxide_path | path type) != "file") {
         zoxide init --cmd cd nushell | save --force $zoxide_path
     }
-}
-
-if (which mise | is-not-empty) {
-    use ($nu.data-dir | path join mise.nu)
 }
 
 # Workaround to get ssh_agent working

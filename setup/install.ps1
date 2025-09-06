@@ -1,6 +1,5 @@
 Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
 Invoke-RestMethod -Uri https://get.scoop.sh | Invoke-Expression
 
-scoop install main/nu
+scoop install git main/nu mise
 
-%USERPROFILE/scoop/shims/nu install.nu
