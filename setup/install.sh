@@ -5,7 +5,7 @@ set -x
 
 case "$ID" in
 	cachyos)
-		paru --noconfirm -S git nushell
+		paru --noconfirm -S git nushell mise
 		;;
 	ubuntu)
 		sudo apt-get update
@@ -14,5 +14,8 @@ case "$ID" in
 		echo "deb https://apt.fury.io/nushell/ /" | sudo tee /etc/apt/sources.list.d/fury.list
 		sudo apt-get update
 		sudo apt-get install -y nushell
+		curl https://mise.run | sh
 		;;
 esac
+
+mise exec chezmoi -- chezmoi init --apply https://codeberg.org/JonnyB/dotfiles.git
