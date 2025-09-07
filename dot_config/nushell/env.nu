@@ -25,6 +25,7 @@ $env.Path = $env.Path
 | prepend $"($env.GOPATH)/bin"
 
 
+mkdir $nu.data-dir
 if (which mise | is-not-empty) {
     let mise_path = $nu.data-dir | path join mise.nu
     ^mise activate nu | save $mise_path --force
