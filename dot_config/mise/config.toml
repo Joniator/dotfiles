@@ -1,0 +1,13 @@
+[tools]
+"aqua:JanDeDobbeleer/oh-my-posh" = "latest"
+carapace = "latest"
+fd = "latest"
+neovim = "latest"
+ripgrep = "latest"
+zoxide = "latest"
+
+go = "latest"
+helm = "latest"
+kubectl = "latest"
+node = "latest"
+rust = "latest"
