@@ -18,4 +18,5 @@ case "$ID" in
 		;;
 esac
 
-mise exec chezmoi -- chezmoi init --apply https://codeberg.org/JonnyB/dotfiles.git
+~/.local/bin/mise exec chezmoi -- chezmoi init --apply https://codeberg.org/JonnyB/dotfiles.git
+~/.local/bin/mise install
