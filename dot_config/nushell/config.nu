@@ -7,6 +7,7 @@ let autoload_dir = ($nu.data-dir | path join 'vendor' 'autoload')
 mkdir $autoload_dir
 
 if (which mise | is-not-empty) {
+    mkdir -p $nu.data-dir
     use ($nu.data-dir | path join mise.nu)
 }
 
