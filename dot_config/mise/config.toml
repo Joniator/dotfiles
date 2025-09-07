@@ -1,6 +1,7 @@
 [tools]
 "aqua:JanDeDobbeleer/oh-my-posh" = "latest"
 carapace = "latest"
+chezmoi = "latest"
 fd = "latest"
 neovim = "latest"
 ripgrep = "latest"
