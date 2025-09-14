@@ -1,5 +1,6 @@
 [tools]
 "aqua:JanDeDobbeleer/oh-my-posh" = "latest"
+atuin = "latest"
 carapace = "latest"
 chezmoi = "latest"
 fd = "latest"

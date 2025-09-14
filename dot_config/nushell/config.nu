@@ -14,7 +14,7 @@ if ((which oh-my-posh | length) != 0) {
     let omp_path = $autoload_dir | path join "oh-my-posh.nu"
     let omp_config = "~/.config/omp/jonnyb.omp.yaml"
     if (($omp_path | path type) != "file") {
-        oh-my-posh init nu --config $omp_config --print | save $omp_path
+        oh-my-posh init nu --config $omp_config --print | save --force $omp_path
     }
 }
 
@@ -31,6 +31,11 @@ if ((which zoxide | length) != 0) {
     if (($zoxide_path | path type) != "file") {
         zoxide init --cmd cd nushell | save --force $zoxide_path
     }
+}
+
+if ((which atuin | length) != 0) {
+    let atuin_path = $autoload_dir | path join "atuin.nu"
+    atuin init nu --disable-up-arrow | save --force $atuin_path
 }
 
 # Workaround to get ssh_agent working
