@@ -1,5 +1,5 @@
 $env.config.shell_integration.osc133 = false
-$env.EDITOR = "nvim"
+$env.EDITOR = 'nvim'
 
 $env.XDG_CONFIG_HOME = ($env.HOME | path join .config)
 $env.XDG_CACHE_HOME = ($env.HOME | path join .local cache)
