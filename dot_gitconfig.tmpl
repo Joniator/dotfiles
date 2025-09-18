@@ -12,6 +12,7 @@
   a  = add
   aa = add --all
   c  = commit
+  ca = commit --amend
   f  = fetch
   pl  = pull
   st = status
@@ -30,9 +31,6 @@
 
 [color]
   ui = true
-
-[blame]
-  ignoreRevsFile = .git-blame-ignore-revs
 
 [core]
   autocrlf = {{ eq .chezmoi.os "windows" }}
