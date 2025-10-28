@@ -6,7 +6,9 @@ $env.XDG_CACHE_HOME = ($env.HOME | path join .local cache)
 $env.XDG_STATE_HOME = ($env.HOME | path join .local state)
 $env.XDG_DATA_HOME = ($env.HOME | path join .local share)
 
-if (sys host | get hostname | str contains -i "msgn") {
+const is_windows = ($nu.os-info.name == "windows")
+
+if ($is_windows and (sys host | get hostname | str contains -i "msgn")) {
     print "Configure msg environment"
     const mise_root = ("/workspaces" | path join home mise)
     $env.MISE_CACHE_DIR = $mise_root | path join "cache"

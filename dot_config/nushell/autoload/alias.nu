@@ -47,3 +47,7 @@ def gacp [] {
     g c
     g p
 }
+
+if ((which podman-remote-static-linux_amd64 | is-not-empty) and (which podman | is-empty)) {
+    alias podman = podman-remote-static-linux_amd64
+}
