@@ -16,3 +16,6 @@ rust = "latest"
 glab = "latest"
 gh = "latest"
 podman = "latest"
+
+[settings]
+idiomatic_version_file_enable_tools = ["java"]
