@@ -1,0 +1,11 @@
+Host homeserver jonnyb.name
+	HostName home.jonnyb.name
+	User jonnyb
+
+Host boeller.dev
+	HostName 167.235.148.42
+	User jonnyb
+
+Host steamdeck deck
+	HostName jmdeck
+	User deck
