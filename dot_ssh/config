@@ -2,7 +2,11 @@ Host homeserver jonnyb.name
 	HostName home.jonnyb.name
 	User jonnyb
 
-Host boeller.dev
+Host tazed.club tazed
+	HostName tazed.club
+	User root
+
+Host hetzner hz1
 	HostName 167.235.148.42
 	User jonnyb
 
