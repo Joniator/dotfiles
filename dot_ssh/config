@@ -8,7 +8,7 @@ Host tazed.club tazed
 
 Host hetzner hz1
 	HostName 167.235.148.42
-	User jonnyb
+	User root
 
 Host steamdeck deck
 	HostName jmdeck
