@@ -10,7 +10,7 @@ if (which mise | is-not-empty) {
     use ($nu.data-dir | path join mise.nu)
 }
 
-if ((which oh-my-posh | length) != 0) {
+if (which oh-my-posh | is-not-empty) {
     let omp_path = $autoload_dir | path join "oh-my-posh.nu"
     let omp_config = "~/.config/omp/jonnyb.omp.yaml"
     if (($omp_path | path type) != "file") {
@@ -18,7 +18,7 @@ if ((which oh-my-posh | length) != 0) {
     }
 }
 
-if ((which carapace | length) != 0) {
+if (which carapace | is-not-empty) {
     let carapace_path = $autoload_dir | path join "carapace.nu"
     $env.CARAPACE_BRIDGES = 'zsh,fish,bash,inshellisense'
     if (($carapace_path | path type) != "file") {
@@ -26,16 +26,20 @@ if ((which carapace | length) != 0) {
     }
 }
 
-if ((which zoxide | length) != 0) {
+if (which zoxide | is-not-empty) {
     let zoxide_path = $autoload_dir | path join "zoxide.nu"
     if (($zoxide_path | path type) != "file") {
         zoxide init --cmd cd nushell | save --force $zoxide_path
     }
 }
 
-if ((which atuin | length) != 0) {
+if (which atuin | is-not-empty) {
     let atuin_path = $autoload_dir | path join "atuin.nu"
     atuin init nu --disable-up-arrow | save --force $atuin_path
+}
+
+if (which fastfetch | is-not-empty) {
+    fastfetch
 }
 
 # Workaround to get ssh_agent working

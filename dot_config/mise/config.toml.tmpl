@@ -1,6 +1,6 @@
 [tools]
 "aqua:JanDeDobbeleer/oh-my-posh" = "latest"
-atuin = "latest"
+{{ if not .isWindows }}atuin = "latest" {{ end }}
 carapace = "latest"
 chezmoi = "latest"
 fd = "latest"
@@ -19,3 +19,5 @@ podman = "latest"
 
 [settings]
 idiomatic_version_file_enable_tools = ["java"]
+
+# vi: ft=toml.template

@@ -1,5 +1,5 @@
 [user]
-{{- if contains .chezmoi.hostname "msgn" }}
+{{- if not .isWork }}
   email = jboeckel@mailbox.org
 {{- else }}
   email = jonathan.boeckel@msg.group

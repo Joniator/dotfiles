@@ -1,8 +1,9 @@
 require("which-key").add({
   {
-    "<Esc><Esc>",
+    "<C-[>",
     "<C-\\><C-n>",
     desc = "Exit terminal mode",
+    mode = "t",
   },
   {
     "<Esc>",

@@ -1,2 +1,7 @@
 cd:
   command: nu
+
+data:
+  isWindows: {{ contains "win" .chezmoi.os }}
+  isWork: {{ contains .chezmoi.hostname "msgn" }}
+  isCachy: {{ eq "cachyos" .chezmoi.osRelease.id }}

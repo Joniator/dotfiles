@@ -3,4 +3,5 @@ def ipinfo [] {
 }
 
 def windows-boot [] {
+    systemctl reboot --boot-loader-entry=auto-windows
 }
