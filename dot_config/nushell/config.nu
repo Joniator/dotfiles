@@ -69,3 +69,5 @@ if $nu.os-info.name == "linux" {
         $ssh_agent_env | save --force $ssh_agent_file
     }
 }
+
+source alias.nu
