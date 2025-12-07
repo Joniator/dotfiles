@@ -51,3 +51,11 @@ def gacp [] {
 if ((which podman-remote-static-linux_amd64 | is-not-empty) and (which podman | is-empty)) {
     alias podman = podman-remote-static-linux_amd64
 }
+
+def reboot-windows [] {
+    systemctl reboot --boot-loader-entry=auto-windows
+}
+
+def update-shutdown [] {
+    (paru -Syu --no-confirm) and (shutdown -t0)
+}
