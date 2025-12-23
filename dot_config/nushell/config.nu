@@ -71,3 +71,5 @@ if $nu.os-info.name == "linux" {
 }
 
 source alias.nu
+
+util update

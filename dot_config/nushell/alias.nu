@@ -51,3 +51,32 @@ def gacp [] {
 if ((which podman-remote-static-linux_amd64 | is-not-empty) and (which podman | is-empty)) {
     alias podman = podman-remote-static-linux_amd64
 }
+
+def "e" [...rest] {
+    nvim ...$rest
+}
+
+def "util chezmoi-origin-to-ssh" [] {
+    let dotfiles_url = "ssh://git@codeberg.org/JonnyB/dotfiles.git"
+    chezmoi git remote set-url origin $dotfiles_url
+}
+
+def "util ipinfo" [] {
+    http get --headers [ ACCEPT application/json ] ipinfo.io | get ip
+}
+
+def "util update" [] {
+
+    const config_file = $nu.data-dir | path join "autoupdate.yaml"
+    mut config = {};
+
+    if ($config_file | path exists) {
+        $config = open $config_file
+    }
+
+    if (($config.last_updated? | is-empty) or ($config.last_updated | date from-human) < (date now) - 7day) {
+        print "Updating dotfiles"
+        $config | upsert last_updated (date now) | save -f $config_file
+        chezmoi update
+    }
+}
