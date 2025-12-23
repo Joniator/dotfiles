@@ -13,3 +13,10 @@ Host hetzner hz1
 Host steamdeck deck
 	HostName jmdeck
 	User deck
+
+Host homeassistant ha
+	ProxyJump home.jonnyb.name
+	HostName homeassistant
+	User jonnyb
+
+# vi: ft=sshconfig
