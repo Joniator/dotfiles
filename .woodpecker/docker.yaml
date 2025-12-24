@@ -4,10 +4,10 @@ when:
     branch: main
 
 steps:
-  - name: publish-next-agent
+  - name: Build container
     image: woodpeckerci/plugin-docker-buildx
     settings:
-      repo: Joniator/dotfiles
+      repo: joniator/dotfiles
       platforms: linux/amd64
       tag: latest
       username:
