@@ -2,7 +2,7 @@
 
 ## Ubuntu installer
 
-`curl -o- https://codeberg.org/JonnyB/dotfiles/raw/branch/main/setup/install.sh`
+`curl -o- https://codeberg.org/JonnyB/dotfiles/raw/branch/main/setup/install.sh | bash`
 
 
 ## Windows installer
