@@ -1,6 +1,5 @@
 [tools]
 "aqua:JanDeDobbeleer/oh-my-posh" = "latest"
-{{ if not .isWindows }}atuin = "latest" {{ end }}
 carapace = "latest"
 chezmoi = "latest"
 fd = "latest"
@@ -16,6 +15,11 @@ rust = "latest"
 glab = "latest"
 gh = "latest"
 podman = "latest"
+
+{{- if not .isWindows }}
+atuin = "latest" 
+ctop = "latest"
+{{- end }}
 
 [settings]
 idiomatic_version_file_enable_tools = ["java"]
