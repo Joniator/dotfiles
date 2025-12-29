@@ -5,6 +5,7 @@ alias la  = ls -a
 alias ll  = ls -l
 alias lla = ls -la
 alias vi  = nvim
+alias afk = install-nothing
 
 ###
 # Chezmoi
@@ -18,6 +19,7 @@ alias cu  = chezmoi update
 
 def "ce nvim" [] { ce ~/.config/nvim }
 def "ce nu" [] { ce ~/.config/nushell; exec nu }
+def "ce mise" [] { ce ~/.config/mise/config.toml; }
 
 ###
 # Docker
