@@ -65,6 +65,11 @@ def "util ipinfo" [] {
     http get --headers [ ACCEPT application/json ] ipinfo.io | get ip
 }
 
+def "util nvim-update" [] {
+    nvim --headless "+Lazy! sync" +qa
+    chezmoi add ~/.config/nvim/lazy-lock.json
+}
+
 def "util update" [] {
 
     const config_file = $nu.data-dir | path join "autoupdate.yaml"
