@@ -1,5 +1,8 @@
 $env.config.shell_integration.osc133 = false
-$env.EDITOR = 'nvim'
+$env.EDITOR = (which nvim
+    | get path.0?
+    | str replace -a '\' '/'
+)
 
 $env.XDG_CONFIG_HOME = ($env.HOME | path join .config)
 $env.XDG_CACHE_HOME = ($env.HOME | path join .local cache)
@@ -22,9 +25,10 @@ $env.Path = ($env.Path
 )
 
 $env.GOPATH = $"($env.XDG_DATA_HOME)/go"
-$env.Path = $env.Path 
-| prepend $"($env.HOME)/.local/go/bin"
-| prepend $"($env.GOPATH)/bin"
+$env.Path = ($env.Path 
+    | prepend $"($env.HOME)/.local/go/bin"
+    | prepend $"($env.GOPATH)/bin"
+)
 
 
 mkdir $nu.data-dir

@@ -54,6 +54,16 @@ if ((which podman-remote-static-linux_amd64 | is-not-empty) and (which podman | 
     alias podman = podman-remote-static-linux_amd64
 }
 
+def "load-env-file" [file = '.env'] {
+    open $file
+    | lines 
+    | split column "=" 
+    | rename name value 
+    | where not (($it.name | str starts-with "#") or ($it.name | is-empty)) 
+    | reduce -f {} {|it, acc| $acc | upsert $it.name $it.value } 
+    | load-env
+}
+
 def "e" [...rest] {
     nvim ...$rest
 }
