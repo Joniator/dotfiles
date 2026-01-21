@@ -7,6 +7,8 @@ palettes:
             green: '#40a02b'
             mauve: '#8839ef'
             red: '#d20f39'
+            pink: '#ea76bc'
+            peach: '#fe640b'
             teal: '#179299'
             text: '#4c4f69'
         macchiato:
@@ -14,6 +16,7 @@ palettes:
             green: '#a6da95'
             mauve: '#c6a0f6'
             red: '#ed8796'
+            pink: '#f5bde6'
             teal: '#8bd5ca'
             text: '#cad3f5'
     template: '{{ if eq .Env.LIGHT_MODE "true" }}latte{{ else }}macchiato{{ end }}'
@@ -37,11 +40,16 @@ blocks:
         - properties:
             cache_duration: none
           leading_diamond: 
-          template: ' {{ if .WSL }}WSL at {{ end }}{{.Icon}} {{ if .Env.SSH_CONNECTION }}{{ .HostName }}{{ end }} '
+          template: ' {{ if .WSL }}WSL at {{ end }}{{.Icon}} {{ if .Env.SSH_CONNECTION }}{{ .HostName }}{{ end }}'
           foreground: p:text
           background: p:base
           type: os
           style: diamond
+        - type: shell
+          style: powerline
+          foreground: p:text
+          background: p:base
+          template: '| {{ .Name }} '
         - properties:
             cache_duration: none
             home_icon: "~"

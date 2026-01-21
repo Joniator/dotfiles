@@ -54,7 +54,7 @@ if ((which podman-remote-static-linux_amd64 | is-not-empty) and (which podman | 
     alias podman = podman-remote-static-linux_amd64
 }
 
-def "load-env-file" [file = '.env'] {
+def --env "load-env-file" [file = '.env'] {
     open $file
     | lines 
     | split column "=" 
