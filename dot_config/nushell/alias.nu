@@ -5,6 +5,7 @@ alias la  = ls -a
 alias ll  = ls -l
 alias lla = ls -la
 alias vi  = nvim
+alias vf = nvim (fzf)
 alias afk = install-nothing
 
 ###

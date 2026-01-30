@@ -21,6 +21,18 @@ require("which-key").add({
     "<cmd>Oil<CR>",
     desc = "File Manager",
   },
+  {
+    "<C-w><tab>",
+    function()
+      local buf = vim.v.count
+      if buf == 0 then
+        vim.cmd("tabnext")
+      else
+        vim.cmd("tabnext " .. buf)
+      end
+    end,
+    desc = "File Manager",
+  },
 
   -- Diagnostic keymaps
   {

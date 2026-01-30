@@ -16,6 +16,7 @@ return {
       "nvim-tree/nvim-web-devicons",
       "barrett-ruth/http-codes.nvim",
       "nvim-telescope/telescope-symbols.nvim",
+      "LukasPietzschmann/telescope-tabs",
     },
     config = function()
       require("telescope").setup({
@@ -48,6 +49,11 @@ return {
 
       local wk = require("which-key")
       wk.add({
+        {
+          "<leader><tab>",
+          require("telescope-tabs").list_tabs,
+          desc = "Pick tabs",
+        },
         {
           "<leader>s",
           group = "search",

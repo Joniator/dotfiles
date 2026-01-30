@@ -71,5 +71,6 @@ if ($nu.os-info.name == "linux" and (which ssh-agent | is-not-empty)) {
 }
 
 source alias.nu
+source oc.nu
 
 util update
