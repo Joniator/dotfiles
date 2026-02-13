@@ -46,7 +46,7 @@ if (which fastfetch | is-not-empty) {
 if ($nu.os-info.name == "linux" and (which ssh-agent | is-not-empty)) {
     do --env {
         let ssh_agent_file = (
-            $nu.temp-dir | path join $"ssh-agent-(whoami).nuon"
+            $nu.temp-path | path join $"ssh-agent-(whoami).nuon"
         )
 
         if ($ssh_agent_file | path exists) {
