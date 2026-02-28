@@ -103,7 +103,6 @@ def "util update" [] {
         let omp_path = $autoload_dir | path join "oh-my-posh.nu"
         let omp_config = "~/.config/omp/jonnyb.omp.yaml"
         oh-my-posh init nu --config $omp_config --print | save --force $omp_path
-        print test
     }
 
     if (which carapace | is-not-empty) {
