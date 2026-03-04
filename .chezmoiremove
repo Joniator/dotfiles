@@ -1,2 +1,4 @@
 Dockerfile
-~/.config/nushell/autoload/
+.config/nushell/alias.nu
+.config/nushell/env.nu
+.config/nushell/oc.nu

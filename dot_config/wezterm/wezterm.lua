@@ -27,6 +27,35 @@ local function generate_tab_table()
 	return keys
 end
 
+local last_title_per_tab = {}
+wezterm.on("update-status", function(window, pane)
+	local cwd_uri = pane:get_current_working_dir()
+	if not cwd_uri or not cwd_uri.file_path then
+		return
+	end
+
+	local cwd = cwd_uri.file_path
+	local tab = window:active_tab()
+	local tab_id = tab:tab_id()
+
+	local new_title = ""
+
+	if string.find(string.lower(cwd), "chezmoi", 1, true) then
+		new_title = " chezmoi"
+	elseif string.find(string.lower(cwd), "vdr", 1, true) then
+		new_title = "󰆼 VDR"
+	elseif string.find(string.lower(cwd), "fss", 1, true) then
+		new_title = "  FSS"
+	end
+
+	if new_title then
+		if last_title_per_tab[tab_id] ~= new_title then
+			tab:set_title(new_title)
+			last_title_per_tab[tab_id] = new_title
+		end
+	end
+end)
+
 config.default_prog = { "nu" }
 config.default_cwd = "~"
 config.initial_cols = 122
@@ -36,7 +65,7 @@ config.window_close_confirmation = "NeverPrompt"
 --[
 -- Appearance
 --]
-config.color_scheme = "catppuccin-macchiato"
+config.color_scheme = "Catppuccin Macchiato"
 config.window_background_image = home .. "/.config/wezterm/background.jpg"
 config.window_background_image_hsb = { brightness = 0.005 }
 config.font = wezterm.font_with_fallback({
@@ -44,46 +73,45 @@ config.font = wezterm.font_with_fallback({
 })
 
 config.use_fancy_tab_bar = false
-config.hide_tab_bar_if_only_one_tab = true
+config.hide_tab_bar_if_only_one_tab = false
 local SOLID_LEFT_ARROW = wezterm.nerdfonts.pl_right_hard_divider
 local SOLID_RIGHT_ARROW = wezterm.nerdfonts.pl_left_hard_divider
 wezterm.on("format-tab-title", function(tab, tabs, panes, config, hover, max_width)
-  -- The filled in variant of the < symbol
-  local SOLID_LEFT_ARROW = wezterm.nerdfonts.pl_right_hard_divider
+	-- The filled in variant of the < symbol
+	local SOLID_LEFT_ARROW = wezterm.nerdfonts.pl_right_hard_divider
 
-  -- The filled in variant of the > symbol
-  local SOLID_RIGHT_ARROW = wezterm.nerdfonts.pl_left_hard_divider
-  local title = tab.active_pane.title
-  if tab.tab_title and #tab.tab_title > 0 then
-    title = tab.tab_title
-  end
-  if tab.is_active then
-    return {
-      { Background = { Color = "#0b0022" } },
-      { Foreground = { Color = "#2b2042" } },
-      { Text = SOLID_LEFT_ARROW },
-      { Background = { Color = "#2b2042" } },
-      { Foreground = { Color = "#A9A6AC" } },
-      { Text = (tab.tab_index + 1) .. ": " .. title .. " " },
-      { Background = { Color = "#0b0022" } },
-      { Foreground = { Color = "#2b2042" } },
-      { Text = SOLID_RIGHT_ARROW },
-    }
-  else
-    return {
-      { Background = { Color = "#0b0022" } },
-      { Foreground = { Color = "#1b1032" } },
-      { Text = SOLID_LEFT_ARROW },
-      { Background = { Color = "#1b1032" } },
-      { Foreground = { Color = "#66646C" } },
-      { Text = (tab.tab_index + 1) .. ": " .. title .. " " },
-      { Background = { Color = "#0b0022" } },
-      { Foreground = { Color = "#1b1032" } },
-      { Text = SOLID_RIGHT_ARROW },
-    }
-  end
+	-- The filled in variant of the > symbol
+	local SOLID_RIGHT_ARROW = wezterm.nerdfonts.pl_left_hard_divider
+	local title = tab.active_pane.title
+	if tab.tab_title and #tab.tab_title > 0 then
+		title = tab.tab_title
+	end
+	if tab.is_active then
+		return {
+			{ Background = { Color = "#0b0022" } },
+			{ Foreground = { Color = "#2b2042" } },
+			{ Text = SOLID_LEFT_ARROW },
+			{ Background = { Color = "#2b2042" } },
+			{ Foreground = { Color = "#A9A6AC" } },
+			{ Text = (tab.tab_index + 1) .. ": " .. title .. " " },
+			{ Background = { Color = "#0b0022" } },
+			{ Foreground = { Color = "#2b2042" } },
+			{ Text = SOLID_RIGHT_ARROW },
+		}
+	else
+		return {
+			{ Background = { Color = "#0b0022" } },
+			{ Foreground = { Color = "#1b1032" } },
+			{ Text = SOLID_LEFT_ARROW },
+			{ Background = { Color = "#1b1032" } },
+			{ Foreground = { Color = "#66646C" } },
+			{ Text = (tab.tab_index + 1) .. ": " .. title .. " " },
+			{ Background = { Color = "#0b0022" } },
+			{ Foreground = { Color = "#1b1032" } },
+			{ Text = SOLID_RIGHT_ARROW },
+		}
+	end
 end)
-
 
 --[
 -- Custom Hyperlinks
@@ -115,6 +143,7 @@ config.keys = {
 	{ key = "c", mods = "CTRL|SHIFT", action = act.CopyTo("Clipboard") },
 
 	-- Tabs
+	{ key = "R", mods = "CTRL|SHIFT", action = act.EmitEvent("rename-tab") },
 	{ key = "n", mods = "LEADER", action = act.SpawnTab("CurrentPaneDomain") },
 	{ key = "n", mods = "LEADER|SHIFT", action = act.SpawnTab("DefaultDomain") },
 	{ key = "x", mods = "LEADER|SHIFT", action = act.CloseCurrentTab({ confirm = false }) },
