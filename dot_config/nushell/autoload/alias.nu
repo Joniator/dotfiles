@@ -1,3 +1,4 @@
+$env.EDITOR = 'mise x neovim -- nvim'
 alias _   = sudo
 alias cat = open --raw
 alias l   = ls
