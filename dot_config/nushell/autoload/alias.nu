@@ -1,12 +1,12 @@
-$env.EDITOR = 'mise x neovim -- nvim'
+$env.EDITOR = 'nvim'
 alias _   = sudo
 alias cat = open --raw
 alias l   = ls
 alias la  = ls -a
 alias ll  = ls -l
 alias lla = ls -la
-alias vi  = nvim
-alias vf = nvim (fzf)
+alias nvim  = vi
+alias vf = vi (fzf)
 alias afk = install-nothing
 
 ###

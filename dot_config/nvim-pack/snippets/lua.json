@@ -1,0 +1,16 @@
+{
+  "packadd": {
+    "prefix": "packadd",
+    "body": [
+      "vim.pack.add({",
+      "${1:packages}",
+      "})"
+    ]
+  },
+  "packgh": {
+    "prefix": "packgh",
+    "body": [
+      "\"https://github.com/${1:packages}\""
+    ]
+  }
+}
