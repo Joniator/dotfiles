@@ -376,17 +376,6 @@ wk.add({
   },
 })
 
--- Bufferline {{{1
-vim.pack.add({
-  "https://github.com/akinsho/bufferline.nvim",
-})
-require("bufferline").setup({
-  options = {
-    show_buffer_icons = true,
-    separator_style = "slope",
-  },
-})
-
 -- Lualine {{{1
 vim.pack.add({
   "https://github.com/nvim-lualine/lualine.nvim",
@@ -824,6 +813,18 @@ vim.pack.add({
 })
 require("catppuccin").setup({
   transparent_background = true,
+  highlight_overrides = {
+    latte = function(colors)
+      return {
+        FylerFSDirectoryName = { fg = colors.text, bg = colors.crust },
+      }
+    end,
+    macchiato = function(colors)
+      return {
+        FylerFSDirectoryName = { fg = colors.text, bg = colors.base },
+      }
+    end,
+  },
   integrations = {
     blink_cmp = {
       style = "bordered",
@@ -836,4 +837,20 @@ require("catppuccin").setup({
     which_key = false,
   },
 })
-vim.cmd.colorscheme("catppuccin-mocha")
+if os.getenv("LIGHT_MODE") == "true" then
+  vim.cmd.colorscheme("catppuccin-latte")
+else
+  vim.cmd.colorscheme("catppuccin-macchiato")
+end
+
+-- Bufferline {{{1
+vim.pack.add({
+  "https://github.com/akinsho/bufferline.nvim",
+})
+require("bufferline").setup({
+  highlights = require("catppuccin.special.bufferline").get_theme(),
+  options = {
+    show_buffer_icons = true,
+    separator_style = "slope",
+  },
+})

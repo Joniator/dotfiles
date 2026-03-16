@@ -65,53 +65,43 @@ config.window_close_confirmation = "NeverPrompt"
 --[
 -- Appearance
 --]
-config.color_scheme = "Catppuccin Macchiato"
-config.window_background_image = home .. "/.config/wezterm/background.jpg"
-config.window_background_image_hsb = { brightness = 0.005 }
+function get_appearance()
+	if wezterm.gui then
+		return wezterm.gui.get_appearance()
+	end
+	return "Dark"
+end
+
+function scheme_for_appearance(appearance)
+	if appearance:find("Dark") then
+		return {
+			name = "Catppuccin Macchiato",
+			light_mode = "false",
+			image = "background.jpg",
+			brightness = 0.005,
+		}
+	else
+		return {
+			name = "Catppuccin Latte",
+			light_mode = "true",
+			image = "background_light.jpg",
+			brightness = 1,
+		}
+	end
+end
+local theme = scheme_for_appearance(get_appearance())
+config.set_environment_variables = {
+	LIGHT_MODE = theme.light_mode,
+}
+config.color_scheme = theme.name
+config.window_background_image = home .. "/.config/wezterm/" .. theme.image
+config.window_background_image_hsb = { brightness = theme.brightness }
 config.font = wezterm.font_with_fallback({
 	"BigBlueTermPlus Nerd Font",
 })
 
 config.use_fancy_tab_bar = false
 config.hide_tab_bar_if_only_one_tab = false
-local SOLID_LEFT_ARROW = wezterm.nerdfonts.pl_right_hard_divider
-local SOLID_RIGHT_ARROW = wezterm.nerdfonts.pl_left_hard_divider
-wezterm.on("format-tab-title", function(tab, tabs, panes, config, hover, max_width)
-	-- The filled in variant of the < symbol
-	local SOLID_LEFT_ARROW = wezterm.nerdfonts.pl_right_hard_divider
-
-	-- The filled in variant of the > symbol
-	local SOLID_RIGHT_ARROW = wezterm.nerdfonts.pl_left_hard_divider
-	local title = tab.active_pane.title
-	if tab.tab_title and #tab.tab_title > 0 then
-		title = tab.tab_title
-	end
-	if tab.is_active then
-		return {
-			{ Background = { Color = "#0b0022" } },
-			{ Foreground = { Color = "#2b2042" } },
-			{ Text = SOLID_LEFT_ARROW },
-			{ Background = { Color = "#2b2042" } },
-			{ Foreground = { Color = "#A9A6AC" } },
-			{ Text = (tab.tab_index + 1) .. ": " .. title .. " " },
-			{ Background = { Color = "#0b0022" } },
-			{ Foreground = { Color = "#2b2042" } },
-			{ Text = SOLID_RIGHT_ARROW },
-		}
-	else
-		return {
-			{ Background = { Color = "#0b0022" } },
-			{ Foreground = { Color = "#1b1032" } },
-			{ Text = SOLID_LEFT_ARROW },
-			{ Background = { Color = "#1b1032" } },
-			{ Foreground = { Color = "#66646C" } },
-			{ Text = (tab.tab_index + 1) .. ": " .. title .. " " },
-			{ Background = { Color = "#0b0022" } },
-			{ Foreground = { Color = "#1b1032" } },
-			{ Text = SOLID_RIGHT_ARROW },
-		}
-	end
-end)
 
 --[
 -- Custom Hyperlinks
