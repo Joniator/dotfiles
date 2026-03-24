@@ -96,7 +96,7 @@ def "util update" [] {
     if (($config.last_updated? | is-empty) or ($config.last_updated | date from-human) < (date now) - 7day) {
         print "Updating dotfiles"
         $config | upsert last_updated (date now) | save -f $config_file
-        mise exec chezmoi --chezmoi update
+        mise exec chezmoi -- chezmoi update
     }
 
     mise up
