@@ -184,7 +184,7 @@ require("mini.splitjoin").setup()
 require("mini.surround").setup({
   highlight_duration = 5000,
 })
-require("mini.tabline").setup()
+-- require("mini.tabline").setup()
 
 -- Fidget {{{1
 vim.pack.add({
@@ -425,36 +425,15 @@ require("markview").setup({
 
 -- Fyler {{{1
 vim.pack.add({
-  "https://github.com/A7Lavinraj/fyler.nvim",
+  "https://github.com/stevearc/oil.nvim",
 })
-require("fyler").setup({
-  views = {
-    finder = {
-      default_explorer = true,
-      win = {
-        win_opts = {
-          cursorline = true,
-          number = true,
-          relativenumber = true,
-        },
-      },
-      mappings = {
-        -- ['q'] = 'CloseView',
-        -- ['<CR>'] = 'Select',
-        -- ['<C-t>'] = 'SelectTab',
-        -- ['|'] = 'SelectVSplit',
-        ["-"] = "GotoParent",
-        -- ['~'] = 'GotoCwd',
-        -- ['.'] = 'GotoNode',
-        -- ['#'] = 'CollapseAll',
-        -- ['<BS>'] = 'CollapseNode',
-      },
-    },
+require("oil").setup({
+  view_options = {
+    show_hidden = true,
   },
 })
 wk.add({
-  { "<leader>-", "<cmd>Fyler<CR>", desc = "Open Fyler" },
-  { "<leader>_", "<cmd>Fyler kind=split_left_most<CR>", desc = "Open Fyler Split" },
+  { "<leader>-", "<cmd>Oil<CR>", desc = "Open Oil" },
 })
 
 -- Git {{{1
@@ -654,7 +633,12 @@ wk.add({
 -- LSP-Config {{{1
 vim.pack.add({
   "https://github.com/neovim/nvim-lspconfig",
+  -- "https://github.com/mfussenegger/nvim-jdtls",
 })
+-- wk.add({
+--   "<leader>ca",
+--   vim.lsp.buf.code_action,
+-- })
 
 -- Mason {{{1
 vim.api.nvim_create_autocmd("PackChanged", {
