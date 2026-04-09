@@ -2,3 +2,4 @@ Dockerfile
 .config/nushell/alias.nu
 .config/nushell/env.nu
 .config/nushell/oc.nu
+.local/bin/vi
