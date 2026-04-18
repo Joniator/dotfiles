@@ -1,13 +1,8 @@
 # Dotfiles
 
-## Ubuntu installer
+## CachyOS installer
 
 `curl -o- https://codeberg.org/JonnyB/dotfiles/raw/branch/main/setup/install.sh | bash`
-
-
-## Windows installer
-
-`Invoke-RestMethod -Uri https://codeberg.org/JonnyB/dotfiles/raw/branch/main/setup/install.ps1 | Invoke-Expression`
 
 ## Docker
 

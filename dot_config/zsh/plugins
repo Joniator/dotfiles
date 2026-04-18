@@ -11,6 +11,5 @@ zsh-users/zsh-completions
 
 zdharma-continuum/fast-syntax-highlighting
 catppuccin/zsh-fsh kind:clone
-atuinsh/atuin
 
 ~/.config/zsh/config

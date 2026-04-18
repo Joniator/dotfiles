@@ -3,8 +3,6 @@
 # Fix Inappropriate ioctl for device
 export GPG_TTY=$(tty)
 
-#eval "$(direnv hook zsh)"
-
 # Create XDG directories if they don't already exist
 if [[ ! -d "$XDG_DATA_HOME" ]]; then mkdir -p "$XDG_DATA_HOME"; fi
 if [[ ! -d "$XDG_STATE_HOME" ]]; then mkdir -p "$XDG_STATE_HOME"; fi
@@ -30,6 +28,9 @@ if [[ $plugins_txt -nt $static_file || $config_folder -nt $static_file || ! -s $
     envsubst < $plugins_txt | antidote bundle >$static_file
   )
 fi
+
+autoload -Uz compinit
+compinit
 
 autoload -Uz $antidote_dir/functions/antidote
 

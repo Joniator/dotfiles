@@ -5,7 +5,7 @@ set -x
 
 case "$ID" in
 	cachyos)
-		pacman -Syu --noconfirm git nushell mise
+		paru -Syu --noconfirm git nushell mise oh-my-posh carapace chezmoi fd neovim ripgrep zoxide
 		;;
 	ubuntu)
 		sudo apt-get update
@@ -18,5 +18,5 @@ case "$ID" in
 		;;
 esac
 
-~/.local/bin/mise exec chezmoi -- chezmoi init --apply https://codeberg.org/JonnyB/dotfiles.git
-~/.local/bin/mise install
+chezmoi init --apply https://codeberg.org/JonnyB/dotfiles.git
+
