@@ -19,6 +19,6 @@ def "oc forward-service" [
 }
  
 def "oc project" [project?: string@"nu-complete-oc-projects"] { 
-    let project = project | default (^oc projects -q | fzf)
+    let project = $project | default (^oc projects -q | fzf)
     ^oc project $project
 }

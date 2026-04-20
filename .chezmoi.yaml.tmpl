@@ -5,5 +5,5 @@ cd:
 
 data:
   isWindows: {{ contains "win" .chezmoi.os }}
-  isWork: {{ contains .chezmoi.hostname "msgn" }}
+  isWork: {{ contains "MSGN" .chezmoi.hostname }}
   isCachy: {{ eq "cachyos" $osId }}
