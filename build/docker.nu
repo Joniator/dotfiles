@@ -1,14 +1,21 @@
 #! /usr/bin/env nu
 
-let commit = git rev-parse HEAD
+def commands [] {
+  [ "release" ]
+}
 
-docker build -t "joniator/dotfiles:latest" .
-print "Tagging"
-docker tag "joniator/dotfiles:latest" $"joniator/dotfiles:($commit)"
+def main [command?: string@commands] {
+  let commit = git rev-parse HEAD
 
-[
-    "joniator/dotfiles:latest",
-    $"joniator/dotfiles:($commit)"
-]
-| each { |tag| print $"Pushing ($tag)"; docker push $tag }
+  docker build -t "joniator/dotfiles:latest" .
+  print "Tagging"
+  docker tag "joniator/dotfiles:latest" $"joniator/dotfiles:($commit)"
 
+  if ($command == "release") {
+    [
+      "joniator/dotfiles:latest",
+      $"joniator/dotfiles:($commit)"
+    ]
+    | each { |tag| print $"Pushing ($tag)"; docker push $tag }
+  }
+}
