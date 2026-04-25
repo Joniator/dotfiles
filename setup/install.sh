@@ -1,23 +1,18 @@
-#! /usr/bin/env bash
-set -x
+#!/usr/bin/env bash
+set -euo pipefail
+
+SETUP_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 . /etc/os-release
+. "$SETUP_DIR/lib/utils.sh"
 
 case "$ID" in
-    cachyos)
-        pacman -Syu paru
-        paru -Syu --noconfirm git nushell mise oh-my-posh carapace chezmoi fd neovim ripgrep zoxide
-        ;;
-    ubuntu)
-        sudo apt-get update
-        sudo apt-get install -y gpg git
-        curl -fsSL https://apt.fury.io/nushell/gpg.key | sudo gpg --dearmor --batch --yes -o /etc/apt/trusted.gpg.d/fury-nushell.gpg
-        echo "deb https://apt.fury.io/nushell/ /" | sudo tee /etc/apt/sources.list.d/fury.list
-        sudo apt-get update
-        sudo apt-get install -y nushell
-        curl https://mise.run | sh
+    ubuntu)  . "$SETUP_DIR/lib/ubuntu.sh" ;;
+    cachyos) . "$SETUP_DIR/lib/cachyos.sh" ;;
+    *)
+        echo "Unsupported OS: $ID" >&2
+        exit 1
         ;;
 esac
 
 chezmoi init --apply https://codeberg.org/JonnyB/dotfiles.git
-
