@@ -29,11 +29,6 @@ $env.Path = ($env.Path
     | prepend $"($env.GOPATH)/bin"
 )
 
-mkdir $nu.data-dir
-let mise_path = $nu.data-dir | path join mise.nu
-^mise activate nu | save $mise_path --force
-use ($nu.data-dir | path join mise.nu)
-
 if (which fastfetch | is-not-empty) {
     fastfetch
 }

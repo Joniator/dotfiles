@@ -99,7 +99,10 @@ def "util update" [] {
         chezmoi update
     }
 
-    mise up
+    if (which mise | is-not-empty) {
+      ^mise activate nu | save $autoload_dir | path join 'mise.nu' --force
+      mise up
+    }
 
     if (which oh-my-posh | is-not-empty) {
         let omp_path = $autoload_dir | path join "oh-my-posh.nu"
