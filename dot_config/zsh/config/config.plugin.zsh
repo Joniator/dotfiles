@@ -2,10 +2,28 @@
 
 fpath=($fpath ${0:A:h}/completions)
 
-function executable_exists() {
-    command -v "$1" >/dev/null 2>&1
-    return $?
-}
+local script_dir=${0:A:h}
+
+source ${script_dir}/util.zsh
+source ${script_dir}/dm.zsh
+
+if executable_exists mise
+then
+   eval "$(mise activate zsh)"
+fi
+
+if executable_exists carapace
+then
+    export CARAPACE_BRIDGES='zsh,fish,bash,inshellisense'
+    zstyle ':completion:*' format $'\e[2;37mCompleting %d\e[m'
+    source <(carapace _carapace)
+fi
+
+if executable_exists oc 
+then
+  source <(oc completion zsh)
+  compdef _oc oc
+fi
 
 if executable_exists oh-my-posh
 then 
@@ -16,45 +34,34 @@ if executable_exists nvim
 then
     alias vi="nvim"
     alias vim="nvim"
+
+    vf() {
+        file="$(find . | fzf)"
+        if [[ $? = 0 ]]; then
+            nvim "$file"
+        fi
+    }
 fi
 
-function dm_install() {
-    tool=$1
-    shift
-    case $tool in
-	*)
-	    echo Not supported
-    esac
-}
+if executable_exists atuin
+then
+    eval "$(atuin init zsh --disable-up-arrow)"
+fi
 
-function dm_edit() {
-    segment=$1
-    shift
-    case $segment in
-	zsh)
-	    chezmoi edit --apply ~/.config/zsh
-	    exec zsh
-	    ;;
-	nvim)
-	    nvim ~/.config/nvim
-	    ;;
-    esac
-
-}
-
-function dm() {
-    command=$1
-    shift
-    case $command in
-	i|install)
-	    dm_install $@
-	    ;;
-	e|edit)
-	    dm_edit $@
-	    ;;
-    esac
-}
+if executable_exists zoxide
+then
+    eval "$(zoxide init --cmd cd zsh)"
+fi
 
 alias ca="chezmoi apply"
-alias ce="chezmoi edit --apply"
 alias cg="chezmoi git"
+alias g="git"
+
+function ce() {
+    local dir=$PWD
+    cd ~/.local/share/chezmoi
+    vi $@
+    chezmoi apply
+    cd $dir
+    exec zsh
+}

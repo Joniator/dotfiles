@@ -1,0 +1,8 @@
+history_filter = [
+    "^nzb-monkey-go"
+]
+enter_accept = false
+style = "compact"
+
+[sync]
+records = true

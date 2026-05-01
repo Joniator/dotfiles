@@ -100,7 +100,7 @@ def "util update" [] {
     }
 
     if (which mise | is-not-empty) {
-      ^mise activate nu | save $autoload_dir | path join 'mise.nu' --force
+      ^mise activate nu | save ($autoload_dir | path join 'mise.nu') --force
       mise up
     }
 

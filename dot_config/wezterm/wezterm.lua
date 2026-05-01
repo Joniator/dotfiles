@@ -56,7 +56,7 @@ wezterm.on("update-status", function(window, pane)
 	end
 end)
 
-config.default_prog = { "nu" }
+config.default_prog = { "zsh" }
 config.default_cwd = "~"
 config.initial_cols = 122
 config.initial_rows = 50
