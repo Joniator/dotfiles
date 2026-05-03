@@ -13,7 +13,14 @@ $SUDO add-apt-repository -y ppa:neovim-ppa/unstable
 $SUDO add-apt-repository -y ppa:zhangsongcui3371/fastfetch
 
 $SUDO apt-get update
-$SUDO apt-get install -y neovim nushell fastfetch ripgrep fd-find fzf
+$SUDO apt-get install -y \
+    eza \
+    fastfetch \
+    fd-find \
+    fzf \
+    neovim \
+    nushell \
+    ripgrep
 
 # Ubuntu ships fd as 'fdfind'; expose it as 'fd'
 ln -sf "$(command -v fdfind)" "$HOME/.local/bin/fd"

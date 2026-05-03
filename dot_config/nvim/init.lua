@@ -425,10 +425,11 @@ require("markview").setup({
 
 -- Oil {{{1
 vim.pack.add({
-  "https://github.com/stevearc/oil.nvim",
+  "https://github.com/barrettruth/canola.nvim",
 })
 require("oil").setup({
   view_options = {
+    cleanup_buffers_on_delete = true,
     show_hidden = true,
   },
 })

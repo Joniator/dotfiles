@@ -17,6 +17,10 @@
       "rev": "ac768945a4f1948f26a297cd4a5361de88b5c02f",
       "src": "https://github.com/francescarpi/buffon.nvim"
     },
+    "canola.nvim": {
+      "rev": "37fc91a54c8d05b5e6737396fc2a2257154d7241",
+      "src": "https://github.com/barrettruth/canola.nvim"
+    },
     "conform.nvim": {
       "rev": "086a40dc7ed8242c03be9f47fbcee68699cc2395",
       "src": "https://github.com/stevearc/conform.nvim"

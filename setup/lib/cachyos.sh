@@ -9,6 +9,7 @@ paru -Suy --noconfirm \
     atuin \
     carapace-bin \
     chezmoi \
+    eza \
     fastfetch \
     fd \
     fzf \
