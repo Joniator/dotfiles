@@ -1,0 +1,18 @@
+FROM ubuntu:24.04
+
+ARG USERNAME=jonnyb
+ARG USER_UID=1001
+ARG USER_GID=$USER_UID
+
+RUN groupadd --gid $USER_GID $USERNAME && \
+    useradd --uid $USER_UID --gid $USER_GID -m $USERNAME && \
+    echo "$USERNAME ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
+
+USER $USERNAME
+WORKDIR /home/$USERNAME
+
+COPY --chown=1001:1001 . /tmp/dotfiles
+
+RUN /tmp/dotfiles/setup/install.sh
+
+CMD [ "zsh" ]

@@ -1,4 +1,5 @@
 Dockerfile
+Dockerfile.ubuntu
 .config/nushell/alias.nu
 .config/nushell/env.nu
 .config/nushell/oc.nu
