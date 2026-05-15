@@ -5,6 +5,17 @@ This is a [chezmoi](https://chezmoi.io) dotfiles repository. Files prefixed with
 ## Adding Shell Functions
 
 When asked to add a shell function or command, implement it in **all three shells** unless told otherwise.
+You may get dumped a oneliner in either bash, zsh or nushell. If so, expand it for readability and maintainability.
+Do not write complex oneliners.
+Try to use tools that help with common tasks. E.g. you have access to the following:
+
+- fzf
+- rg
+- fd
+- yq
+- jq
+
+If there is a tool that might help implement a method, explain what it does, how it helps, and ask if you should install it using the setup script
 
 ### Nushell
 
