@@ -15,3 +15,7 @@ function oc() {
     fi
 }
 
+function chezmoi_origin_to_ssh() {
+    chezmoi git remote set-url origin ssh://git@codeberg.org/JonnyB/dotfiles.git
+}
+
