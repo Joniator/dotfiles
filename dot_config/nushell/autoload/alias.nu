@@ -126,3 +126,9 @@ def "util update" [] {
         atuin init nu --disable-up-arrow | save --force $atuin_path
     }
 }
+
+# Podman Docker compat
+let _podman_sock = "/mnt/wsl/podman-sockets/podman-machine-default/podman-user.sock"
+if ($_podman_sock | path exists) {
+    $env.DOCKER_HOST = $"unix://($_podman_sock)"
+}
