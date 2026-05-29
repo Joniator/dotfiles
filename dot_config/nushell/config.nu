@@ -29,6 +29,22 @@ $env.Path = ($env.Path
     | prepend $"($env.GOPATH)/bin"
 )
 
+# Local secrets (gitignored, not managed by chezmoi)
+# Uses `open --raw` (runtime), so safe when file doesn't exist
+let secret_env = ($env.HOME | path join ".env.secret")
+if ($secret_env | path exists) {
+    open --raw $secret_env
+    | lines
+    | where { |line| ($line | str trim | str length) > 0 and not ($line | str trim | str starts-with "#") }
+    | each { |line| $line | str replace --regex '^export\s+' '' }
+    | each { |line|
+        let idx = ($line | str index-of "=")
+        { ($line | str substring 0..<$idx): ($line | str substring ($idx + 1)..) }
+    }
+    | reduce -f {} { |it, acc| $acc | merge $it }
+    | load-env
+}
+
 if (which fastfetch | is-not-empty) {
     fastfetch
 }

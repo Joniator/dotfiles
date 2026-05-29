@@ -9,4 +9,7 @@ export ZSH_CACHE_DIR="$XDG_CACHE_HOME/zsh"
 
 export PATH="$HOME/.local/bin:$PATH"
 
+# Local secrets (gitignored, not managed by chezmoi)
+[[ -f "$HOME/.env.secret" ]] && . "$HOME/.env.secret"
+
 # vi: ft=zsh
