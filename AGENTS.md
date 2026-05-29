@@ -2,6 +2,11 @@
 
 This is a [chezmoi](https://chezmoi.io) dotfiles repository. Files prefixed with `dot_` map to dotfiles (e.g., `dot_bashrc` → `~/.bashrc`, `dot_config/` → `~/.config/`).
 
+## Workflow
+
+- After completing a task, document new features or changes in `README.md`.
+- Commit all changes when done. Include documentation in the same commit (or amend if applicable).
+
 ## Adding Shell Functions
 
 When asked to add a shell function or command, implement it in **all three shells** unless told otherwise.
