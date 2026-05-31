@@ -2,6 +2,7 @@
 
 alias ca="chezmoi apply"
 alias cg="chezmoi git"
+alias dc="docker compose"
 alias g="git"
 
 if executable_exists eza
