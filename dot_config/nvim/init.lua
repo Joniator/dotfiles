@@ -634,7 +634,6 @@ wk.add({
 -- LSP-Config {{{1
 vim.pack.add({
   "https://github.com/neovim/nvim-lspconfig",
-  "https://codeberg.org/mfussenegger/nvim-jdtls",
 })
 -- wk.add({
 --   "<leader>ca",
