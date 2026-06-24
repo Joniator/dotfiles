@@ -13,9 +13,11 @@
   aa = add --all
   c  = commit
   ca = commit --amend
+  cane = commit --amend --no-edit
   f  = fetch
   pl  = pull
   st = status
+  from = !git fetch && git rebase origin/main
 
 [gpg]
   format = ssh
