@@ -1,8 +1,8 @@
-cd:
-  command: zsh
-
 {{ $osId := (index .chezmoi.osRelease "id" | default "unknown") }}
 {{ $defaultShell := promptStringOnce . "defaultShell" "Default shell (e.g. zsh, bash, nu)" }}
+
+cd:
+  command: {{ $defaultShell }}
 
 data:
   isWindows: {{ contains "win" .chezmoi.os }}
