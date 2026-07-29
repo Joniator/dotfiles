@@ -10,6 +10,12 @@ export ZSH_CACHE_DIR="$XDG_CACHE_HOME/zsh"
 export PATH="$HOME/.local/bin:$PATH"
 
 # Local secrets (gitignored, not managed by chezmoi)
-[[ -f "$HOME/.env.secret" ]] && . "$HOME/.env.secret"
+# `set -a` auto-exports all vars defined while sourcing, so the file
+# can stay as plain KEY=value pairs (no `export` needed).
+if [[ -f "$HOME/.env.secret" ]]; then
+    set -a
+    . "$HOME/.env.secret"
+    set +a
+fi
 
 # vi: ft=zsh

@@ -47,7 +47,7 @@ function ce() {
 
 
 # Podman Docker compat
-local _podman_sock="/mnt/wsl/podman-sockets/podman-machine-default/podman-user.sock"
+_podman_sock="/mnt/wsl/podman-sockets/podman-machine-default/podman-user.sock"
 if [[ -S "$_podman_sock" ]]; then
     export DOCKER_HOST="unix://$_podman_sock"
 fi

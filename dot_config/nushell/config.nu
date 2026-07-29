@@ -39,7 +39,15 @@ if ($secret_env | path exists) {
     | each { |line| $line | str replace --regex '^export\s+' '' }
     | each { |line|
         let idx = ($line | str index-of "=")
-        { ($line | str substring 0..<$idx): ($line | str substring ($idx + 1)..) }
+        let key = ($line | str substring 0..<$idx)
+        let raw = ($line | str substring ($idx + 1)..)
+        # Strip matching surrounding single or double quotes (dotenv-style)
+        let val = if (($raw | str starts-with '"') and ($raw | str ends-with '"')) or (($raw | str starts-with "'") and ($raw | str ends-with "'")) {
+            $raw | str substring 1..<(($raw | str length) - 1)
+        } else {
+            $raw
+        }
+        { $key: $val }
     }
     | reduce -f {} { |it, acc| $acc | merge $it }
     | load-env
