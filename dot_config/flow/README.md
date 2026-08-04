@@ -17,6 +17,7 @@ nushell, styled with [gum] + [glow], optionally augmented with [mods].
     util.nu       tiny shared helpers (`abort`, `has`, `require`)
   cmd/
     chezmoi.nu    `flow chezmoi ...` — origin-to-ssh, update
+    dev.nu        `flow dev ...`     — start
     edit.nu       `flow edit ...`    — zsh, nvim, nu, mise
     git.nu        `flow git ...`     — branch, commit, wip
     net.nu        `flow net ...`     — ip

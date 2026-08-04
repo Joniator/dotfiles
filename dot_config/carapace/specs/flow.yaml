@@ -19,6 +19,12 @@ commands:
         flags:
           --force: bypass the weekly rate limit
 
+  - name: dev
+    description: day-to-day dev flows
+    commands:
+      - name: start
+        description: start a new feature branch off latest main
+
   - name: edit
     description: chezmoi edit a config subtree
     commands:

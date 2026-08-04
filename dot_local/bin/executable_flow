@@ -20,6 +20,7 @@
 
 use ~/.config/flow/lib/ui.nu
 use ~/.config/flow/cmd/chezmoi.nu as chezmoicmd
+use ~/.config/flow/cmd/dev.nu as devcmd
 use ~/.config/flow/cmd/edit.nu as editcmd
 use ~/.config/flow/cmd/git.nu as gitcmd
 use ~/.config/flow/cmd/net.nu as netcmd
@@ -30,6 +31,9 @@ use ~/.config/flow/cmd/review.nu as reviewcmd
 # -- chezmoi -----------------------------------------------------------------
 def "main chezmoi origin-to-ssh" [] { chezmoicmd origin-to-ssh }
 def "main chezmoi update" [--force] { chezmoicmd update --force=$force }
+
+# -- dev ---------------------------------------------------------------------
+def "main dev start" [] { devcmd start }
 
 # -- edit --------------------------------------------------------------------
 def "main edit zsh"  [] { editcmd zsh }

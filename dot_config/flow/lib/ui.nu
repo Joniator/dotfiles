@@ -78,6 +78,7 @@ export def help [] {
     print "Commands:"
     print "  flow chezmoi origin-to-ssh   rewrite dotfiles remote as ssh"
     print "  flow chezmoi update [--force]  weekly refresh + regen vendor autoloads"
+    print "  flow dev start               new feature branch from latest main"
     print "  flow edit zsh|nvim|nu|mise   chezmoi edit a config subtree"
     print "  flow git branch              interactive checkout"
     print "  flow git commit              stage + commit with prompt"
