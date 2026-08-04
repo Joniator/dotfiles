@@ -1,0 +1,37 @@
+# carapace spec for the `flow` command.
+#
+# Applies to bash, zsh, nu, fish, etc. via the carapace init in each shell.
+# See https://carapace.sh/ for the spec format.
+#
+# Keep this file in lockstep with the `def "main ..."` dispatchers in
+# ~/.local/bin/flow. When you add a new subcommand there, mirror it here.
+
+name: flow
+description: dev workflow helper
+commands:
+  - name: git
+    description: git flows
+    commands:
+      - name: branch
+        description: fuzzy-checkout a local branch
+      - name: commit
+        description: stage-all and commit with a prompted message
+      - name: wip
+        description: quick WIP commit (git add -A; git commit -m wip)
+
+  - name: oc
+    description: openshift flows
+    commands:
+      - name: project
+        description: switch project (fuzzy if no name given)
+        completion:
+          positional:
+            - ["$(oc get projects -o name 2>/dev/null | sed 's|.*/||')"]
+      - name: pods
+        description: list pods in current project as a table
+
+  - name: review
+    description: code review flows
+    commands:
+      - name: diff
+        description: render staged diff as markdown, optionally summarize with mods

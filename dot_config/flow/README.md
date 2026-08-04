@@ -45,6 +45,12 @@ Both live in `~/.local/bin/` on PATH — no per-shell integration needed.
 3. Use `ui` helpers for all styled output/prompts — never call `gum`
    directly from `cmd/*.nu`, so restyling stays a one-file change.
 
+## Completions
+
+A single [carapace](https://carapace.sh/) spec at `~/.config/carapace/specs/flow.yaml` drives completions in **every** shell that has carapace initialised (bash, zsh, nu, fish). Keep it in lockstep with the `def "main ..."` dispatchers in `~/.local/bin/flow` — whenever you add/rename a command there, mirror it in the yaml.
+
+Dynamic completions (e.g. project names for `flow oc project`) use the spec's `completion.positional` with a shell snippet; the snippet runs on each tab so keep it fast.
+
 ## Dependencies
 
 Installed by the setup scripts (`setup/lib/{ubuntu,cachyos}.sh` and

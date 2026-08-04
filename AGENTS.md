@@ -2,6 +2,13 @@
 
 This is a [chezmoi](https://chezmoi.io) dotfiles repository. Files prefixed with `dot_` map to dotfiles (e.g., `dot_bashrc` → `~/.bashrc`, `dot_config/` → `~/.config/`).
 
+## Nested guidelines
+
+Some subtrees have their own `AGENTS.md` with rules that override / extend this file within that directory:
+
+- `dot_config/flow/AGENTS.md` — rules for the `flow` workflow helper (nushell script + gum/glow UI, cross-shell/-platform). Read it before touching anything under `dot_config/flow/`, `dot_local/bin/flow*`, or `dot_config/carapace/specs/flow.yaml`.
+
+
 ## Workflow
 
 - After completing a task, document new features or changes in `README.md`.
