@@ -17,6 +17,15 @@ PowerShell. Read `README.md` in this directory before editing.
    dispatchers. No logic. If you find yourself writing an `if` there,
    move it to `cmd/<group>.nu`.
 
+   Modules are imported with `use ~/.config/flow/cmd/<group>.nu` —
+   **without `as <alias>`** (nushell's `use` does not support renaming
+   a whole module; it silently mis-parses `as` as an import symbol name
+   and every subcommand fails with `export not found` at first call).
+   The module namespace becomes the filename stem (`chezmoi`, `git`,
+   ...). Inside a module, calls to the same external binary
+   (`git`, `chezmoi`, ...) still resolve externally because a module
+   never `use`s itself.
+
 2. **Never call `gum`, `glow`, or `mods` directly from `cmd/*.nu`.**
    All styling and prompt primitives go through `lib/ui.nu`. If a widget
    you need isn't there yet, add it to `ui.nu` first, then use it.

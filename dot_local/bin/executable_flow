@@ -19,45 +19,50 @@
 #   2. Add `def "main <group> foo" [] { <group>cmd foo }` below.
 
 use ~/.config/flow/lib/ui.nu
-use ~/.config/flow/cmd/chezmoi.nu as chezmoicmd
-use ~/.config/flow/cmd/dev.nu as devcmd
-use ~/.config/flow/cmd/edit.nu as editcmd
-use ~/.config/flow/cmd/git.nu as gitcmd
-use ~/.config/flow/cmd/net.nu as netcmd
-use ~/.config/flow/cmd/nvim.nu as nvimcmd
-use ~/.config/flow/cmd/oc.nu as occmd
-use ~/.config/flow/cmd/review.nu as reviewcmd
+use ~/.config/flow/cmd/chezmoi.nu
+use ~/.config/flow/cmd/dev.nu
+use ~/.config/flow/cmd/edit.nu
+use ~/.config/flow/cmd/git.nu
+use ~/.config/flow/cmd/net.nu
+use ~/.config/flow/cmd/nvim.nu
+use ~/.config/flow/cmd/oc.nu
+use ~/.config/flow/cmd/review.nu
+
+# Each `use X.nu` imports module `X` with its `export def`s as subcommands.
+# `chezmoi update` below refers to the module export, not the external binary;
+# inside chezmoi.nu itself `chezmoi update` still calls the external because
+# the module doesn't `use` itself.
 
 # -- chezmoi -----------------------------------------------------------------
-def "main chezmoi origin-to-ssh" [] { chezmoicmd origin-to-ssh }
-def "main chezmoi update" [--force] { chezmoicmd update --force=$force }
+def "main chezmoi origin-to-ssh" [] { chezmoi origin-to-ssh }
+def "main chezmoi update" [--force] { chezmoi update --force=$force }
 
 # -- dev ---------------------------------------------------------------------
-def "main dev start" [] { devcmd start }
+def "main dev start" [] { dev start }
 
 # -- edit --------------------------------------------------------------------
-def "main edit zsh"  [] { editcmd zsh }
-def "main edit nvim" [] { editcmd nvim }
-def "main edit nu"   [] { editcmd nu }
-def "main edit mise" [] { editcmd mise }
+def "main edit zsh"  [] { edit zsh }
+def "main edit nvim" [] { edit nvim }
+def "main edit nu"   [] { edit nu }
+def "main edit mise" [] { edit mise }
 
 # -- git ---------------------------------------------------------------------
-def "main git branch" [] { gitcmd branch }
-def "main git commit" [] { gitcmd commit }
-def "main git wip"    [] { gitcmd wip }
+def "main git branch" [] { git branch }
+def "main git commit" [] { git commit }
+def "main git wip"    [] { git wip }
 
 # -- net ---------------------------------------------------------------------
-def "main net ip" [] { netcmd ip }
+def "main net ip" [] { net ip }
 
 # -- nvim --------------------------------------------------------------------
-def "main nvim update" [] { nvimcmd update }
+def "main nvim update" [] { nvim update }
 
 # -- openshift ---------------------------------------------------------------
-def "main oc project" [name?: string] { occmd project $name }
-def "main oc pods"    [] { occmd pods }
+def "main oc project" [name?: string] { oc project $name }
+def "main oc pods"    [] { oc pods }
 
 # -- review ------------------------------------------------------------------
-def "main review diff" [] { reviewcmd diff }
+def "main review diff" [] { review diff }
 
 # -- top-level ---------------------------------------------------------------
 def main [] { ui help }
