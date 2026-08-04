@@ -13,11 +13,21 @@ $SUDO add-apt-repository -y ppa:neovim-ppa/unstable
 $SUDO add-apt-repository -y ppa:zhangsongcui3371/fastfetch
 
 $SUDO apt-get update
+# Charm apt repo (gum, glow, mods, etc.)
+curl -fsSL https://repo.charm.sh/apt/gpg.key \
+    | $SUDO gpg --dearmor --batch --yes -o /etc/apt/trusted.gpg.d/charm.gpg
+echo "deb [signed-by=/etc/apt/trusted.gpg.d/charm.gpg] https://repo.charm.sh/apt/ * *" \
+    | $SUDO tee /etc/apt/sources.list.d/charm.list
+
+$SUDO apt-get update
 $SUDO apt-get install -y \
     eza \
     fastfetch \
     fd-find \
     fzf \
+    glow \
+    gum \
+    mods \
     neovim \
     nushell \
     ripgrep

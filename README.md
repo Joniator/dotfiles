@@ -42,6 +42,20 @@ Run `util update` once after a fresh install (or after moving machines) to (re)g
 
 `curl -o- https://codeberg.org/JonnyB/dotfiles/raw/branch/main/setup/install.sh | bash`
 
+## Windows installer
+
+From PowerShell:
+
+```powershell
+iwr -useb https://codeberg.org/JonnyB/dotfiles/raw/branch/main/setup/install.ps1 | iex
+```
+
+Installs the same toolchain as Linux via scoop (preferred, per-user, no admin) with a winget fallback for anything scoop can't provide. See `setup/lib/windows.ps1`.
+
+## flow
+
+`flow` is a single-entry-point dev workflow helper written in nushell, styled with gum/glow. Callable identically from bash, zsh, nu, and Windows (`flow` on Unix via shebang, `flow.cmd` wrapper on Windows). See [`dot_config/flow/README.md`](dot_config/flow/README.md) for the layout and how to add commands.
+
 ## Docker
 
 ### Run

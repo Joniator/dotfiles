@@ -14,7 +14,10 @@ paru -Suy --noconfirm \
     fd \
     fzf \
     git \
+    glow \
+    gum \
     mise \
+    mods \
     neovim \
     nushell \
     oh-my-posh \

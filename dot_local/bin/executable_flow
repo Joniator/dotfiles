@@ -1,0 +1,39 @@
+#!/usr/bin/env nu
+# flow — personal dev workflow helper.
+#
+# This file is the single entry point. It declares `main <group> <cmd>`
+# dispatchers, then delegates to modules under ~/.config/flow/cmd/*.nu.
+# Shared UI helpers (gum/glow wrappers) live in ~/.config/flow/lib/ui.nu.
+#
+# Layout:
+#   ~/.local/bin/flow           this file (Unix shebang + Windows target)
+#   ~/.local/bin/flow.cmd       Windows wrapper -> `nu %~dp0flow %*`
+#   ~/.config/flow/lib/ui.nu    styling / prompt primitives (gum, glow)
+#   ~/.config/flow/lib/util.nu  small shared helpers
+#   ~/.config/flow/cmd/git.nu   `flow git ...` impls
+#   ~/.config/flow/cmd/oc.nu    `flow oc ...`  impls
+#   ~/.config/flow/cmd/review.nu`flow review ...` impls
+#
+# Add a new command:
+#   1. `export def foo [] { ... }` in cmd/<group>.nu
+#   2. Add `def "main <group> foo" [] { <group>cmd foo }` below.
+
+use ~/.config/flow/lib/ui.nu
+use ~/.config/flow/cmd/git.nu as gitcmd
+use ~/.config/flow/cmd/oc.nu as occmd
+use ~/.config/flow/cmd/review.nu as reviewcmd
+
+# -- git ---------------------------------------------------------------------
+def "main git branch" [] { gitcmd branch }
+def "main git commit" [] { gitcmd commit }
+def "main git wip"    [] { gitcmd wip }
+
+# -- openshift ---------------------------------------------------------------
+def "main oc project" [name?: string] { occmd project $name }
+def "main oc pods"    [] { occmd pods }
+
+# -- review ------------------------------------------------------------------
+def "main review diff" [] { reviewcmd diff }
+
+# -- top-level ---------------------------------------------------------------
+def main [] { ui help }
