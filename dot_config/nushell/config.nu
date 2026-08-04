@@ -4,10 +4,7 @@ $env.config.show_banner = false
 $env.config.edit_mode = "vi"
 $env.config.shell_integration.osc133 = false
 
-$env.XDG_CONFIG_HOME = ($env.HOME | path join .config)
-$env.XDG_CACHE_HOME = ($env.HOME | path join .local cache)
-$env.XDG_STATE_HOME = ($env.HOME | path join .local state)
-$env.XDG_DATA_HOME = ($env.HOME | path join .local share)
+# XDG_* vars are set in env.nu (runs before vendor autoload scan).
 
 $env.NU_VENDOR_AUTOLOAD_DIR = ($nu.data-dir | path join 'vendor' 'autoload')
 mkdir $env.NU_VENDOR_AUTOLOAD_DIR
