@@ -6,7 +6,7 @@ $env.config.shell_integration.osc133 = false
 
 # XDG_* vars are set in env.nu (runs before vendor autoload scan).
 
-$env.NU_VENDOR_AUTOLOAD_DIR = ($nu.data-dir | path join 'vendor' 'autoload')
+$env.NU_VENDOR_AUTOLOAD_DIR = ($nu.vendor-autoload-dirs | last)
 mkdir $env.NU_VENDOR_AUTOLOAD_DIR
 
 
