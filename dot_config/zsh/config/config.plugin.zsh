@@ -5,7 +5,6 @@ fpath=($fpath ${0:A:h}/completions)
 local script_dir=${0:A:h}
 
 source ${script_dir}/util.zsh
-source ${script_dir}/dm.zsh
 
 if executable_exists mise
 then

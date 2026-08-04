@@ -54,13 +54,13 @@ export def "pick many" [header: string]: list<string> -> list<string> {
 
 # ---- long-running actions --------------------------------------------------
 
-# Wrap an external command in a gum spinner.
-# Usage:  ui spin "pulling..." { git pull }
-# The closure's stdout is discarded; use for side-effect commands.
-export def spin [title: string, action: closure] {
-    # gum spin needs a command, not a closure — run nu inline to execute it.
-    let cmd = ($action | view source | str trim --char '{' | str trim --char '}' | str trim)
-    gum spin --title $title --show-output -- nu -c $cmd
+# Print a titled progress line before running the given closure. Kept simple
+# because gum spin cannot easily wrap a nushell closure (closures aren't
+# serializable). If you need a real spinner, invoke `gum spin -- <external>`
+# directly from the command that owns the work.
+export def progress [title: string, action: closure] {
+    info $title
+    do $action
 }
 
 # ---- markdown --------------------------------------------------------------
@@ -76,12 +76,17 @@ export def help [] {
     header "flow"
     print ""
     print "Commands:"
-    print "  flow git branch          interactive checkout"
-    print "  flow git commit          stage + commit with prompt"
-    print "  flow git wip             quick WIP commit"
-    print "  flow oc project [name]   switch OpenShift project (fuzzy if omitted)"
-    print "  flow oc pods             browse pods in current project"
-    print "  flow review diff         review staged diff with glow + mods"
+    print "  flow chezmoi origin-to-ssh   rewrite dotfiles remote as ssh"
+    print "  flow chezmoi update [--force]  weekly refresh + regen vendor autoloads"
+    print "  flow edit zsh|nvim|nu|mise   chezmoi edit a config subtree"
+    print "  flow git branch              interactive checkout"
+    print "  flow git commit              stage + commit with prompt"
+    print "  flow git wip                 quick WIP commit"
+    print "  flow net ip                  public ip via ipinfo.io"
+    print "  flow nvim update             headless Lazy sync + re-add lockfile"
+    print "  flow oc project [name]       switch OpenShift project (fuzzy if omitted)"
+    print "  flow oc pods                 browse pods in current project"
+    print "  flow review diff             review staged diff with glow + mods"
     print ""
     print "Extend at ~/.config/flow/ — see README.md."
 }

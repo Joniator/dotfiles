@@ -9,6 +9,28 @@
 name: flow
 description: dev workflow helper
 commands:
+  - name: chezmoi
+    description: chezmoi helpers
+    commands:
+      - name: origin-to-ssh
+        description: rewrite dotfiles remote to ssh
+      - name: update
+        description: weekly refresh + regenerate vendor autoloads
+        flags:
+          --force: bypass the weekly rate limit
+
+  - name: edit
+    description: chezmoi edit a config subtree
+    commands:
+      - name: zsh
+        description: edit ~/.config/zsh and re-exec zsh
+      - name: nvim
+        description: edit ~/.config/nvim
+      - name: nu
+        description: edit ~/.config/nushell and re-exec nu
+      - name: mise
+        description: edit ~/.config/mise/config.toml
+
   - name: git
     description: git flows
     commands:
@@ -18,6 +40,18 @@ commands:
         description: stage-all and commit with a prompted message
       - name: wip
         description: quick WIP commit (git add -A; git commit -m wip)
+
+  - name: net
+    description: network utilities
+    commands:
+      - name: ip
+        description: print the public IP address
+
+  - name: nvim
+    description: neovim maintenance
+    commands:
+      - name: update
+        description: headless Lazy sync + re-add lockfile to chezmoi
 
   - name: oc
     description: openshift flows

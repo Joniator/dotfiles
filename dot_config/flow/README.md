@@ -16,9 +16,13 @@ nushell, styled with [gum] + [glow], optionally augmented with [mods].
     ui.nu         gum/glow/style primitives — the only place gum flags live
     util.nu       tiny shared helpers (`abort`, `has`, `require`)
   cmd/
-    git.nu        `flow git ...` implementations
-    oc.nu        `flow oc ...`  implementations
-    review.nu     `flow review ...` implementations
+    chezmoi.nu    `flow chezmoi ...` — origin-to-ssh, update
+    edit.nu       `flow edit ...`    — zsh, nvim, nu, mise
+    git.nu        `flow git ...`     — branch, commit, wip
+    net.nu        `flow net ...`     — ip
+    nvim.nu       `flow nvim ...`    — update
+    oc.nu         `flow oc ...`      — project, pods
+    review.nu     `flow review ...`  — diff
 ```
 
 The entrypoint `~/.local/bin/flow` is deliberately just a table of

@@ -19,14 +19,34 @@
 #   2. Add `def "main <group> foo" [] { <group>cmd foo }` below.
 
 use ~/.config/flow/lib/ui.nu
+use ~/.config/flow/cmd/chezmoi.nu as chezmoicmd
+use ~/.config/flow/cmd/edit.nu as editcmd
 use ~/.config/flow/cmd/git.nu as gitcmd
+use ~/.config/flow/cmd/net.nu as netcmd
+use ~/.config/flow/cmd/nvim.nu as nvimcmd
 use ~/.config/flow/cmd/oc.nu as occmd
 use ~/.config/flow/cmd/review.nu as reviewcmd
+
+# -- chezmoi -----------------------------------------------------------------
+def "main chezmoi origin-to-ssh" [] { chezmoicmd origin-to-ssh }
+def "main chezmoi update" [--force] { chezmoicmd update --force=$force }
+
+# -- edit --------------------------------------------------------------------
+def "main edit zsh"  [] { editcmd zsh }
+def "main edit nvim" [] { editcmd nvim }
+def "main edit nu"   [] { editcmd nu }
+def "main edit mise" [] { editcmd mise }
 
 # -- git ---------------------------------------------------------------------
 def "main git branch" [] { gitcmd branch }
 def "main git commit" [] { gitcmd commit }
 def "main git wip"    [] { gitcmd wip }
+
+# -- net ---------------------------------------------------------------------
+def "main net ip" [] { netcmd ip }
+
+# -- nvim --------------------------------------------------------------------
+def "main nvim update" [] { nvimcmd update }
 
 # -- openshift ---------------------------------------------------------------
 def "main oc project" [name?: string] { occmd project $name }

@@ -70,63 +70,6 @@ def "e" [...rest] {
     nvim ...$rest
 }
 
-def "util chezmoi-origin-to-ssh" [] {
-    let dotfiles_url = "ssh://git@codeberg.org/JonnyB/dotfiles.git"
-    chezmoi git remote set-url origin $dotfiles_url
-}
-
-def "util ipinfo" [] {
-    http get --headers [ ACCEPT application/json ] ipinfo.io | get ip
-}
-
-def "util nvim-update" [] {
-    nvim --headless "+Lazy! sync" +qa
-    chezmoi add ~/.config/nvim/lazy-lock.json
-}
-
-def "util update" [] {
-    let autoload_dir = ($env.NU_VENDOR_AUTOLOAD_DIR)
-    const config_file = $nu.data-dir | path join "autoupdate.yaml"
-    mut config = {};
-
-    if ($config_file | path exists) {
-        $config = open $config_file
-    }
-
-    if (($config.last_updated? | is-empty) or ($config.last_updated | date from-human) < (date now) - 7day) {
-        print "Updating dotfiles"
-        $config | upsert last_updated (date now) | save -f $config_file
-        chezmoi update
-    }
-
-    if (which mise | is-not-empty) {
-      ^mise activate nu | save ($autoload_dir | path join 'mise.nu') --force
-      mise up
-    }
-
-    if (which oh-my-posh | is-not-empty) {
-        let omp_path = $autoload_dir | path join "oh-my-posh.nu"
-        let omp_config = "~/.config/omp/jonnyb.omp.yaml"
-        oh-my-posh init nu --config $omp_config --print | save --force $omp_path
-    }
-
-    if (which carapace | is-not-empty) {
-        let carapace_path = $autoload_dir | path join "carapace.nu"
-        $env.CARAPACE_BRIDGES = 'zsh,fish,bash,inshellisense'
-            carapace _carapace nushell | save --force  $carapace_path
-    }
-
-    if (which zoxide | is-not-empty) {
-        let zoxide_path = $autoload_dir | path join "zoxide.nu"
-        zoxide init --cmd cd nushell | save --force $zoxide_path
-    }
-
-    if (which atuin | is-not-empty) {
-        let atuin_path = $autoload_dir | path join "atuin.nu"
-        atuin init nu --disable-up-arrow | save --force $atuin_path
-    }
-}
-
 # Podman Docker compat
 let _podman_sock = "/mnt/wsl/podman-sockets/podman-machine-default/podman-user.sock"
 if ($_podman_sock | path exists) {
