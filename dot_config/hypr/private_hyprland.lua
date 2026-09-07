@@ -44,6 +44,7 @@ hl.on("hyprland.start", function()
   hl.exec_cmd("firefox --new-window https://youtube.com", { workspace = "6 silent" })
   hl.exec_cmd("firefox --new-window", { workspace = "2 silent" })
 
+  hl.exec_cmd("keepassxc")
   hl.exec_cmd("spotify-launcher", { workspace = "7 silent" })
   hl.exec_cmd("vesktop", { workspace = "8 silent" })
   hl.exec_cmd("wl-paste --type text --watch cliphist store")
@@ -74,6 +75,10 @@ hl.config({
     allow_tearing = false,
 
     layout = "dwindle",
+  },
+
+  input = {
+    numlock_by_default = true,
   },
 
   decoration = {
@@ -194,7 +199,7 @@ hl.config({
     kb_options = "",
     kb_rules = "",
 
-    follow_mouse = 1,
+    follow_mouse = 2,
 
     sensitivity = 0, -- -1.0 - 1.0, 0 means no modification.
 
@@ -224,10 +229,6 @@ hl.device({
 -- Example binds, see https://wiki.hypr.land/Configuring/Basics/Binds/ for more
 hl.bind("SUPER + Q", hl.dsp.exec_cmd(terminal))
 local closeWindowBind = hl.bind("SUPER + C", hl.dsp.window.close())
-hl.bind(
-  "SUPER + M",
-  hl.dsp.exec_cmd("command -v hyprshutdown >/dev/null 2>&1 && hyprshutdown || hyprctl dispatch 'hl.dsp.exit()'")
-)
 hl.bind("SUPER + E", hl.dsp.exec_cmd(fileManager))
 hl.bind("SUPER + V", hl.dsp.window.float({ action = "toggle" }))
 hl.bind("SUPER + P", hl.dsp.window.pseudo())
@@ -254,12 +255,12 @@ for i = 1, 10 do
   hl.bind("SUPER + " .. key, hl.dsp.focus({ workspace = i }))
   hl.bind("SUPER + SHIFT + " .. key, hl.dsp.window.move({ workspace = i }))
 end
-hl.bind("SUPER + G", hl.dsp.focus({ workspace = "name:gaming" }))
-hl.bind("SUPER + SHIFT + G", hl.dsp.window.move({ workspace = "name:gaming" }))
+hl.bind("SUPER + G", hl.dsp.focus({ workspace = gamingWorkspace }))
+hl.bind("SUPER + SHIFT + G", hl.dsp.window.move({ workspace = gamingWorkspace }))
 
 -- Example special workspace (scratchpad)
-hl.bind("SUPER + S", hl.dsp.workspace.toggle_special("magic"))
-hl.bind("SUPER + SHIFT + S", hl.dsp.window.move({ workspace = "special:magic" }))
+hl.bind("SUPER + Slash", hl.dsp.workspace.toggle_special("keepass"))
+hl.bind("SUPER + SHIFT + Slash", hl.dsp.window.move({ workspace = "special:keepass" }))
 
 -- Scroll through existing workspaces with mainMod + scroll
 hl.bind("SUPER + mouse_down", hl.dsp.focus({ workspace = "e+1" }))
@@ -274,20 +275,17 @@ hl.bind("XF86AudioNext", hl.dsp.exec_cmd("playerctl next"), { locked = true })
 hl.bind("XF86AudioPause", hl.dsp.exec_cmd("playerctl play-pause"), { locked = true })
 hl.bind("XF86AudioPlay", hl.dsp.exec_cmd("playerctl play-pause"), { locked = true })
 hl.bind("XF86AudioPrev", hl.dsp.exec_cmd("playerctl previous"), { locked = true })
-
-hl.bind(
-  "Print",
-  hl.dsp.exec_cmd('grim - | satty -f - --copy-command wl-copy -o "~/Pictures/Screenshots/%Y%m%d_%H%M%S.png"')
-)
 hl.bind("SUPER + F", hl.dsp.window.fullscreen())
 
 local ipc = "noctalia msg "
 
 -- Core binds
 hl.bind("SUPER + Space", hl.dsp.exec_cmd(ipc .. "panel-toggle launcher"))
-hl.bind("SUPER + S", hl.dsp.exec_cmd(ipc .. "panel-toggle control-center"))
-hl.bind("SUPER + comma", hl.dsp.exec_cmd(ipc .. "settings-toggle"))
+hl.bind("SUPER + Comma", hl.dsp.exec_cmd(ipc .. "settings-toggle"))
+hl.bind("SUPER + X", hl.dsp.exec_cmd(ipc .. "panel-toggle clipboard"))
 hl.bind("ALT + Tab", hl.dsp.exec_cmd(ipc .. "window-switcher"))
+hl.bind("Print", hl.dsp.exec_cmd(ipc .. "screenshot-region"))
+hl.bind("SUPER + Print", hl.dsp.exec_cmd(ipc .. "screenshot-fullscreen"))
 
 -- Media keys
 hl.bind("XF86AudioRaiseVolume", hl.dsp.exec_cmd(ipc .. "volume-up"))
@@ -304,19 +302,20 @@ hl.bind("XF86MonBrightnessDown", hl.dsp.exec_cmd(ipc .. "brightness-down"))
 -- and https://wiki.hypr.land/Configuring/Basics/Workspace-Rules/
 
 -- Example window rules that are useful
-hl.workspace_rule({ workspace = "name:gaming", monitor = monitor_primary })
+hl.workspace_rule({ workspace = gamingWorkspace, monitor = monitor_primary })
 
 local gamingApps = "^(steam_app.*|gamescope)$"
 
-hl.window_rule({ match = { content = "game" }, workspace = "name:gaming" })
+hl.window_rule({ match = { content = "game" }, workspace = gamingWorkspace })
 hl.window_rule({
   match = { xdg_tag = "^(.*game.*)$" },
-  workspace = "name:gaming",
+  workspace = gamingWorkspace,
   fullscreen_state = 2,
   content = "game",
   sync_fullscreen = true,
 })
-hl.window_rule({ match = { class = gamingApps }, workspace = "name:gaming" })
+hl.window_rule({ match = { class = gamingApps }, workspace = gamingWorkspace })
+hl.window_rule({ match = { class = "^(org.keepassxc.KeePassXC)$" }, workspace = "special:keepass", float = true })
 hl.window_rule({ match = { class = "^(steam)$", title = "^(Friends List)$" }, float = true })
 hl.window_rule({
   match = { class = "^(steam)$", title = "^(Launching\\.{3})$" },
@@ -340,17 +339,17 @@ local suppressMaximizeRule = hl.window_rule({
 })
 -- suppressMaximizeRule:set_enabled(false)
 
-hl.workspace_rule({ workspace = "name:gaming", monitor = monitor_primary, default = true, default_name = "gaming" })
-hl.workspace_rule({ workspace = "1", monitor = monitor_primary })
+hl.workspace_rule({ workspace = "1", monitor = monitor_primary, default = true })
 hl.workspace_rule({ workspace = "2", monitor = monitor_primary })
 hl.workspace_rule({ workspace = "3", monitor = monitor_primary })
 hl.workspace_rule({ workspace = "4", monitor = monitor_primary })
 hl.workspace_rule({ workspace = "5", monitor = monitor_primary })
-hl.workspace_rule({ workspace = "6", monitor = monitor_secondary })
+hl.workspace_rule({ workspace = "6", monitor = monitor_secondary, default = true })
 hl.workspace_rule({ workspace = "7", monitor = monitor_secondary })
 hl.workspace_rule({ workspace = "8", monitor = monitor_secondary })
 hl.workspace_rule({ workspace = "9", monitor = monitor_secondary })
 hl.workspace_rule({ workspace = "0", monitor = monitor_secondary })
+hl.workspace_rule({ workspace = gamingWorkspace, monitor = monitor_primary, default_name = "gaming" })
 
 hl.window_rule({
   -- Fix some dragging issues with XWayland
