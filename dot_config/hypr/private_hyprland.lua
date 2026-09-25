@@ -49,6 +49,10 @@ hl.on("hyprland.start", function()
   hl.exec_cmd("vesktop", { workspace = "8 silent" })
   hl.exec_cmd("wl-paste --type text --watch cliphist store")
   hl.exec_cmd("wl-paste --type image --watch cliphist store")
+
+  hl.exec_cmd("kwalletd6")
+  hl.exec_cmd("nextcloud")
+  hl.exec_cmd("steam", { workspace = gamingWorkspace })
 end)
 
 -----------------------
@@ -317,6 +321,7 @@ hl.window_rule({
 hl.window_rule({ match = { class = gamingApps }, workspace = gamingWorkspace })
 hl.window_rule({ match = { class = "^(org.keepassxc.KeePassXC)$" }, workspace = "special:keepass", float = true })
 hl.window_rule({ match = { class = "^(steam)$", title = "^(Friends List)$" }, float = true })
+hl.window_rule({ match = { class = "^(vesktop)$" }, workspace = "8" })
 hl.window_rule({
   match = { class = "^(steam)$", title = "^(Launching\\.{3})$" },
   float = true,
