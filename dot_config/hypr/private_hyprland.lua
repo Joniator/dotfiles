@@ -52,7 +52,8 @@ hl.on("hyprland.start", function()
 
   hl.exec_cmd("kwalletd6")
   hl.exec_cmd("nextcloud")
-  hl.exec_cmd("steam", { workspace = gamingWorkspace })
+  hl.exec_cmd("ferdium")
+  hl.exec_cmd("steam -silent", { workspace = gamingWorkspace })
 end)
 
 -----------------------
