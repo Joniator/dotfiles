@@ -15,17 +15,23 @@ local function isIdleOrOffline(status)
 end
 
 -- Only reached when isIdleOrOffline() is false, i.e. status.online is true.
-local function formatStatus(status)
+local function colorFor(status)
+  return status.paused and "warning" or "primary"
+end
+
+local function speedText(status)
   if status.paused then
-    return noctalia.tr("widget.paused"), "pause"
+    return noctalia.tr("widget.paused")
   end
 
-  local mbps = status.speedKBps / 1024
-  return string.format("%.1f MB/s", mbps), "download"
+  return string.format("%.1f MB/s", status.speedKBps / 1024)
 end
 
 local function tooltipFor(status)
+  local state = status.paused and noctalia.tr("widget.paused") or noctalia.tr("widget.downloading")
   return noctalia.tr("widget.tooltip", {
+    state = state,
+    percent = tostring(math.floor((status.percent or 0) * 100 + 0.5)),
     jobs = tostring(status.jobCount or 0),
     mbleft = string.format("%.0f", status.mbLeft or 0),
     timeleft = status.timeLeft ~= "" and status.timeLeft or "-",
@@ -39,9 +45,25 @@ local function render(status)
   end
 
   barWidget.setVisible(true)
-  local text, glyph = formatStatus(status)
-  barWidget.setText(text)
-  barWidget.setGlyph(glyph)
+
+  -- Glyph + speed text + a small colored progress bar; full breakdown
+  -- (percent, jobs, ETA) lives in the tooltip.
+  local container = barWidget.isVertical() and ui.column or ui.row
+  local glyph = status.paused and "pause" or "download"
+
+  barWidget.render(container({ gap = 4, align = "center" }, {
+    ui.glyph({ name = glyph, size = 14 }),
+    ui.label({ text = speedText(status) }),
+    ui.progress({
+      progress = status.percent or 0,
+      fill = colorFor(status),
+      track = "surface_variant/0.4",
+      radius = 3,
+      width = 28,
+      height = 6,
+    }),
+  }))
+
   barWidget.setTooltip(tooltipFor(status))
 end
 

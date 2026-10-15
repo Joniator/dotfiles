@@ -1,10 +1,11 @@
 # sabnzbd-status (Noctalia plugin)
 
-Bar widget + background service showing a SABnzbd download queue's speed,
-job count, and ETA. Click the widget to open the SABnzbd web UI. The pill
-auto-hides (`barWidget.setVisible(false)`) whenever SABnzbd is unreachable
-or its queue is empty and unpaused, and reappears as soon as there's
-something to report.
+Bar widget + background service showing a SABnzbd download queue's speed
+and overall progress (a small colored bar, via `barWidget.render` +
+`ui.progress`), with percent/job count/ETA on hover. Click the widget to
+open the SABnzbd web UI. The pill auto-hides (`barWidget.setVisible(false)`)
+whenever SABnzbd is unreachable or its queue is empty and unpaused, and
+reappears as soon as there's something to report.
 
 ## Layout
 

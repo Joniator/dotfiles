@@ -22,6 +22,7 @@
   },
   "widget": {
     "paused": "Paused",
-    "tooltip": "{jobs} job(s) - {mbleft} MB left - ETA {timeleft}"
+    "downloading": "Downloading",
+    "tooltip": "{state}: {percent}% - {jobs} job(s) - {mbleft} MB left - ETA {timeleft}"
   }
 }

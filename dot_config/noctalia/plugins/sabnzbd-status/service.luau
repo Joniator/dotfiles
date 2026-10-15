@@ -33,11 +33,19 @@ local function poll()
     end
 
     local queue = data.queue
+    local totalMb = tonumber(queue.mb) or 0
+    local mbLeft = tonumber(queue.mbleft) or 0
+    local percent = 0
+    if totalMb > 0 then
+      percent = math.clamp((totalMb - mbLeft) / totalMb, 0, 1)
+    end
+
     noctalia.state.set("status", {
       online = true,
       paused = queue.paused or false,
       speedKBps = tonumber(queue.kbpersec) or 0,
-      mbLeft = tonumber(queue.mbleft) or 0,
+      mbLeft = mbLeft,
+      percent = percent,
       timeLeft = queue.timeleft or "",
       jobCount = tonumber(queue.noofslots) or #(queue.slots or {}),
     })
