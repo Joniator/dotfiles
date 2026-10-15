@@ -56,6 +56,21 @@ Installs the same toolchain as Linux via scoop (preferred, per-user, no admin) w
 
 `flow` is a single-entry-point dev workflow helper written in nushell, styled with gum/glow. Callable identically from bash, zsh, nu, and Windows (`flow` on Unix via shebang, `flow.cmd` wrapper on Windows). See [`dot_config/flow/README.md`](dot_config/flow/README.md) for the layout and how to add commands.
 
+## Noctalia plugins
+
+`dot_config/noctalia/plugins/` holds custom [Noctalia](https://docs.noctalia.dev) shell
+plugins (Luau scripts + `plugin.toml` manifest), managed as regular dotfiles so they
+version alongside the rest of the config. It's registered once as a `path` source:
+
+```sh
+noctalia msg plugins source add dev path ~/.config/noctalia/plugins
+noctalia msg plugins enable <author>/<plugin>
+```
+
+`.luau` edits hot-reload automatically; `plugin.toml` changes need
+`noctalia msg config-reload`. See each plugin's own `README.md` for details, e.g.
+[`sabnzbd-status`](dot_config/noctalia/plugins/sabnzbd-status/README.md).
+
 ## Docker
 
 ### Run

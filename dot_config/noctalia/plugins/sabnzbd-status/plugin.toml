@@ -1,0 +1,66 @@
+# SABnzbd Status - bar widget showing the SABnzbd download queue
+# (speed, jobs remaining, paused state). A background [[service]] polls the
+# SABnzbd JSON API and publishes the result to shared plugin state; the
+# [[widget]] just renders whatever the service last published.
+# See: https://docs.noctalia.dev/noctalia/plugins/development/
+
+id = "joniator/sabnzbd-status"
+name = "SABnzbd Status"
+version = "1.0.0"
+plugin_api = 3
+author = "joniator"
+license = "MIT"
+dependencies = []
+tags = ["downloads", "nzb", "sabnzbd"]
+icon = "download"
+description = "Shows SABnzbd download queue progress and speed in the bar."
+
+[[setting]]
+key = "host"
+type = "string"
+label_key = "settings.host.label"
+description_key = "settings.host.description"
+default = "localhost"
+
+[[setting]]
+key = "port"
+type = "int"
+label_key = "settings.port.label"
+description_key = "settings.port.description"
+default = 8080
+min = 1
+max = 65535
+
+[[setting]]
+key = "https"
+type = "bool"
+label_key = "settings.https.label"
+default = false
+
+[[setting]]
+key = "api_key"
+type = "string"
+label_key = "settings.api_key.label"
+description_key = "settings.api_key.description"
+default = ""
+
+[[setting]]
+key = "poll_interval_seconds"
+type = "int"
+label_key = "settings.poll_interval_seconds.label"
+description_key = "settings.poll_interval_seconds.description"
+default = 5
+min = 1
+max = 300
+
+# Headless background service: polls the SABnzbd API on its own interval and
+# publishes the parsed queue status via noctalia.state.set("status", ...).
+[[service]]
+id = "poller"
+entry = "service.luau"
+
+# Bar widget: renders whatever the poller service last published, and opens
+# the SABnzbd web UI on click.
+[[widget]]
+id = "status"
+entry = "widget.luau"

@@ -1,0 +1,27 @@
+{
+  "settings": {
+    "host": {
+      "label": "Host",
+      "description": "Hostname or IP of the SABnzbd instance"
+    },
+    "port": {
+      "label": "Port",
+      "description": "SABnzbd web UI port"
+    },
+    "https": {
+      "label": "Use HTTPS"
+    },
+    "api_key": {
+      "label": "API key",
+      "description": "Found in SABnzbd under Config -> General -> API Key"
+    },
+    "poll_interval_seconds": {
+      "label": "Poll interval (seconds)",
+      "description": "How often to query the SABnzbd queue status"
+    }
+  },
+  "widget": {
+    "paused": "Paused",
+    "tooltip": "{jobs} job(s) - {mbleft} MB left - ETA {timeleft}"
+  }
+}
